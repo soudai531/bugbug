@@ -38,5 +38,3 @@ out/
 
 ### MacOS ###
 .DS_Store/
-
-/src/main/.gitkeep
