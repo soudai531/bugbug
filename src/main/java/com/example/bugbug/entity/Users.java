@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Users {
 	@Id
 	private Integer user_id;
-	private String user_name;
+	private String name;
 	private String icon;
 	private String mail;
 	private String pass;
-	private Date reg_date;
+	private Date reg_date_on;
 }

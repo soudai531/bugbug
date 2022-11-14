@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h2>トップページ</h2>
+<form th:action="@{/menu}" method="post">
+	<input type="submit" value="ログイン"> 
+</form>
+<th:block th:if="${msg} != null">
+	[[${msg}]]
+</th:block>
+
+</body>
+</html>

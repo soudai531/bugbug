@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.bugbug.entity.User;
+import com.example.bugbug.entity.Users;
 import com.example.bugbug.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository repository;
 	
 	@Override
-	public List<User> findMail(String mail) {
+	public List<Users> findMail(String mail) {
 		return repository.findByMail(mail);
 	}
 	

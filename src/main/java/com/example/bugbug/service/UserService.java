@@ -3,11 +3,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.bugbug.entity.User;
+import com.example.bugbug.entity.Users;
 @Service
 public interface UserService {
 	//メールでユーザー検索
-	List<User> findMail(String mail);
+	List<Users> findMail(String mail);
 	//パスワードのチェック
 	Boolean match(String inputPass,String pass);
 }

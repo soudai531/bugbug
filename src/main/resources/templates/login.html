@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>ログイン</h2>
+
+<form th:action="@{/login}" method="post" th:object="${loginForm}">
+
+	<p>メールアドレス<br>
+		<input type="text" name="mail" th:field="*{mail}"> 
+	</p>
+	
+	<p>パスワード (半角数字6文字以上)<br>
+		<input type="text" name="pass" th:field="*{pass}"> 
+	</p>
+	<th:block th:if="${msg} != null">
+		[[${msg}]]<br>
+	</th:block>
+	
+	
+	<input type="submit" name="com" value="完了">
+	
+	<input type="submit" name="new" value="アカウントをお持ちでない方はこちら">
+	
+</form>
+</body>
+</html>
