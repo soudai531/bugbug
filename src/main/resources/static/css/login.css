@@ -1,0 +1,94 @@
+div.demo {
+    text-align: center;
+    margin: auto;
+}
+
+.title {
+    margin: 100px;
+}
+
+.input {
+    margin: 15px;
+}
+
+
+input[type="password"] {
+    width: 200px;
+    /*--幅--*/
+    padding: 10px;
+    /*--余白--*/
+    font-size: 16px;
+    /*--文字サイズ--*/
+    border: none;
+    /*--ボーダー線--*/
+    border-radius: 100vh;
+    /*--角丸--*/
+    background-color: #F4F4F4;
+
+    width: 15%;
+
+    padding: 15px;
+
+}
+
+input[type="email"] {
+    width: 200px;
+    /*--幅--*/
+    padding: 10px;
+    /*--余白--*/
+    font-size: 16px;
+    /*--文字サイズ--*/
+    border: none;
+    /*--ボーダー線--*/
+    border-radius: 100vh;
+    /*--角丸--*/
+    background-color: #F4F4F4;
+
+    width: 15%;
+
+    padding: 15px;
+
+}
+
+::placeholder {
+    color: #ACACAC;
+
+}
+
+/*--focus--*/
+input[type="password"]:focus {
+    background-color: #F4F4F4;
+    /*--背景色--*/
+}
+
+/*--ボタン--*/
+/*input[type="submit"] {}*/
+
+.btn--green {
+    color: #ffffff;
+    background: #147647;
+    border: none;
+    padding: 10px;
+    font-size: 13px;
+    width: 7%;
+    margin: 20px;
+}
+
+.btn--green:hover,
+a.btn--green:hover {
+    color: #fff;
+    background: #147647;
+    padding: 10px;
+    font-size: 13px;
+    width: 7%;
+    margin: 20px;
+}
+
+.btn--radius {
+    border-radius: 100vh;
+}
+
+a.no-acaunt {
+    text-decoration: none;
+    color: #ACACAC;
+}
