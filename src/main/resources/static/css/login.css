@@ -1,28 +1,27 @@
-div.demo {
+div.class {
     text-align: center;
     margin: auto;
 }
-
+/*ƒƒOƒCƒ“‚Ì—]”’*/
 .title {
     margin: 100px;
 }
-
+/*“ü—Í•”•ª‚Ì—]”’*/
 .input {
     margin: 15px;
 }
-
+/*ƒpƒXƒ[ƒh“ü—Í•”•ª*/
 
 input[type="password"] {
-    width: 200px;
-    /*--å¹…--*/
+  
     padding: 10px;
-    /*--ä½™ç™½--*/
+
     font-size: 16px;
-    /*--æ–‡å­—ã‚µã‚¤ã‚º--*/
+
     border: none;
-    /*--ãƒœãƒ¼ãƒ€ãƒ¼ç·š--*/
+
     border-radius: 100vh;
-    /*--è§’ä¸¸--*/
+
     background-color: #F4F4F4;
 
     width: 15%;
@@ -30,18 +29,18 @@ input[type="password"] {
     padding: 15px;
 
 }
-
+/*ƒ[ƒ‹ƒAƒhƒŒƒX“ü—Í•”•ª*/
 input[type="email"] {
     width: 200px;
-    /*--å¹…--*/
+
     padding: 10px;
-    /*--ä½™ç™½--*/
+
     font-size: 16px;
-    /*--æ–‡å­—ã‚µã‚¤ã‚º--*/
+
     border: none;
-    /*--ãƒœãƒ¼ãƒ€ãƒ¼ç·š--*/
+
     border-radius: 100vh;
-    /*--è§’ä¸¸--*/
+
     background-color: #F4F4F4;
 
     width: 15%;
@@ -58,12 +57,11 @@ input[type="email"] {
 /*--focus--*/
 input[type="password"]:focus {
     background-color: #F4F4F4;
-    /*--èƒŒæ™¯è‰²--*/
+    
 }
 
-/*--ãƒœã‚¿ãƒ³--*/
-/*input[type="submit"] {}*/
 
+/*ƒƒOƒCƒ“ƒ{ƒ^ƒ“*/
 .btn--green {
     color: #ffffff;
     background: #147647;
