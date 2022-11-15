@@ -1,19 +1,24 @@
+@charset "UTF-8";
+
 div.class {
     text-align: center;
     margin: auto;
 }
-/*ログインの余白*/
+
+/*繧ｿ繧､繝医Ν*/
 .title {
     margin: 100px;
 }
-/*入力部分の余白*/
+
+/* */
 .input {
     margin: 15px;
 }
-/*パスワード入力部分*/
+
+/* */
 
 input[type="password"] {
-  
+
     padding: 10px;
 
     font-size: 16px;
@@ -29,7 +34,8 @@ input[type="password"] {
     padding: 15px;
 
 }
-/*メールアドレス入力部分*/
+
+/* */
 input[type="email"] {
     width: 200px;
 
@@ -57,11 +63,11 @@ input[type="email"] {
 /*--focus--*/
 input[type="password"]:focus {
     background-color: #F4F4F4;
-    
+
 }
 
 
-/*ログインボタン*/
+/* */
 .btn--green {
     color: #ffffff;
     background: #147647;
