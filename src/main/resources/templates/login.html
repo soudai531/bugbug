@@ -7,7 +7,7 @@
 <body>
 <h2>ログイン</h2>
 
-<form th:action="@{/login}" method="post" th:object="${loginForm}">
+<form th:action="@{/index}" method="post" th:object="${loginForm}">
 
 	<p>メールアドレス<br>
 		<input type="text" name="mail" th:field="*{mail}"> 

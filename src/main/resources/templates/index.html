@@ -7,8 +7,8 @@
 <body>
 
 <h2>トップページ</h2>
-<form th:action="@{/menu}" method="post">
-	<input type="submit" value="ログイン"> 
+<form th:action="@{/login/form}" method="post">
+	<input type="submit" value="ログイン" > 
 </form>
 <th:block th:if="${msg} != null">
 	[[${msg}]]

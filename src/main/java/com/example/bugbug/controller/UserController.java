@@ -11,6 +11,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.bugbug.entity.Users;
 import com.example.bugbug.form.LoginForm;
@@ -37,18 +39,16 @@ public class UserController {
 		}
 		
 		//ログイン画面遷移
-		@PostMapping("menu")
+		@RequestMapping(value="login/form")
 		public String viewLoginForm() {
 			return "login";
 		}
 		
 		//ログイン処理
-		@PostMapping(value="login",params="com")
-		public String authLogin(@Validated LoginForm f,BindingResult bindingResult,Model model) {
-			//バリデーション
-			if(bindingResult.hasErrors()) {
-				return "index";
-			}
+		
+		@PostMapping(value="index",params="com")
+		public String authLogin(@Validated LoginForm f,BindingResult bindingResult,Model model,RedirectAttributes redirectAttributes) {
+			
 			//メールで検索
 			List<Users> list = service.findMail(f.getMail());
 			//メールとパスワードが正しいとき
@@ -59,8 +59,8 @@ public class UserController {
 				model.addAttribute("msg","ログイン成功");
 				return "index";
 			}else {
-				model.addAttribute("msg","メールアドレスかパスワードが違います");
-				return "login";
+				redirectAttributes.addFlashAttribute("msg","メールアドレスかパスワードが違います");
+				return "redirect:/login/form";
 			}
 			
 			
