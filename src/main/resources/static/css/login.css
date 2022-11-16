@@ -61,8 +61,8 @@ input[type="password"]:focus {
 }
 
 
-/*ログインボタン*/
-.btn--green {
+
+.btngreen {
     color: #ffffff;
     background: #147647;
     border: none;
@@ -72,8 +72,8 @@ input[type="password"]:focus {
     margin: 20px;
 }
 
-.btn--green:hover,
-a.btn--green:hover {
+.btngreen:hover,
+a.btngreen:hover {
     color: #fff;
     background: #147647;
     padding: 10px;
@@ -82,7 +82,7 @@ a.btn--green:hover {
     margin: 20px;
 }
 
-.btn--radius {
+.btnradius {
     border-radius: 100vh;
 }
 
