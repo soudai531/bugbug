@@ -5,17 +5,17 @@ div.class {
     margin: auto;
 }
 
-/*タイトル*/
+/*タイトル余白*/
 .title {
     margin: 100px;
 }
 
-/* */
+/*テキストボックス余白*/
 .input {
     margin: 15px;
 }
 
-/* */
+/*パスワード*/
 
 input[type="password"] {
 
@@ -35,7 +35,7 @@ input[type="password"] {
 
 }
 
-/* */
+/*メールアドレス*/
 input[type="email"] {
     width: 200px;
 
