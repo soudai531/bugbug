@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	//インスタンス作成部分
 	private final UserService service;
-	final HttpSession session;
+	HttpSession session;
 	
 	//Form初期設定エリア
 	@ModelAttribute
