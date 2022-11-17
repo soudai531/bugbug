@@ -1,5 +1,6 @@
 package com.example.bugbug.controller;
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -63,7 +64,10 @@ public class UserController {
 		Users user = new Users(null,f.getName(),null,f.getMail(),hash,date);
 		//登録処理
 		service.addUser(user);
-		return "login";
+		List<Users> list = service.findMail(f.getMail());
+		session.setAttribute("user_id", list.get(0).getUser_id());
+		session.setAttribute("user_name", f.getName());
+		return "redirect:/index";
 	}
 	
 	
