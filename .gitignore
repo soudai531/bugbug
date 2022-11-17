@@ -17,9 +17,6 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-### application.properties ###
-*.properties
-
 # External tool builders
 .externalToolBuilders/
 
