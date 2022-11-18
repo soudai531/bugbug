@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 div.main {
     text-align: center;
     margin: auto;
@@ -8,7 +9,6 @@ div.main {
 /*タイトル余白*/
 .title {
     margin: 100px;
-
 }
 
 /*テキストボックス余白*/
@@ -17,16 +17,13 @@ div.main {
 }
 
 /*パスワード*/
-
 input.password-box {
-    padding: 10px;
     font-size: 16px;
     border: none;
     border-radius: 100vh;
     background-color: #F4F4F4;
     width: 15%;
     padding: 15px;
-
 }
 
 /*メールアドレス*/
