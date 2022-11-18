@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.mian{
+    text-align: center;
+    
+}
+p{
+    text-align: center;
+}
+.btn-area{
+    text-align: center;
+}
+.title{
+    font-weight: bold;
+    color: #147647;
+    font-size: 24px;
+}
+.detail{
+    color: gray;
+    font-size: 12px;
+}
+
+.btn{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #147647;
+    color: #147647;
+    background-color: #ffffff;
+    margin: 30px;
+    font-size: 14px;
+}
+
+.btn:hover{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #147647;
+    color: #ffffff;
+    background-color: #147647;
+    margin: 30px;
+}
