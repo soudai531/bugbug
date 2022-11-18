@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,9 +27,11 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	//インスタンス作成エリア
 	private final UserService service;
-	HttpSession session;
 	private final PassValidator passValidator;
 	private final MailValidator mailValidator;
+	
+	@Autowired
+	HttpSession session;
 	
 	//Form初期設定エリア
 	@ModelAttribute
