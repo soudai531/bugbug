@@ -64,7 +64,9 @@ public class UserController {
 		Users user = new Users(null,f.getName(),null,f.getMail(),hash,date);
 		//登録処理
 		service.addUser(user);
+		//ユーザーIDの取得
 		List<Users> list = service.findMail(f.getMail());
+		//セッションへの追加
 		session.setAttribute("user_id", list.get(0).getUser_id());
 		session.setAttribute("user_name", f.getName());
 		return "redirect:/index";
