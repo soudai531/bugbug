@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-
-<title>Login</title>
-<link rel="stylesheet" href="css/login.css">
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="../../css/login.css">
 </head>
+
 <body>
-	<div class="login">
-		<h3 class="title">ログイン</h3>
-		<form th:action="@{/login}" method="post" th:object="${userForm}">
+	<div class="main">
+		<h1 class="title">ログイン</h1>
+		<form th:action="@{/login}" method="post" th:object="${loginForm}">
+				<input type="email" name="mail" th:field="*{mail}" class="input mail-box" placeholder="メールアドレス" autocomplete="on" /><br>
+				<input type="password" name="pass" th:field="*{pass}" class="input password-box" placeholder="パスワード" /><br>
+			<th:block th:if="${msg} != null">
+				[[${msg}]]<br>
+			</th:block>
 
-			<!--メールアドレス-->
-			<input type="email" name="email" class="input" placeholder="メールアドレス"
-				autocomplete="on"> <br>
-
-			<!--パスワード-->
-			<input type="password" name="password" class="input"
-				placeholder="パスワード"> <br> <input type="submit"
-				class="btngreen btnradius" name="btngreen" value="ログイン ▶">
-
+			<input type="submit" class="btngreen btnradius" name="btngreen" value="ログイン ▶" />
 			<a href="registerAcount.html" class="no-acaunt">
 				<p>アカウントをお持ちでない方はこちら</p>
 			</a>
-
+      
 		</form>
 	</div>
-
-
 </body>
 </html>
