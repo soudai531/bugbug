@@ -1,17 +1,25 @@
 package com.example.bugbug.service;
+
+import org.springframework.stereotype.Service;
+import com.example.bugbug.entity.Users;
 import java.sql.Date;
 import java.util.List;
 
-import com.example.bugbug.entity.Users;
-
 public interface UserService {
 
-	//メールでユーザー検索
+	// メールでユーザー検索
 	List<Users> findMail(String mail);
-	//ユーザー登録
+
+	// パスワードのチェック
+	Boolean match(String inputPass, String pass);
+
+	// ユーザー登録
 	void addUser(Users user);
-	//ハッシュ化
+
+	// ハッシュ化
 	String hash(String pass);
-	//日付取得
+
+	// 日付取得
 	Date getDate();
+
 }

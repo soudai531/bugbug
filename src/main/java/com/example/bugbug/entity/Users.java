@@ -1,4 +1,5 @@
 package com.example.bugbug.entity;
+
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
