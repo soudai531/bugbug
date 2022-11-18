@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+div.class {
+    text-align: center;
+    margin: auto;
+}
+
+/*タイトル余白*/
+.title {
+    margin: 100px;
+}
+
+/*テキストボックス余白*/
+.input {
+    margin: 15px;
+}
+
+/*パスワード*/
+
+input[type="password"] {
+
+    padding: 10px;
+
+    font-size: 16px;
+
+    border: none;
+
+    border-radius: 100vh;
+
+    background-color: #F4F4F4;
+
+    width: 15%;
+
+    padding: 15px;
+
+}
+
+/*メールアドレス*/
+input[type="email"] {
+    width: 200px;
+
+    padding: 10px;
+
+    font-size: 16px;
+
+    border: none;
+
+    border-radius: 100vh;
+
+    background-color: #F4F4F4;
+
+    width: 15%;
+
+    padding: 15px;
+
+}
+
+::placeholder {
+    color: #ACACAC;
+
+}
+
+/*--focus--*/
+input[type="password"]:focus {
+    background-color: #F4F4F4;
+
+}
+
+
+
+.btngreen {
+    color: #ffffff;
+    background: #147647;
+    border: none;
+    padding: 10px;
+    font-size: 13px;
+    width: 7%;
+    margin: 20px;
+}
+
+.btngreen:hover,
+a.btngreen:hover {
+    color: #fff;
+    background: #147647;
+    padding: 10px;
+    font-size: 13px;
+    width: 7%;
+    margin: 20px;
+}
+
+.btnradius {
+    border-radius: 100vh;
+}
+
+a.no-acaunt {
+    text-decoration: none;
+    color: #ACACAC;
+}
