@@ -4,19 +4,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Login</title>
-	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="../../css/login.css">
 </head>
 
 <body>
-	<div class="login">
-		<h3 class="title">ログイン</h3>
+	<div class="main">
+		<h1 class="title">ログイン</h1>
 		<form th:action="@{/index}" method="post" th:object="${loginForm}">
 
-			<p>メールアドレス<br>
-				<input type="text" name="mail" th:field="*{mail}" class="input" placeholder="メールアドレス" autocomplete="on">
+				<input type="text" name="mail" th:field="*{mail}" class="input mail-box" placeholder="メールアドレス" autocomplete="on">
 			</p>
-			<p>パスワード (半角数字6文字以上)<br>
-				<input type="text" name="pass" th:field="*{pass}" class="input" placeholder="パスワード">
+				<input type="text" name="pass" th:field="*{pass}" class="input password-box" placeholder="パスワード">
 			</p>
 			<th:block th:if="${msg} != null">
 				[[${msg}]]<br>
