@@ -20,13 +20,11 @@ public class MailValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO 自動生成されたメソッド・スタブ
 		return InputForm.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO 自動生成されたメソッド・スタブ
 		//対象のフォームの取得
 		InputForm form = (InputForm) target;
 		//メールの検索

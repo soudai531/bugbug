@@ -3,7 +3,7 @@ package com.example.bugbug.controller;
 import com.example.bugbug.entity.Users;
 import com.example.bugbug.form.InputForm;
 import com.example.bugbug.service.UserService;
-import com.example.bugbug.validator.PassValidator;
+import com.example.bugbug.validator.PasswordValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +25,8 @@ import java.util.List;
 @Controller
 public class AccountController {
     private final UserService service;
-    private final PassValidator passValidator;
-    private final PassValidator mailValidator;
+    private final PasswordValidator passValidator;
+    private final PasswordValidator mailValidator;
 
     @Autowired
     private HttpSession session;

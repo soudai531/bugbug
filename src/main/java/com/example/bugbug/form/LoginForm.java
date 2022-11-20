@@ -9,5 +9,5 @@ public class LoginForm {
 	@NotBlank
 	private String mail;
 	@NotBlank
-	private String pass;
+	private String password;
 }

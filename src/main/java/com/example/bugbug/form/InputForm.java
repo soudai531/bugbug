@@ -13,6 +13,6 @@ public class InputForm {
 	@NotBlank
 	private String name;
 	@Pattern(regexp="(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-z0-9]{6,}" )
-	private String pass;
-	private String comPass;//確認用パスワード
+	private String password;
+	private String confirmPassword;//確認用パスワード
 }

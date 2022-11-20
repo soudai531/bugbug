@@ -6,23 +6,20 @@ import org.springframework.validation.Validator;
 import com.example.bugbug.form.InputForm;
 //パスワード用のバリデーション
 @Component
-public class PassValidator implements Validator {
+public class PasswordValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO 自動生成されたメソッド・スタブ
 		return InputForm.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO 自動生成されたメソッド・スタブ
 		//対象のフォームの取得
 		InputForm form = (InputForm) target;
 		//パスワードと確認用パスワードが違う場合
-		if(!form.getPass().equals(form.getComPass())) {
+		if(!form.getPassword().equals(form.getConfirmPassword())) {
 			errors.reject("com.example.demo.validator.PassValidator.message");
 		}
 	}
-
 }
