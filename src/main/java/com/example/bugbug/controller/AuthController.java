@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,15 +17,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+// ログイン処理のコントローラー
 @RequiredArgsConstructor
 @Controller
 public class AuthController {
 
-    // インスタンス作成部分
     private final UserService service;
-    
     @Autowired
-    HttpSession session;
+    private HttpSession session;
+
+    @ModelAttribute
+    public LoginForm LoginSetUpForm() {
+        return new LoginForm();
+    }
 
     // ログイン画面遷移
     @RequestMapping(value = "login/form")
@@ -36,7 +41,6 @@ public class AuthController {
     @PostMapping(value = "login")
     public String authLogin(@Validated LoginForm f, BindingResult bindingResult, Model model,
                             RedirectAttributes redirectAttributes) {
-
         // メールで検索
         List<Users> list = service.findMail(f.getMail());
         // メールとパスワードが正しいとき
