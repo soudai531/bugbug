@@ -6,8 +6,9 @@ div.acount {
 }
 
 /*タイトル余白*/
-.title {
+h1.title {
     margin: 100px;
+    size: large;
 }
 
 /*テキストボックス余白*/
@@ -15,44 +16,26 @@ div.acount {
     margin: 15px;
 }
 
-/*パスワード*/
-
-input[type="password"] {
-
-    padding: 10px;
-
-    font-size: 16px;
-
-    border: none;
-
-    border-radius: 100vh;
-
-    background-color: #F4F4F4;
-
-    width: 15%;
-
-    padding: 15px;
-
-}
-
 /*メールアドレス*/
 input[type="email"] {
-    width: 200px;
-
-    padding: 10px;
-
-    font-size: 16px;
-
-    border: none;
-
-    border-radius: 100vh;
-
-    background-color: #F4F4F4;
-
+    min-width: 200px;
     width: 15%;
-
     padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 100vh;
+    background-color: #F4F4F4;
+}
 
+/*パスワード*/
+input[type="password"] {
+    font-size: 16px;
+    border: none;
+    border-radius: 100vh;
+    background-color: #F4F4F4;
+    width: 15%;
+    min-width: 200px;
+    padding: 15px;
 }
 
 ::placeholder {
@@ -66,8 +49,6 @@ input[type="password"]:focus {
 
 }
 
-
-
 .btngreen {
     color: #ffffff;
     background: #147647;
@@ -76,6 +57,7 @@ input[type="password"]:focus {
     font-size: 13px;
     width: 13%;
     margin: 20px;
+    border-radius: 100vh;
 }
 
 .btngreen:hover,
@@ -84,12 +66,7 @@ a.btngreen:hover {
     background: #147647;
     padding: 10px;
     font-size: 13px;
-    width: 137%;
     margin: 20px;
-}
-
-.btnradius {
-    border-radius: 100vh;
 }
 
 a.no-acaunt {
