@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>ヘッダー挿入部分</div>
+
+<div>
+<h2>新規アカウント登録</h2>
+<form th:action="@{/sinup}" method="post" th:object="${inputForm}">
+	<div>
+		メールアドレス<span>必須</span><br>
+		<input type="text" name="mail" th:field="*{mail}"> 
+	</div>
+	<div>
+		パスワード<span>必須</span><br>
+		<input type="text" name="pass" th:field="*{password}">
+	</div>
+	<div>
+		パスワード（確認用）<span>必須</span><br>
+		<input type="text" name="comPass" th:field="*{confirmPassword}">
+	</div>
+	<div>
+		ユーザーネーム<span>必須</span><br>
+		<input type="text" name="name" th:field="*{name}"> 
+	</div>
+	<ul th:if="${#fields.hasErrors('*')}">
+		<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+	</ul>
+	<input type="submit" value="アカウント作成">
+</form>
+
+</div>
+
+</body>
+</html>
