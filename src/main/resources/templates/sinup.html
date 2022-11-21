@@ -1,38 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>新規アカウント登録 : bugbug</title>
+    <link rel="stylesheet" href="../static/css/sinup.css">
 </head>
+
 <body>
-<div>ヘッダー挿入部分</div>
+    <div class="acount">
+        <h1 class="title">新規アカウント登録</h1>
+        <form th:action="@{/sinup}" method="post" th:object="${inputForm}">
 
-<div>
-<h2>新規アカウント登録</h2>
-<form th:action="@{/sinup}" method="post" th:object="${inputForm}">
-	<div>
-		メールアドレス<span>必須</span><br>
-		<input type="text" name="mail" th:field="*{mail}"> 
-	</div>
-	<div>
-		パスワード<span>必須</span><br>
-		<input type="text" name="pass" th:field="*{password}">
-	</div>
-	<div>
-		パスワード（確認用）<span>必須</span><br>
-		<input type="text" name="comPass" th:field="*{confirmPassword}">
-	</div>
-	<div>
-		ユーザーネーム<span>必須</span><br>
-		<input type="text" name="name" th:field="*{name}"> 
-	</div>
-	<ul th:if="${#fields.hasErrors('*')}">
-		<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
-	</ul>
-	<input type="submit" value="アカウント作成">
-</form>
+            <!--メールアドレス-->
+            <p class="text required">メールアドレス</p><br>
+            <input type="email" th:field="*{mail}" class="input" placeholder="メールアドレス" autocomplete="on">
+            <br>
 
-</div>
+            <!--パスワード-->
+            <p class="text required">パスワード</p><br>
+            <input type="password" th:field="*{password}" class="input" placeholder="パスワード">
+            <br>
 
+            <!--パスワード確認-->
+            <p class="text required">パスワード（確認用）</p><br>
+            <input type="password" th:field="*{confirmPassword}" class="input" placeholder="パスワード（確認用）">
+            <br>
+
+            <!--ユーザーネーム-->
+            <p class="text required">ユーザーネーム</p><br>
+            <input type="password" name="username" class="input" placeholder="ユーザーネーム">
+            <br>
+            <ul th:if="${#fields.hasErrors('*')}">
+		          <li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+	          </ul>
+
+            <input type="submit" class="btngreen" value="アカウント作成">
+
+            <h:outputText styleClass="required" />
+        </form>
+    </div>
 </body>
 </html>
