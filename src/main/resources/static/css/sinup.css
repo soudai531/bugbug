@@ -8,7 +8,7 @@ div.acount {
 /*タイトル余白*/
 h1.title {
     margin: 100px;
-    size: large;
+    font-size: 27px;
 }
 
 /*テキストボックス余白*/
