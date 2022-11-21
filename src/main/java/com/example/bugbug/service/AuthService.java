@@ -10,5 +10,5 @@ public interface AuthService {
     // メールでユーザー検索
     List<Users> findMail(String mail);
     // パスワードのチェック
-    Boolean match(String inputPass, String pass);
+    Boolean match(String inputPass, String password);
 }

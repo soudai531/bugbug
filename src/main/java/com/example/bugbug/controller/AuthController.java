@@ -3,7 +3,6 @@ package com.example.bugbug.controller;
 import com.example.bugbug.entity.Users;
 import com.example.bugbug.form.LoginForm;
 import com.example.bugbug.service.AuthService;
-import com.example.bugbug.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +44,7 @@ public class AuthController {
         // メールで検索
         List<Users> list = service.findMail(f.getMail());
         // メールとパスワードが正しいとき
-        if (!list.isEmpty() && service.match(list.get(0).getPass(), f.getPassword())) {
+        if (!list.isEmpty() && service.match(list.get(0).getPassword(), f.getPassword())) {
             // sessionに値を登録
             session.setAttribute("user_id", list.get(0).getUser_id());
             session.setAttribute("user_name", list.get(0).getName());

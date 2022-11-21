@@ -2,7 +2,8 @@ package com.example.bugbug.controller;
 
 import com.example.bugbug.entity.Users;
 import com.example.bugbug.form.InputForm;
-import com.example.bugbug.service.UserService;
+import com.example.bugbug.service.AccountService;
+import com.example.bugbug.validator.MailValidator;
 import com.example.bugbug.validator.PasswordValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
@@ -24,9 +22,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class AccountController {
-    private final UserService service;
+    private final AccountService service;
     private final PasswordValidator passValidator;
-    private final PasswordValidator mailValidator;
+    private final MailValidator mailValidator;
 
     @Autowired
     private HttpSession session;
@@ -45,7 +43,7 @@ public class AccountController {
     }
 
     // 新規登録フォームへの遷移
-    @GetMapping("sinup/form")
+    @RequestMapping("sinup/form")
     public String viewAcountForm() {
         return "sinup";
     }
@@ -55,10 +53,10 @@ public class AccountController {
     public String createAcount(@Validated InputForm f, BindingResult bindingResult, Model model) {
         // validation
         if (bindingResult.hasErrors()) {
-            return "sinup/form";
+            return "sinup";
         }
         // パスワードのハッシュ化
-        String hash = service.hash(f.getPass());
+        String hash = service.hash(f.getPassword());
         // 現在の日付を取得
         Date date = service.getDate();
         // 登録用のエンティティの定義

@@ -17,6 +17,6 @@ public class Users {
 	private String name;
 	private String icon;
 	private String mail;
-	private String pass;
+	private String password;
 	private Date reg_date_on;
 }
