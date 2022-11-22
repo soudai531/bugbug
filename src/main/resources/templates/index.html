@@ -9,7 +9,7 @@
 <h2>トップページ</h2>
 <a href="/login/form">ログイン</a>
 <a href="/sinup/form">新規登録</a>
-<a href="/logout">ログアウト</a>
+<a th:href="@{/users/{id}/logout(id=${user_id})}">ログアウト</a>
 <p th:text="${session_name}+さんようこそ"></p>
 <th:block th:if="${msg} != null">
 	[[${msg}]]
