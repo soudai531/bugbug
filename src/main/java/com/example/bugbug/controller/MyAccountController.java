@@ -19,12 +19,13 @@ public class MyAccountController {
 
     @RequestMapping("users/*/logout")
     public String logput(SessionStatus sessionStatus) {
-		 //sessionに登録さてている情報を削除
-		 session.removeAttribute("user_id");
-		 session.removeAttribute("user_name");
-		 session.invalidate();
-		 //sessionのリセット
-		 sessionStatus.setComplete();
-		 return "index";
+		//sessionに登録さてている情報を削除
+		session.removeAttribute("user_id");
+		session.removeAttribute("user_name");
+		//sessionの破棄
+		session.invalidate();
+		//sessionの完了
+		sessionStatus.setComplete();
+		return "redirect:/index";
 	 }
 }
