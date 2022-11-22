@@ -17,7 +17,7 @@ public class MyAccountController {
     @Autowired
     private HttpSession session;
 
-    @RequestMapping("users/**/logout")
+    @RequestMapping("users/*/logout")
     public String logput(SessionStatus sessionStatus) {
 		 //sessionに登録さてている情報を削除
 		 session.removeAttribute("user_id");
