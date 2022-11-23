@@ -14,6 +14,40 @@
 <th:block th:if="${msg} != null">
 	[[${msg}]]
 </th:block>
+<main>
+	<h1>おすすめのレシピ</h1>
+	<th:block th:if="${recipes}">
+		<th:block th:each="recipe : ${recipes}">
+			<div>
+				<!--	レシピ画像	-->
+				<a th:href="${recipe.link}">
+					<img src="#"/>
+				</a>
+				<!--	投稿ユーザー	-->
+				<div>
+					<img src="#"/>
+					<span th:text="${recipe.user_name}"></span>
+				</div>
+				<!--	いいねボタン	-->
+				<div>
+					<span th:text="${recipe.favorite_number}"/>
+					<img src="#"/>
+				</div>
+				<!--	レシピ名		-->
+				<div>
+					<a th:href="${recipe.link}"></a>
+				</div>
+				<!--	タグ		-->
+				<div>
+					<th:block th:if="${not #strings.isEmpty(recipe.tag1.name)}">
+						<a th:href="${recipe.tag1_link} ">[[${recipe.tag1.name}]]</a>
+					</th:block>
+				</div>
+			</div>
+
+		</th:each>
+	</th:block>
+</main>
 
 </body>
 </html>
