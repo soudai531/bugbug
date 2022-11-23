@@ -2,6 +2,10 @@
 
 * https://github.com/Aso2101122/bugbug/issues/
 
+## 閉じるissue
+
+Closes #
+
 ## やったこと
 
 * このプルリクで何をしたのか？
