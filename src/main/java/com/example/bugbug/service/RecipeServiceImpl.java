@@ -1,17 +1,23 @@
 package com.example.bugbug.service;
 
+import com.example.bugbug.entity.Recipes;
+import com.example.bugbug.repository.RecipesRepository;
 import com.example.bugbug.service.dto.RecipeDto;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@AllArgsConstructor
+@Service
 public class RecipeServiceImpl implements RecipeService {
-    // レシピをすべて取得
-    List<RecipeDto> getRecipe(){
 
-    }
+    private RecipesRepository repository;
 
-    // おすすめレシピを20件取得
-    List<RecipeDto> getRecommendRecipe(){
-
+    /**
+     *レシピをすべて取得
+     */
+    @Override
+    public void getAllRecipe(){
+        Iterable<Recipes> recipes = repository.findAll();
+        recipes.forEach(recipe -> System.out.println(recipe.getUser_id()));
     }
 }

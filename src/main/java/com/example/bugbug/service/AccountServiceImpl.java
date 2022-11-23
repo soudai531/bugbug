@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -44,4 +45,9 @@ public class AccountServiceImpl implements AccountService{
         return date;
     }
 
+    // ユーザー情報1件取得
+    public Users findUserId(int id){
+        Optional<Users> user= repository.findById(id);
+        return user.get();
+    }
 }

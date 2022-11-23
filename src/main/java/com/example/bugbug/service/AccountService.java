@@ -18,4 +18,7 @@ public interface AccountService {
 
     // 日付取得
     Date getDate();
+
+    // ユーザー情報1件取得
+    Users  findUserId(int id);
 }
