@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.mian{
+    text-align: center;
+    
+}
+
+/*文字を真ん中に*/
+p{
+    text-align: center;
+}
+
+/*ボタンを真ん中に*/
+.btn-area{
+    text-align: center;
+}
+
+/*質問文字のスタイル*/
+.title{
+    font-weight: bold;
+    color: #147647;
+    font-size: 24px;
+}
+/*注訳のスタイル*/
+.detail{
+    color: gray;
+    font-size: 12px;
+}
+
+/*ボタンのスタイル*/
+.btn{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #147647;
+    color: #147647;
+    background-color: #ffffff;
+    margin: 30px;
+    font-size: 14px;
+}
+
+/*ボタンを選択したときのスタイル*/
+.btn:hover{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #147647;
+    color: #ffffff;
+    background-color: #147647;
+    margin: 30px;
+}

@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+div.acount {
+    text-align: center;
+    margin: auto;
+}
+
+/*タイトル余白*/
+h1.title {
+    margin: 100px;
+    font-size: 27px;
+}
+
+/*テキストボックス余白*/
+.input {
+    margin: 15px;
+}
+
+/*メールアドレス*/
+input[type="email"] {
+    min-width: 200px;
+    width: 15%;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 100vh;
+    background-color: #F4F4F4;
+}
+
+/*パスワード*/
+input[type="password"] {
+    font-size: 16px;
+    border: none;
+    border-radius: 100vh;
+    background-color: #F4F4F4;
+    width: 15%;
+    min-width: 200px;
+    padding: 15px;
+}
+
+::placeholder {
+    color: #ACACAC;
+
+}
+
+/*--focus--*/
+input[type="password"]:focus {
+    background-color: #F4F4F4;
+
+}
+
+.btngreen {
+    color: #ffffff;
+    background: #147647;
+    border: none;
+    padding: 10px;
+    font-size: 13px;
+    width: 13%;
+    margin: 20px;
+    border-radius: 100vh;
+}
+
+.btngreen:hover,
+a.btngreen:hover {
+    color: #fff;
+    background: #147647;
+    padding: 10px;
+    font-size: 13px;
+    margin: 20px;
+}
+
+a.no-acaunt {
+    text-decoration: none;
+    color: #ACACAC;
+}
+
+.acount .text {
+    margin: 0;
+    display: inline-block;
+    font-size: 16px;
+    color: #147647;
+    width: 15%;
+    text-align: left;
+}
+
+.required::after {
+    content: "必須";
+    background-color: #FFE8E8;
+    color: #E45F5F;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 10px;
+    padding: 3px 7px;
+    margin: 0px 5px;
+    line-height: 1;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+    display: inline-block;
+}
