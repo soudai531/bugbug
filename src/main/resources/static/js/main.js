@@ -26,7 +26,7 @@ const scrollHeaderHandle = () => {
     }
   }
 };
-let set_position = 50;
+let set_position = 10;
 window.addEventListener("scroll", scrollHeaderHandle);
 
 /* ナビボタン遷移先設定 */
