@@ -1,19 +1,140 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bugbug</title>
+    <link rel="icon" th:href="@{/img/logoicon.png}" />
+    <link rel="preload" th:href="@{/img/header.jpeg}" as="image" />
+    <link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
+    <!-- 共通CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- 各ページCSS -->
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+  </head>
+  <body>
+    <div class="loading"></div>
+    <!-- ヘッダー -->
+    <header class="header">
+      <!-- ロゴ -->
+      <a class="logo" href="index.html">
+        <img class="logo__img" th:src="@{/img/logo_white.png}" alt="" srcset="" />
+      </a>
+      <!-- サイト説明 -->
+      <section class="siteExpl">
+        <p class="siteExpl__text--row1">bugbugとは昆虫食を専門とした</p>
+        <p class="siteExpl__text--row2">レシピ共有サイトです</p>
+      </section>
+      <!-- 虫フィルターボタン -->
+      <section class="insectFilterBtn">
+        <span class="insectFilterBtn__text">虫フィルター</span>
+        <input type="checkbox" class="insectFilterBtn__input" id="label-insectFilterBtn" />
+        <label class="insectFilterBtn__label" for="label-insectFilterBtn"></label>
+      </section>
+      <!-- ナビボタン -->
+      <nav class="navBtns">
+        <button class="navBtns__btn navBtns__btn--insectBook" type="button">
+          <span class="navBtns__btn__text">昆虫食図鑑</span>
+          <ion-icon name="bug-outline"></ion-icon>
+        </button>
+        <button class="navBtns__btn navBtns__btn--searchRecipe" type="button">
+          <span class="navBtns__btn__text">レシピを探す</span>
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
+        <button class="navBtns__btn navBtns__btn--registerAcount" type="button">
+          <span class="navBtns__btn__text">会員登録</span>
+          <ion-icon name="person-add-outline"></ion-icon>
+        </button>
+        <button class="navBtns__btn navBtns__btn--login" type="button">
+          <span class="navBtns__btn__text">ログイン</span>
+          <ion-icon name="log-in-outline"></ion-icon>
+        </button>
+      </nav>
+      <div class="search__form__cover hidden"></div>
+      <form class="search__form hidden" action="search.html">
+        <button class="search__form__close" type="button">×</button>
+        <section class="search__form__keyword">
+          <span class="search__form__title">キーワードから探す</span>
+          <div class="search__form__keyword__input">
+            <input type="text" name="keyword" placeholder="キーワードを入力" />
+            <button class="search__form__keyword__btn" type="submit">検索</button>
+          </div>
+        </section>
+        <hr />
+        <section class="search__form__tag">
+          <span class="search__form__title">タグから探す</span>
+          <div class="search__form__tag__tags">
+            <button class="search__form__tag__tags__btn" type="submit" name="tag__id" value="1">
+              <span class="search__form__tag__tags__btn__name"><span>#</span>コロギ</span>
+            </button>
+          </div>
+        </section>
+      </form>
+    </header>
 
-<h2>トップページ</h2>
-<a href="/login/form">ログイン</a>
-<a href="/sinup/form">新規登録</a>
-<a th:href="@{/users/{id}/logout(id=${user_id})}">ログアウト</a>
-<p th:text="${session_name}+さんようこそ"></p>
-<th:block th:if="${msg} != null">
-	[[${msg}]]
-</th:block>
+    <!-- メインコンテンツ -->
+    <main class="main">
+      <!-- おすすめレシピ一覧 -->
+      <section class="recomRecipe">
+        <div class="recomRecipe__title">
+          <span class="recomRecipe__title__text">おすすめのレシピ</span>
+        </div>
+        <!-- おすすめレシピ -->
+        <section class="recomRecipe__list">
+          <!-- おすすめレシピ一覧取得は未実装() -->
+          <section href="" class="recomRecipe__list__item">
+            <div class="recomRecipe__list__item__img">
+              <img th:src="@{/img/recipe1.jpg}" alt="" />
+            </div>
+            <div class="recomRecipe__list__item__userAction">
+              <a class="recomRecipe__list__item__user" href="">
+                <span class="recomRecipe__list__item__user__icon">
+                  <img th:src="@{/img/recipe1.jpg}" alt="" />
+                </span>
+                <span class="recomRecipe__list__item__user__name">username</span>
+              </a>
+              <div class="recomRecipe__list__item__heartBtn">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span class="recomRecipe__list__item__heartNum">30</span>
+              </div>
+            </div>
+            <div class="recomRecipe__list__item__recipeName">レシピ名レシピ名レシピ名レシピ名</div>
+            <div class="recomRecipe__list__item__tags">
+              <a class="recomRecipe__list__item__tag" href="search.html?category_id=1">
+                <span class="recomRecipe__list__item__tag__name"><span>#</span>コロギ</span>
+              </a>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+    <div style="border: 1px solid black;">
+      <p>↓サーバー側確認用↓</p>
+      <h2>トップページ</h2>
+      <a href="/login/form">ログイン</a>
+      <a href="/sinup/form">新規登録</a>
+      <a th:href="@{/users/{id}/logout(id=${user_id})}">ログアウト</a>
+      <p th:text="${session_name}+さんようこそ"></p>
+      <th:block th:if="${msg} != null"> [[${msg}]] </th:block>
+    </div>
 
-</body>
+    <!-- フッター -->
+    <footer class="footer">
+      <section class="footer__logo">
+        <img class="logo__img" th:src="@{/img/logo_white.png}" alt="" srcset="" />
+      </section>
+      <ul class="footer__nav">
+        <li><a href="index.html">トップ</a></li>
+        <li><a href="login.html">ログイン</a></li>
+        <li><a href="register-acount.html">会員登録</a></li>
+        <li><a href="">お問い合わせ</a></li>
+      </ul>
+      <section class="footer_copyright">© 2022 bugbug.</section>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
 </html>
