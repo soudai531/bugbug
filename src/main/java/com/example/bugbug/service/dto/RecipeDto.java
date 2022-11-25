@@ -1,12 +1,13 @@
 package com.example.bugbug.service.dto;
 
+import com.example.bugbug.entity.Recipes;
 import lombok.Data;
 
 @Data
 public class RecipeDto {
     // レシピ情報
     private int recipeId;
-    private int recipeUrl;
+    private String recipeUrl;
     private String recipeImageUrl;
     private String recipeName;
 
@@ -19,17 +20,17 @@ public class RecipeDto {
     // お気に入り数
     private int favoriteNumber;
 
-    //タグ情報１
-    private int tag1Id;
-    private int tag1Url;
-    private String tag1Name;
+    // タグ
 
-    // タグ情報２
-    private int tag2Id;
-    private int tag2Url;
-    private String tag2Name;
 
-    RecipeDto(){
-
+    /**
+     * コンストラクタ
+     * @param recipe
+     */
+    public RecipeDto(Recipes recipe){
+        this.recipeId = recipe.getRecipe_id();
+        this.recipeUrl = "/recipe/" + recipe.getRecipe_id();
+        this.recipeName = recipe.getName();
+        this.postUserId = recipe.getUser_id();
     }
 }
