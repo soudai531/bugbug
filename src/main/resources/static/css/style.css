@@ -37,8 +37,7 @@ body {
 }
 
 a:not([class]) {
-  -webkit-text-decoration-skip: ink;
-          text-decoration-skip-ink: auto;
+  text-decoration-skip-ink: auto;
 }
 
 img,
@@ -61,10 +60,8 @@ select {
   *,
 *::before,
 *::after {
-    -webkit-animation-duration: 0.01ms !important;
-            animation-duration: 0.01ms !important;
-    -webkit-animation-iteration-count: 1 !important;
-            animation-iteration-count: 1 !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
@@ -192,8 +189,6 @@ a {
 }
 
 .recipe__user {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   height: 100%;
   display: flex;
@@ -236,8 +231,6 @@ a {
 }
 
 .recipe__heartBtn {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   height: 100%;
   display: flex;
@@ -290,8 +283,6 @@ a {
 
 .recipe__tag, .search__form__tag__tags__btn {
   display: block;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   height: 30px;
   padding: 8px 10px;
@@ -671,8 +662,6 @@ a {
   }
 }
 .navBtns__btn.js-headerScrollOn {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   padding-left: 30px;
   padding-right: 30px;
@@ -803,12 +792,9 @@ a {
   opacity: 1;
   z-index: 2000;
   will-change: opacity;
-  -webkit-animation-name: searchFormAnimate;
-          animation-name: searchFormAnimate;
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  animation-name: searchFormAnimate;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
 }
 @media screen and (max-width: 1024px) {
   .search__form {
@@ -831,14 +817,6 @@ a {
 .search__form.hidden {
   display: none;
 }
-@-webkit-keyframes searchFormAnimate {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 @keyframes searchFormAnimate {
   0% {
     opacity: 0;
@@ -856,23 +834,12 @@ a {
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   transition: background 0.3s;
-  -webkit-animation-name: searchFormCoverAnimate;
-          animation-name: searchFormCoverAnimate;
-  -webkit-animation-duration: 0.4s;
-          animation-duration: 0.4s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  animation-name: searchFormCoverAnimate;
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
 }
 .search__form__cover.hidden {
   display: none;
-}
-@-webkit-keyframes searchFormCoverAnimate {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 @keyframes searchFormCoverAnimate {
   0% {
@@ -936,12 +903,6 @@ a {
   transition: border 0.3s;
   will-change: border;
 }
-.search__form__keyword__input input::-moz-placeholder {
-  color: #ACACAC;
-}
-.search__form__keyword__input input:-ms-input-placeholder {
-  color: #ACACAC;
-}
 .search__form__keyword__input input::placeholder {
   color: #ACACAC;
 }
@@ -985,8 +946,7 @@ a {
   position: relative;
   transition: height 0.4s;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 8px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 0, 0, 0.1);
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 @media screen and (max-width: 1024px) {
   .footer {
@@ -1049,9 +1009,7 @@ a {
   font-family: "Kiwi Maru", sans-serif;
   color: #FDFDFD;
   text-decoration: none;
-  transition: -webkit-text-decoration 0.3s;
   transition: text-decoration 0.3s;
-  transition: text-decoration 0.3s, -webkit-text-decoration 0.3s;
 }
 .footer__nav li a:hover {
   text-decoration: underline;
