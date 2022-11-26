@@ -1,7 +1,12 @@
 package com.example.bugbug.service.dto;
 
 import com.example.bugbug.entity.Recipes;
+import com.example.bugbug.entity.Tags;
+import com.example.bugbug.entity.Users;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class RecipeDto {
@@ -21,7 +26,7 @@ public class RecipeDto {
     private int favoriteNumber;
 
     // タグ
-
+    private List<Tags> tags = new ArrayList<>();;
 
     /**
      * コンストラクタ
@@ -30,7 +35,30 @@ public class RecipeDto {
     public RecipeDto(Recipes recipe){
         this.recipeId = recipe.getRecipe_id();
         this.recipeUrl = "/recipe/" + recipe.getRecipe_id();
+        // Todo 写真urlの作成
         this.recipeName = recipe.getName();
         this.postUserId = recipe.getUser_id();
     }
+
+    /**
+     * タグ情報を格納する
+     */
+    public void ofTag(List<Tags> tags) {
+        tags.forEach(tag -> this.tags.add(tag));
+    }
+
+    /**
+     * 投稿ユーザー情報を格納
+     */
+    public void ofUser(List<Users> user){
+
+    }
+
+    /**
+     * お気に入り数を格納
+     */
+    public void ofFavorite(int favoriteNum){
+
+    }
+
 }

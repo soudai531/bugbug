@@ -7,5 +7,8 @@ import java.util.List;
 public interface RecipeService {
 
     // レシピをすべて取得
-    void getAllRecipe();
+    List<RecipeDto> getAllRecipe();
+
+    // おすすめレシピを20件ずつ取得
+    List<RecipeDto> getRecommendRecipe(int page);
 }

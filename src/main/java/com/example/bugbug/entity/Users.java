@@ -7,10 +7,12 @@ import org.springframework.data.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table("users")
 public class Users {
 	@Id
 	private Integer user_id;

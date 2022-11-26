@@ -4,15 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-
-/**
- * レシピタグテーブル主キー用クラス
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeTagsKey {
-    private int recipe_id;
+@Table("tags")
+public class Tags {
+    @Id
     private int tag_id;
+    private String name;
+    private int deleted;
 }
