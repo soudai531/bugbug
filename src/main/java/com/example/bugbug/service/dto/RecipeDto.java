@@ -33,11 +33,11 @@ public class RecipeDto {
      * @param recipe
      */
     public RecipeDto(Recipes recipe){
-        this.recipeId = recipe.getRecipe_id();
-        this.recipeUrl = "/recipe/" + recipe.getRecipe_id();
+        this.recipeId = recipe.getRecipeId();
+        this.recipeUrl = "/recipe/" + recipe.getRecipeId();
         // Todo 写真urlの作成
         this.recipeName = recipe.getName();
-        this.postUserId = recipe.getUser_id();
+        this.postUserId = recipe.getUserId();
     }
 
     /**

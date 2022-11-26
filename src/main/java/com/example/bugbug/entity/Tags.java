@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
@@ -12,7 +13,8 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("tags")
 public class Tags {
     @Id
-    private int tag_id;
+    @Column("tag_id")
+    private int tagId;
     private String name;
     private int deleted;
 }

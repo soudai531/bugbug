@@ -58,7 +58,7 @@ public class RecipeServiceImpl implements RecipeService {
             // Todo レシピ画像URLを格納する
 
             // レシピについているタグIDを取得
-            List<RecipeTags> recipeTags = recipeTagsRepository.getRecipeTagsId(recipe.getRecipe_id());
+            List<RecipeTags> recipeTags = recipeTagsRepository.getRecipeTagsId(recipe.getRecipeId());
             //　レシピについているタグのタグ情報をまとめて取得
             List<Tags> tags = tagService.getTags(recipeTags);
             // DTOにタグ情報を格納

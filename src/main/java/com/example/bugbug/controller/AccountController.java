@@ -66,7 +66,7 @@ public class AccountController {
         // ユーザーIDの取得
         List<Users> list = service.findMail(f.getMail());
         // セッションへの追加
-        session.setAttribute("user_id", list.get(0).getUser_id());
+        session.setAttribute("user_id", list.get(0).getUserId());
         session.setAttribute("user_name", f.getName());
         // トップページにリダイレクト
         return "redirect:/index";

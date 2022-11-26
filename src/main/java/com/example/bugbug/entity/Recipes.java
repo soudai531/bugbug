@@ -3,6 +3,7 @@ package com.example.bugbug.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
@@ -12,14 +13,18 @@ import java.util.Date;
 @NoArgsConstructor
 @Table("recipes")
 public class Recipes {
-    private int recipe_id;
-    private int user_id;
+    @Column("recipe_id")
+    private int recipeId;
+    @Column("user_id")
+    private int userId;
     private String name;
     private String image;
     private String explan;
     private String point;
-    private int image_blurred;
+    @Column("image_blurred")
+    private int imageBlurred;
     private int browes;
-    private Date reg_date_on;
+    @Column("reg_date_on")
+    private Date regDateOn;
     private int deleted;
 }
