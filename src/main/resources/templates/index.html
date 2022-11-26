@@ -16,36 +16,34 @@
 </th:block>
 <main>
 	<h1>おすすめのレシピ</h1>
-	<th:block th:if="${recipes}">
-		<th:block th:each="recipe : ${recipes}">
+	<span th:text="${recipes}"></span><br>
+	<th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
+		<div>
+			<!--	レシピ画像	-->
+			<a th:href="${recipe.recipeUrl}">
+				<img src="#" alt="レシピ画像"/>
+			</a>
+			<!--	投稿ユーザー	-->
 			<div>
-				<!--	レシピ画像	-->
-				<a th:href="${recipe.link}">
-					<img src="#"/>
-				</a>
-				<!--	投稿ユーザー	-->
-				<div>
-					<img src="#"/>
-					<span th:text="${recipe.user_name}"></span>
-				</div>
-				<!--	いいねボタン	-->
-				<div>
-					<span th:text="${recipe.favorite_number}"/>
-					<img src="#"/>
-				</div>
-				<!--	レシピ名		-->
-				<div>
-					<a th:href="${recipe.link}"></a>
-				</div>
-				<!--	タグ		-->
-				<div>
-					<th:block th:if="${not #strings.isEmpty(recipe.tag1.name)}">
-						<a th:href="${recipe.tag1_link} ">[[${recipe.tag1.name}]]</a>
-					</th:block>
-				</div>
+				<img src="#" alt="ユーザーアイコン"/>
+				<span th:text="${recipe.postUserName}"></span>
 			</div>
-
-		</th:each>
+			<!--	いいねボタン	-->
+			<div>
+				<span></span>
+				<img src="#"/>
+			</div>
+			<!--	レシピ名		-->
+			<div>
+				<a th:href="${recipe.recipeUrl}">[[${recipe.recipeName}]]</a>
+			</div>
+			<!--	タグ		-->
+			<div>
+				<th:block th:each="tag : ${recipe.tags}">
+					<span>[[${tag.name}]]</span>
+				</th:block>
+			</div>
+		</div>
 	</th:block>
 </main>
 

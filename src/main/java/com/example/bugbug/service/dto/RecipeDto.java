@@ -36,6 +36,7 @@ public class RecipeDto {
         this.recipeId = recipe.getRecipeId();
         this.recipeUrl = "/recipe/" + recipe.getRecipeId();
         // Todo 写真urlの作成
+        
         this.recipeName = recipe.getName();
         this.postUserId = recipe.getUserId();
     }
