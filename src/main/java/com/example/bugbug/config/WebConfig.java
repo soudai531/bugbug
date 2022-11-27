@@ -15,8 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override //addResourceHandlersのオーバーライドをしJavaプログラムとして記述。「ソース→メソッドのオーバーライド→addResourceHandlersを選択」
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //ファイルの場所はURI形式で渡す必要があるため、FileクラスのtoURIメソッドを使用して変換
-        String imageDirUri = appConfig.getImageDir().toURI().toString();
-        System.out.println(imageDirUri);
+        String imageDirUri = appConfig.getDirMap().get("images").toURI().toString();
         //「/images/以下のパスがリクエストされたら」「imageDirにある対応ファイルを使用する」という設定
         registry.addResourceHandler("/images/**").addResourceLocations(imageDirUri);
     }

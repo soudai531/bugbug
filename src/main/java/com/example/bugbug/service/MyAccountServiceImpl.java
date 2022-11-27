@@ -24,12 +24,16 @@ public class MyAccountServiceImpl implements MyAccountService{
     private final UserRepository userRepository;
 
     public String saveUserIcon(MultipartFile file, int userId){
-        String userIdFormat = String.format("%010d", userId);
+        //現在時刻の取得
         Calendar cal = Calendar.getInstance();
+        // 時間とIDのフォーマット
+        String userIdFormat = String.format("%010d", userId);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String dateTime = sdf.format(cal.getTime());
+        // ファイル名の作成
         String fileName = "user-icon_" + userIdFormat + "_" + dateTime + ".jpg";
-        File dest = new File(appConfig.getImageDir(),fileName);
+        // URIの作成
+        File dest = new File(appConfig.getDirMap().get("user-icon"),fileName);
         try {
             //ファイルをパス(dest)に転送する
             file.transferTo(dest);
