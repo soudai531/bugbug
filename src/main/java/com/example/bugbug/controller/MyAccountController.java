@@ -36,8 +36,10 @@ public class MyAccountController {
         if (!authService.isLogin()) {
             return "redirect:/login/form";
         }
-        // アイコンテスト表示
+        // アイコン テスト表示
         model.addAttribute("userIcon", myAccountService.getMyIcon());
+        // URL用のユーザーID
+        model.addAttribute("userId", session.getAttribute("user_id"));
         return "mypage";
     }
 

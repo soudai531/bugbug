@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration //Javaコンフィグレーションクラスを作成。→リソースハンドラ（SpringMVC内蔵の仕組み）が設定できる。＝自分でファイルごとにハンドラメソッドを作成しなくてよくなる。
+@Configuration //Javaコンフィグレーションクラスを作成。→リソースハンドラ（SpringMVC内蔵の仕組み）が設定できる
 public class WebConfig implements WebMvcConfigurer {
 
     // 画像保存先設定クラス
