@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
 <body>
 
 <h2>トップページ</h2>
@@ -11,6 +11,7 @@
 <a href="/sinup/form">新規登録</a>
 <a href="/logout">ログアウト</a>
 <p th:text="${session_name}+さんようこそ"></p>
+<a href="/mypage">マイページへ</a>
 <th:block th:if="${msg} != null">
 	[[${msg}]]
 </th:block>
