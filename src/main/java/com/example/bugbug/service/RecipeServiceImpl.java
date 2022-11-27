@@ -3,6 +3,7 @@ package com.example.bugbug.service;
 import com.example.bugbug.entity.RecipeTags;
 import com.example.bugbug.entity.Recipes;
 import com.example.bugbug.entity.Tags;
+import com.example.bugbug.entity.Users;
 import com.example.bugbug.repository.RecipeTagsRepository;
 import com.example.bugbug.repository.RecipesRepository;
 import com.example.bugbug.repository.TagsRepository;
@@ -21,8 +22,9 @@ public class RecipeServiceImpl implements RecipeService {
 
     private RecipesRepository recipesRepository;
     private RecipeTagsRepository recipeTagsRepository;
-    private TagsRepository tagsRepository;
+
     private TagsService tagService;
+    private AccountService accountService;
 
     /**
      *レシピをすべて取得
@@ -64,7 +66,8 @@ public class RecipeServiceImpl implements RecipeService {
             // DTOにタグ情報を格納
             recipeDto.ofTag(tags);
             // Todo　ユーザー情報を格納する
-
+            Users user = accountService.findUserId(recipe.getUserId());
+            recipeDto.ofUser(user);
             // Todo お気に入り数を格納する
 
             return recipeDto;

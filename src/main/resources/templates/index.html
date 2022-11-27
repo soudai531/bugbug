@@ -17,31 +17,36 @@
 <main>
 	<h1>おすすめのレシピ</h1>
 	<!-- 画像参照テスト部分 -->
-	<img src="http://118.27.33.34/bugbug/img.JPG"　width="400px" alt="テスト画像"/>
+	<img src="http://118.27.33.34/bugbug/img.JPG" width="400px" alt="テスト画像"/>
 	<th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
 		<div>
 			<!--	レシピ画像	-->
-			<a th:href="${recipe.recipeUrl}">
+			<a th:href="|/recipes/${recipe.recipeId}|">
 				<img src="#" alt="レシピ画像"/>
 			</a>
 			<!--	投稿ユーザー	-->
 			<div>
-				<img src="#" alt="ユーザーアイコン"/>
-				<span th:text="${recipe.postUserName}"></span>
+				<a th:href="|/users/${recipe.postUserId}|">
+					<img src="#" alt="ユーザーアイコン"/>
+					<span th:text="${recipe.postUserName}"></span>
+				</a>
+
 			</div>
 			<!--	いいねボタン	-->
 			<div>
 				<span></span>
-				<img src="#"/>
+				<img src="#" alt="お気に入りボタンアイコン"/>
 			</div>
 			<!--	レシピ名		-->
 			<div>
-				<a th:href="${recipe.recipeUrl}">[[${recipe.recipeName}]]</a>
+				<a th:href="|/recipes/${recipe.recipeId}|">[[${recipe.recipeName}]]</a>
 			</div>
 			<!--	タグ		-->
 			<div>
 				<th:block th:each="tag : ${recipe.tags}">
-					<span>[[${tag.name}]]</span>
+					<a th:href="|/serch?tag=${tag.tagId}|">
+						<span>#[[${tag.name}]]</span>
+					</a>
 				</th:block>
 			</div>
 		</div>

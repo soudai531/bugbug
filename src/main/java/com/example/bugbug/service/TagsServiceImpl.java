@@ -16,11 +16,16 @@ public class TagsServiceImpl implements TagsService {
     private TagsRepository tagsRepository;
 
 
+    /**
+     * レシピタグのリストを受け取りタグ情報をリストで返す
+     * @param recipeTags
+     * @return
+     */
     @Override
     public List<Tags> getTags(List<RecipeTags> recipeTags) {
         List<Tags> tags = new ArrayList<>();
         // タグを取得
-        recipeTags.forEach(recipeTag -> tags.add(tagsRepository.findById(recipeTag.getRecipeTagId()).get()));
+        recipeTags.forEach(recipeTag -> tags.add(tagsRepository.findById(recipeTag.getTagId()).get()));
         return tags;
     }
 }
