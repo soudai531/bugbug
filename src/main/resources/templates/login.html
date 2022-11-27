@@ -9,9 +9,9 @@
     <link rel="preload" href="@{/img/header.jpeg}" as="image" CSS />
     <link rel="preload" href="@{/img/footer.jpg}" as="image" />
     <!-- 共通CSS -->
-    <link rel="stylesheet" href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <!-- 各ページCSS -->
-    <link rel="stylesheet" href="@{/css/login.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
   </head>
   <body>
     <div class="loading"></div>
@@ -89,9 +89,9 @@
       <div class="login">
         <h3 class="login__title">LOGIN</h3>
         <!-- ログインフォーム -->
-        <form class="login__form" th:action="@{/login}" method="post" th:object="${userForm}">
+        <form class="login__form" th:action="@{/login}" th:object="${LoginForm}" method="post" >
           <!--メールアドレス-->
-          <input type="email" name="email" class="login__form__input" placeholder="メールアドレス" autocomplete="on" />
+          <input type="email" name="mail" class="login__form__input" placeholder="メールアドレス" autocomplete="on" />
           <!--パスワード-->
           <input type="password" name="password" class="login__form__input" placeholder="パスワード" />
           <button class="login__form__btn" type="submit"><span>ログイン ▶</span></button>

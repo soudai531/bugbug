@@ -6,14 +6,10 @@
     </head>
     <body>
     <p th:if="${error}" th:text="${error}">エラーメッセージ</p>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form th:action="|/users/${userId}/user-icon/update|" method="post" enctype="multipart/form-data">
         アップロードするファイルを選択してください<br>
         <input type="file" name="file" accept="image/jpeg">
         <input type="submit">
     </form>
-    <p>
-        <img src="http://118.27.33.34/bugbug/img/user-icon/user-icon0000000001.JPG">
-    </p>
-
     </body>
 </html>

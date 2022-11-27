@@ -52,6 +52,7 @@ public class AuthController {
             return "redirect:/index";
         } else {
             redirectAttributes.addFlashAttribute("msg", "メールアドレスかパスワードが違います");
+            System.out.println("ログイン失敗");
             return "redirect:/login/form";
         }
     }
