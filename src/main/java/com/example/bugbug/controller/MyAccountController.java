@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import com.example.bugbug.config.AppConfig;
 import com.example.bugbug.service.AuthService;
+import com.example.bugbug.service.MyAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +35,7 @@ public class MyAccountController {
     @Autowired //@Beanなどをつけて事前設定されたインスタンスを使用するには@Autowiredが必要（AppConfigクラスが使えるようになる）
     private AppConfig appConfig;
     private final AuthService authService;
+    private final MyAccountService myAccountService;
 
     /**
      * マイページ表示
@@ -43,7 +46,10 @@ public class MyAccountController {
         if (!authService.isLogin()) {
             return "redirect:/login/form";
         }
-        model.addAttribute("userId", session.getAttribute("user_id"));
+        int userId = Integer.parseInt(session.getAttribute("user_id").toString());
+        String userIcon = myAccountService.getIcon(userId);
+        model.addAttribute("userIcon", userIcon);
+        model.addAttribute("userId", userId);
         return "mypage";
     }
 
@@ -63,7 +69,7 @@ public class MyAccountController {
      * ユーザーアイコンの登録（変更も兼ねる）
      */
     @PostMapping("/users/{userId}/user-icon/update")
-    public String updateUserIcon(@PathVariable int userId, @RequestParam MultipartFile file,  Model model) {
+    public String updateUserIcon(@PathVariable int userId, @RequestParam MultipartFile file, Model model , RedirectAttributes redirectAttributes) {
         // ログイン済みか確認
         if (!authService.isLogin()) {
             return "redirect:/login/form";
@@ -73,24 +79,9 @@ public class MyAccountController {
             model.addAttribute("error", "ファイルを指定してください");
             return "mypage";
         }
-        // ファイル名を作成
-        String userIdFormat = String.format("%010d", userId);
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String dateTime = sdf.format(cal.getTime());
-        String fileName = "user-icon_" + userIdFormat + "_" + dateTime + ".jpg";
-        File dest = new File(appConfig.getImageDir(),fileName);
-        try {
-            //ファイルをパス(dest)に転送する
-            file.transferTo(dest); //表示される修正候補の「try/catchで囲む」を選択
-        } catch (IllegalStateException e) {
-            // TODO 自動生成された catch ブロック
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO 自動生成された catch ブロック
-            e.printStackTrace();
-        }
-        // return "redirect:/index";
+        //画像を保存
+        String imageFileName = myAccountService.saveUserIcon(file,userId);
+        redirectAttributes.addFlashAttribute("imageFileName",imageFileName);
         return "redirect:/mypage";
     }
 
