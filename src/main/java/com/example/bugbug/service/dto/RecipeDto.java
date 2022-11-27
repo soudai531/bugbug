@@ -1,8 +1,8 @@
 package com.example.bugbug.service.dto;
 
-import com.example.bugbug.entity.Recipes;
-import com.example.bugbug.entity.Tags;
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.Recipe;
+import com.example.bugbug.entity.Tag;
+import com.example.bugbug.entity.User;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ public class RecipeDto {
     private int favoriteNumber;
 
     // タグ
-    private List<Tags> tags = new ArrayList<>();;
+    private List<Tag> tags = new ArrayList<>();;
 
     /**
      * コンストラクタ
      * @param recipe
      */
-    public RecipeDto(Recipes recipe){
+    public RecipeDto(Recipe recipe){
         this.recipeId = recipe.getRecipeId();
         // Todo 写真urlの作成
         
@@ -41,14 +41,14 @@ public class RecipeDto {
     /**
      * タグ情報を格納する
      */
-    public void ofTag(List<Tags> tags) {
+    public void ofTag(List<Tag> tags) {
         tags.forEach(tag -> this.tags.add(tag));
     }
 
     /**
      * 投稿ユーザー情報を格納
      */
-    public void ofUser(Users user){
+    public void ofUser(User user){
         this.postUserId = user.getUserId();
         this.postUserName = user.getName();
         this.postUserImageUrl = user.getIcon();

@@ -1,20 +1,17 @@
 package com.example.bugbug.service;
 
-import com.example.bugbug.entity.RecipeTags;
-import com.example.bugbug.entity.Recipes;
-import com.example.bugbug.entity.Tags;
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.Recipe;
+import com.example.bugbug.entity.RecipeTag;
+import com.example.bugbug.entity.Tag;
+import com.example.bugbug.entity.User;
 import com.example.bugbug.repository.RecipeTagsRepository;
 import com.example.bugbug.repository.RecipesRepository;
-import com.example.bugbug.repository.TagsRepository;
 import com.example.bugbug.service.dto.RecipeDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @AllArgsConstructor
 @Service
@@ -32,11 +29,11 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<RecipeDto> getAllRecipe(){
         //レシピの全件取得
-        List<Recipes> recipes = recipesRepository.findAll();
+        List<Recipe> recipes = recipesRepository.findAll();
         // レシピDTOのリストを作成
         List<RecipeDto> recipeDtoList = new ArrayList<>();
         //　レシピをDTOに詰め替える
-        for(Recipes recipe :recipes) {
+        for(Recipe recipe :recipes) {
             recipeDtoList.add(repackDto(recipe));
         }
         System.out.println(recipeDtoList);
@@ -55,18 +52,18 @@ public class RecipeServiceImpl implements RecipeService {
     /**
      * レシピ情報からレシピDTOを作成する
      */
-    public RecipeDto repackDto(Recipes recipe){
+    public RecipeDto repackDto(Recipe recipe){
             RecipeDto recipeDto = new RecipeDto(recipe);
             // Todo レシピ画像URLを格納する
 
             // レシピについているタグIDを取得
-            List<RecipeTags> recipeTags = recipeTagsRepository.getRecipeTagsId(recipe.getRecipeId());
+            List<RecipeTag> recipeTags = recipeTagsRepository.getRecipeTagsId(recipe.getRecipeId());
             //　レシピについているタグのタグ情報をまとめて取得
-            List<Tags> tags = tagService.getTags(recipeTags);
+            List<Tag> tags = tagService.getTags(recipeTags);
             // DTOにタグ情報を格納
             recipeDto.ofTag(tags);
             // Todo　ユーザー情報を格納する
-            Users user = accountService.findUserId(recipe.getUserId());
+            User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
             // Todo お気に入り数を格納する
 

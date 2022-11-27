@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("recipes")
-public class Recipes {
+public class Recipe {
     @Column("recipe_id")
     private int recipeId;
     @Column("user_id")

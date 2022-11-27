@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<Users, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 	// メールでユーザー検索
-	List<Users> findByMail(String mail);
+	List<User> findByMail(String mail);
 }

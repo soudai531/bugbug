@@ -1,7 +1,7 @@
 package com.example.bugbug.service;
 
-import com.example.bugbug.entity.RecipeTags;
-import com.example.bugbug.entity.Tags;
+import com.example.bugbug.entity.RecipeTag;
+import com.example.bugbug.entity.Tag;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ public interface TagsService {
      * @param recipeTags
      * @return
      */
-    List<Tags> getTags(List<RecipeTags> recipeTags);
+    List<Tag> getTags(List<RecipeTag> recipeTags);
 }

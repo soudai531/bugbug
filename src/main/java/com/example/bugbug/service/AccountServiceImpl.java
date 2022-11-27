@@ -1,6 +1,6 @@
 package com.example.bugbug.service;
 
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 import com.example.bugbug.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,13 +17,13 @@ public class AccountServiceImpl implements AccountService{
 
     // メールの取得
     @Override
-    public List<Users> findMail(String mail) {
+    public List<User> findMail(String mail) {
         return repository.findByMail(mail);
     }
 
     // ユーザーの登録
     @Override
-    public void addUser(Users user) {
+    public void addUser(User user) {
         repository.save(user);
     }
 
@@ -46,8 +46,8 @@ public class AccountServiceImpl implements AccountService{
     }
 
     // ユーザー情報1件取得
-    public Users findUserId(int id){
-        Optional<Users> user= repository.findById(id);
+    public User findUserId(int id){
+        Optional<User> user= repository.findById(id);
         return user.get();
     }
 }
