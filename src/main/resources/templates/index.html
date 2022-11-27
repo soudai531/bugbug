@@ -16,7 +16,8 @@
 </th:block>
 <main>
 	<h1>おすすめのレシピ</h1>
-	<span th:text="${recipes}"></span><br>
+	<!-- 画像参照テスト部分 -->
+	<img src="http://118.27.33.34/bugbug/img.JPG"　width="400px" alt="テスト画像"/>
 	<th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
 		<div>
 			<!--	レシピ画像	-->
