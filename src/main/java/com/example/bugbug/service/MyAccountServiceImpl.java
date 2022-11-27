@@ -11,8 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -20,18 +18,23 @@ import java.util.Optional;
 public class MyAccountServiceImpl implements MyAccountService{
     @Autowired
     private HttpSession session;
+
+    // 画像の保存場所を保持しているBean
     private final AppConfig appConfig;
+    // ユーザーテーブルのリポジトリ
     private final UserRepository userRepository;
 
+    /**
+     * ユーザーアイコンを変更
+     * @param file 保存する画像ファイル
+     * @param userId アイコンを変更するユーザーID
+     * @return 画像ファイル名
+     */
     public String saveUserIcon(MultipartFile file, int userId){
-        //現在時刻の取得
-        Calendar cal = Calendar.getInstance();
-        // 時間とIDのフォーマット
+        // IDのフォーマット(0埋め)
         String userIdFormat = String.format("%010d", userId);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String dateTime = sdf.format(cal.getTime());
         // ファイル名の作成
-        String fileName = "user-icon_" + userIdFormat + "_" + dateTime + ".jpg";
+        String fileName = "user-icon_" + userIdFormat +".jpg";
         // URIの作成
         File dest = new File(appConfig.getDirMap().get("user-icon"),fileName);
         try {
@@ -45,15 +48,19 @@ public class MyAccountServiceImpl implements MyAccountService{
             e.printStackTrace();
         }
         // DBにファイル名を保存する
-        String userIdStr = Integer.valueOf(userId).toString();
-        System.out.println(userId);
-        System.out.println(fileName);
         userRepository.updateIcon(fileName,userId);
         return fileName;
     }
 
-    public String getIcon(int userId){
+    /**
+     * 自分のアイコン画像ファイル名を取得する
+     */
+    public String getMyIcon(){
+        // セッションからユーザーIDの取得
+        int userId = Integer.parseInt(session.getAttribute("user_id").toString());
+        // ユーザー情報を取得
         Optional<Users> user = userRepository.findById(userId);
+        // ユーザーアイコンのファイル名を返す
         return user.get().getIcon();
     }
 }

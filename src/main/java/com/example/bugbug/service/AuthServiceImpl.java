@@ -35,6 +35,10 @@ public class AuthServiceImpl implements AuthService{
         return false;
     }
 
+    /**
+     * ログイン中かどうかを返すメソッド
+     * @return Boolean
+     */
     @Override
     public Boolean isLogin(){
         Object userId = session.getAttribute("user_id");

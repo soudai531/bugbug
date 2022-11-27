@@ -6,5 +6,5 @@ public interface MyAccountService {
     String saveUserIcon(MultipartFile file, int userId);
 
     //アイコンのファイル名を取得
-    String getIcon(int userId);
+    String getMyIcon();
 }

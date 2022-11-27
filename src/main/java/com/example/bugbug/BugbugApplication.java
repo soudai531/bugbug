@@ -6,9 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @SpringBootApplication
@@ -18,7 +16,8 @@ public class BugbugApplication {
 		SpringApplication.run(BugbugApplication.class, args);
 	}
 
-	@Bean//@Beanアノテーションを付けたメソッドを定義しておくことでSpring Frameworkがオブジェクトを登録して後で使える
+	// 画像の保存先の設定Bean
+	@Bean
 	public AppConfig appConfig() {
 
 		// フォルダの相対パス
@@ -47,5 +46,4 @@ public class BugbugApplication {
 		});
 		return appConfig;
 	}
-
 }

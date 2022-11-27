@@ -15,6 +15,7 @@ public interface UserRepository extends CrudRepository<Users, Integer> {
 	// メールでユーザー検索
 	List<Users> findByMail(String mail);
 
+	// ユーザーアイコンの更新
 	@Modifying
 	@Query("UPDATE users SET icon = :fileName WHERE user_id = :userId")
 	void updateIcon(@Param("fileName") String fileName, @Param("userId") int userId);
