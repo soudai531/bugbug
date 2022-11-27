@@ -4,8 +4,8 @@ import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
-import com.example.bugbug.repository.RecipeTagsRepository;
-import com.example.bugbug.repository.RecipesRepository;
+import com.example.bugbug.repository.RecipeTagRepository;
+import com.example.bugbug.repository.RecipeRepository;
 import com.example.bugbug.service.dto.RecipeDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,10 @@ import java.util.List;
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-    private RecipesRepository recipesRepository;
-    private RecipeTagsRepository recipeTagsRepository;
+    private RecipeRepository recipeRepository;
+    private RecipeTagRepository recipeTagRepository;
 
-    private TagsService tagService;
+    private TagService tagService;
     private AccountService accountService;
 
     /**
@@ -29,7 +29,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<RecipeDto> getAllRecipe(){
         //レシピの全件取得
-        List<Recipe> recipes = recipesRepository.findAll();
+        List<Recipe> recipes = recipeRepository.findAll();
         // レシピDTOのリストを作成
         List<RecipeDto> recipeDtoList = new ArrayList<>();
         //　レシピをDTOに詰め替える
@@ -57,7 +57,7 @@ public class RecipeServiceImpl implements RecipeService {
             // Todo レシピ画像URLを格納する
 
             // レシピについているタグIDを取得
-            List<RecipeTag> recipeTags = recipeTagsRepository.getRecipeTagsId(recipe.getRecipeId());
+            List<RecipeTag> recipeTags = recipeTagRepository.getRecipeTagsId(recipe.getRecipeId());
             //　レシピについているタグのタグ情報をまとめて取得
             List<Tag> tags = tagService.getTags(recipeTags);
             // DTOにタグ情報を格納

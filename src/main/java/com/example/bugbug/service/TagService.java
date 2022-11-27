@@ -5,7 +5,7 @@ import com.example.bugbug.entity.Tag;
 
 import java.util.List;
 
-public interface TagsService {
+public interface TagService {
     /**
      * レシピに紐づいているタグの情報をまとめて取得
      * @param recipeTags

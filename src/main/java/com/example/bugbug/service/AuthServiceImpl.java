@@ -11,11 +11,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class AuthServiceImpl implements AuthService{
-    private final UserRepository repository;
+    private final UserRepository userRepository;
     // メールの取得
     @Override
     public List<User> findMail(String mail) {
-        return repository.findByMail(mail);
+        return userRepository.findByMail(mail);
     }
 
     // パスワードチェック

@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface RecipesRepository extends CrudRepository<Recipe, Integer> {
+public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
     List<Recipe> findAll();
 }

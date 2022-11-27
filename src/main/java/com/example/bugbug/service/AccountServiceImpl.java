@@ -13,18 +13,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class AccountServiceImpl implements AccountService{
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
     // メールの取得
     @Override
     public List<User> findMail(String mail) {
-        return repository.findByMail(mail);
+        return userRepository.findByMail(mail);
     }
 
     // ユーザーの登録
     @Override
     public void addUser(User user) {
-        repository.save(user);
+        userRepository.save(user);
     }
 
     // ハッシュ化
@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService{
 
     // ユーザー情報1件取得
     public User findUserId(int id){
-        Optional<User> user= repository.findById(id);
+        Optional<User> user= userRepository.findById(id);
         return user.get();
     }
 }
