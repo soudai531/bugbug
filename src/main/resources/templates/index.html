@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	</head>
+	<link rel="stylesheet" th:href="@{/css/index.css}" />
+</head>
 <body>
 
 <h2>トップページ</h2>
@@ -22,12 +23,12 @@
 		<th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
 			<section href="" class="recomRecipe__list__item">
 				<div class="recomRecipe__list__item__img">
-					<img src="#" alt="レシピ画像"/>
+					<img img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像"/>
 				</div>
 				<div class="recomRecipe__list__item__userAction">
 					<a class="recomRecipe__list__item__user" th:href="|/users/${recipe.postUserId}|">
 						<span class="recomRecipe__list__item__user__icon">
-						  <img src="#" alt="ユーザーアイコン" />
+						  <img th:src="|/images/user-icons/${recipe.postUserImage}|" alt="ユーザーアイコン" />
 						</span>
 						<span class="recomRecipe__list__item__user__name">[[${recipe.postUserName}]]</span>
 					</a>
