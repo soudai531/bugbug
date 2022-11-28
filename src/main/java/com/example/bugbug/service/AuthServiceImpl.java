@@ -1,6 +1,6 @@
 package com.example.bugbug.service;
 
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 import com.example.bugbug.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +12,16 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class AuthServiceImpl implements AuthService{
-    private final UserRepository repository;
+public class AuthServiceImpl implements AuthService {
+
+    private final UserRepository userRepository;
     @Autowired
     private HttpSession session;
 
     // メールの取得
     @Override
-    public List<Users> findMail(String mail) {
-        return repository.findByMail(mail);
+    public List<User> findMail(String mail) {
+        return userRepository.findByMail(mail);
     }
 
     // パスワードチェック
@@ -37,13 +38,13 @@ public class AuthServiceImpl implements AuthService{
 
     /**
      * ログイン中かどうかを返すメソッド
+     * 
      * @return Boolean
      */
     @Override
-    public Boolean isLogin(){
+    public Boolean isLogin() {
         Object userId = session.getAttribute("user_id");
         return userId != null;
     }
-
 
 }

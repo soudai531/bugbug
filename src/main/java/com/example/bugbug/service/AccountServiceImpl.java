@@ -1,6 +1,6 @@
 package com.example.bugbug.service;
 
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 import com.example.bugbug.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -8,22 +8,23 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class AccountServiceImpl implements AccountService{
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
     // メールの取得
     @Override
-    public List<Users> findMail(String mail) {
-        return repository.findByMail(mail);
+    public List<User> findMail(String mail) {
+        return userRepository.findByMail(mail);
     }
 
     // ユーザーの登録
     @Override
-    public void addUser(Users user) {
-        repository.save(user);
+    public void addUser(User user) {
+        userRepository.save(user);
     }
 
     // ハッシュ化
@@ -44,4 +45,9 @@ public class AccountServiceImpl implements AccountService{
         return date;
     }
 
+    // ユーザー情報1件取得
+    public User findUserId(int id){
+        Optional<User> user= userRepository.findById(id);
+        return user.get();
+    }
 }

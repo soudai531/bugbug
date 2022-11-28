@@ -8,12 +8,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<Users, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 	// メールでユーザー検索
-	List<Users> findByMail(String mail);
+	List<User> findByMail(String mail);
 
 	// ユーザーアイコンの更新
 	@Modifying

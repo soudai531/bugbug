@@ -1,6 +1,6 @@
 package com.example.bugbug.controller;
 
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 import com.example.bugbug.form.LoginForm;
 import com.example.bugbug.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -42,11 +42,11 @@ public class AuthController {
     public String authLogin(@Validated LoginForm f, BindingResult bindingResult, Model model,
                             RedirectAttributes redirectAttributes) {
         // メールで検索
-        List<Users> list = service.findMail(f.getMail());
+        List<User> list = service.findMail(f.getMail());
         // メールとパスワードが正しいとき
         if (!list.isEmpty() && service.match(list.get(0).getPassword(), f.getPassword())) {
             // sessionに値を登録
-            session.setAttribute("user_id", list.get(0).getUser_id());
+            session.setAttribute("user_id", list.get(0).getUserId());
             session.setAttribute("user_name", list.get(0).getName());
             model.addAttribute("msg", "ログイン成功");
             return "redirect:/index";

@@ -1,6 +1,6 @@
 package com.example.bugbug.service;
 
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 
 import java.sql.Date;
 import java.util.List;
@@ -8,14 +8,17 @@ import java.util.List;
 public interface AccountService {
 
     // ユーザー登録
-    void addUser(Users user);
+    void addUser(User user);
 
     // メールでユーザー検索
-    List<Users> findMail(String mail);
+    List<User> findMail(String mail);
 
     // ハッシュ化
     String hash(String pass);
 
     // 日付取得
     Date getDate();
+
+    // ユーザー情報1件取得
+    User findUserId(int id);
 }

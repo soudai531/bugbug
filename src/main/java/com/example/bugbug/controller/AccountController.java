@@ -1,6 +1,6 @@
 package com.example.bugbug.controller;
 
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 import com.example.bugbug.form.InputForm;
 import com.example.bugbug.service.AccountService;
 import com.example.bugbug.validator.MailValidator;
@@ -60,13 +60,13 @@ public class AccountController {
         // 現在の日付を取得
         Date date = service.getDate();
         // 登録用のエンティティの定義
-        Users user = new Users(null, f.getName(), null, f.getMail(), hash, date);
+        User user = new User(null, f.getName(), null, f.getMail(), hash, date);
         // 登録処理
         service.addUser(user);
         // ユーザーIDの取得
-        List<Users> list = service.findMail(f.getMail());
+        List<User> list = service.findMail(f.getMail());
         // セッションへの追加
-        session.setAttribute("user_id", list.get(0).getUser_id());
+        session.setAttribute("user_id", list.get(0).getUserId());
         session.setAttribute("user_name", f.getName());
         // トップページにリダイレクト
         return "redirect:/index";
