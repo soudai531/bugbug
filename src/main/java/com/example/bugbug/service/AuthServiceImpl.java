@@ -3,15 +3,21 @@ package com.example.bugbug.service;
 import com.example.bugbug.entity.User;
 import com.example.bugbug.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
+
     private final UserRepository userRepository;
+    @Autowired
+    private HttpSession session;
+
     // メールの取得
     @Override
     public List<User> findMail(String mail) {
@@ -28,6 +34,17 @@ public class AuthServiceImpl implements AuthService{
             return true;
         }
         return false;
+    }
+
+    /**
+     * ログイン中かどうかを返すメソッド
+     * 
+     * @return Boolean
+     */
+    @Override
+    public Boolean isLogin() {
+        Object userId = session.getAttribute("user_id");
+        return userId != null;
     }
 
 }
