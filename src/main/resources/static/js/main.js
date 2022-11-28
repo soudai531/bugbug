@@ -1,6 +1,11 @@
 "use strict";
 
-/* ヘッダーHTMLElemtnt取得 */
+// const loading = document.querySelector(".loading");
+// window.addEventListener("DOMContentLoaded", () => {
+//   loading.classList.add("ok");
+// });
+
+
 const header = document.querySelector(".header");
 const siteExpl = document.querySelector(".siteExpl");
 const logo = document.querySelector(".logo");
@@ -14,6 +19,7 @@ const array = [header, siteExpl, logo, insectFilterBtn, navBtns, ...navBtns__btn
 
 /* スクロール時ヘッダー処理 */
 const scrollHeaderHandle = () => {
+  if(!document.URL.match(/index/)) return;
   if (set_position > document.documentElement.scrollTop) {
     for (let el of array) {
       el.classList.remove("js-headerScrollOn");
@@ -26,28 +32,9 @@ const scrollHeaderHandle = () => {
     }
   }
 };
+
 let set_position = 10;
 window.addEventListener("scroll", scrollHeaderHandle);
-
-/* ナビボタン遷移先設定 */
-const nav_insectBook = document.querySelector(".navBtns__btn--insectBook");
-const nav_registerAcount = document.querySelector(".navBtns__btn--registerAcount");
-const nav_login = document.querySelector(".navBtns__btn--login");
-const navArray = [nav_insectBook, nav_registerAcount, nav_login];
-const locationArray = ["insectBook.html", "registerAcount.html", "login.html"];
-for (let i = 0, size = navArray.length; i < size; i++) {
-  navArray[i].addEventListener("click", () => {
-    location.href = locationArray[i];
-  });
-}
-
-/* 質問解答ボタン遷移先設定 */
-const question__btns = document.querySelectorAll(".question__btn");
-for (let i = 0, size = question__btns.length; i < size; i++) {
-  question__btns[i].addEventListener("click", () => {
-    location.href = "./index.html";
-  });
-}
 
 /* 虫フィルターボタンクリック処理 */
 const insectFilter = document.querySelector(".insectFilterBtn__input");
@@ -58,7 +45,6 @@ if(recipeImgArrayLength > 0) {
     recipeImgArray[i].originImg = recipeImgArray[i].firstElementChild.src;
   }
 }
-
 let filterStarte = false;
 insectFilter.addEventListener("click", () => {
   filterStarte = !filterStarte;
@@ -70,6 +56,33 @@ insectFilter.addEventListener("click", () => {
     }
   }
 });
+
+/* 検索フォームJS処理 */
+const searchFormCover = document.querySelector(".search__form__cover");
+const searchFormClose = document.querySelector(".search__form__close");
+const searchForm = document.querySelector(".search__form");
+const nav_searchRecipe = document.querySelector(".navBtns__btn--searchRecipe");
+
+nav_searchRecipe.addEventListener("click", () => {
+  removeClassHidden(searchFormCover);
+  removeClassHidden(searchForm);
+});
+searchFormCover.addEventListener("click", () => {
+  addClassHidden(searchFormCover);
+  addClassHidden(searchForm);
+});
+searchFormClose.addEventListener("click", () => {
+  addClassHidden(searchFormCover);
+  addClassHidden(searchForm);
+});
+
+/* ダイアログメソッド */
+const addClassHidden = el => {
+  el.classList.add('hidden');
+}
+const removeClassHidden = el => {
+  el.classList.remove('hidden');
+}
 
 /* お気に入りボタンクリック処理 */
 const hearts = document.querySelectorAll(".recomRecipe__list__item__heartBtn");
@@ -86,29 +99,3 @@ for (let el of hearts) {
     }
   });
 }
-
-const loading = document.querySelector(".loading");
-window.addEventListener("DOMContentLoaded", () => {
-  loading.classList.add("ok");
-});
-
-/* 検索フォームJS処理 */
-const searchFormCover = document.querySelector(".search__form__cover");
-const searchFormClose = document.querySelector(".search__form__close");
-const searchForm = document.querySelector(".search__form");
-const nav_searchRecipe = document.querySelector(".navBtns__btn--searchRecipe");
-
-nav_searchRecipe.addEventListener("click", () => {
-  searchFormCover.classList.remove("hidden");
-  searchForm.classList.remove("hidden");
-});
-
-searchFormCover.addEventListener("click", () => {
-  searchFormCover.classList.add("hidden");
-  searchForm.classList.add("hidden");
-});
-
-searchFormClose.addEventListener("click", () => {
-  searchFormCover.classList.add("hidden");
-  searchForm.classList.add("hidden");
-});
