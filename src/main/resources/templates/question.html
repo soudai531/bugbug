@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bugbug-question</title>
-    <link rel="stylesheet" href="css/question.css" />
+    <title>bugbug</title>
+    <link rel="icon" th:href="@{/img/logoicon.png}" />
+    <link rel="preload" th:href="@{/img/header.jpeg}" as="image" CSS/>
+    <link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
+    <!-- 共通CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- 各ページCSS -->
+    <link rel="stylesheet" th:href="@{/css/question.css}" />
   </head>
   <body>
-    <div class="main">
-        <p class="title">?</p>
-        <p class="title">虫は苦手ですか？</p>
-        <p class="detail">虫の写真を加工したり一部イラストに置き換えます</p>
-        <p class="detail">※一部フィルタリングが出来ないものもあります</p>
-
-        <div class="btn-area">
-            <button type="submit" name="yes" class="btn">はい</button>
-        <button type="submit" name="no" class="btn">いいえ</button>
-        </div>
-        
+    <div class="loading"></div>
+    <div class="logo">
+      <img th:src="@{/img/logo_black.png}" alt="" />
     </div>
+    <!-- メインコンテンツ -->
+    <main class="main">
+      <div class="question">
+        <p class="question__title">?</p>
+        <p class="question__title">虫は苦手ですか</p>
+        <p class="question__title__detail">虫の写真を一部イラストに置き換えます</p>
+        <p class="question__title__detail">※一部フィルタリングが出来ないものもあります</p>
+      </div>
+      <form class="question__btns" action="./index.html" method="post">
+        <button class="question__btn question__btn--yes" type="submit" name="answer" value="yes"><span>はい</span></button>
+        <button class="question__btn question__btn--no" type="submit" name="answer" value="no">いいえ</button>
+      </form>
+    </main>
+  
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>

@@ -3,7 +3,7 @@ name: issueテンプレート
 about: issueを作成する際のテンプレート
 title: ''
 labels: ''
-assignees: Aso2101122
+assignees: ''
 
 ---
 
@@ -14,6 +14,7 @@ assignees: Aso2101122
 
 ## 目的
 例：レシピの登録を行うため
+例：コードの可読性、保守性の向上のため
 
 ## タスク
 細かいタスクがある場合は書き出してください
