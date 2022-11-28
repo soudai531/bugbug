@@ -71,5 +71,4 @@ public class AccountController {
         // トップページにリダイレクト
         return "redirect:/index";
     }
-
 }
