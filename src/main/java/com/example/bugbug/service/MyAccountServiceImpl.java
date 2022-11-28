@@ -1,7 +1,7 @@
 package com.example.bugbug.service;
 
 import com.example.bugbug.config.AppConfig;
-import com.example.bugbug.entity.Users;
+import com.example.bugbug.entity.User;
 import com.example.bugbug.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class MyAccountServiceImpl implements MyAccountService{
         // セッションからユーザーIDの取得
         int userId = Integer.parseInt(session.getAttribute("user_id").toString());
         // ユーザー情報を取得
-        Optional<Users> user = userRepository.findById(userId);
+        Optional<User> user = userRepository.findById(userId);
         // ユーザーアイコンのファイル名を返す
         return user.get().getIcon();
     }
