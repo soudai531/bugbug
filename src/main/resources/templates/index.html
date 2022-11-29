@@ -50,22 +50,6 @@
 			</section>
 		</th:block>
 	</section>
-
-	
-	<!-- 画像参照テスト部分 -->
-	<img src="http://118.27.33.34/bugbug/img.JPG" width="400px" alt="テスト画像"/>
-	<th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
-		<div>
-			<!--	レシピ画像	-->
-			<a th:href="|/recipes/${recipe.recipeId}|">
-				<img src="#" alt="レシピ画像"/>
-			</a>
-			<!--	レシピ名		-->
-			<div>
-				<a th:href="|/recipes/${recipe.recipeId}|">[[${recipe.recipeName}]]</a>
-			</div>
-		</div>
-	</th:block>
 </main>
 
 </body>
