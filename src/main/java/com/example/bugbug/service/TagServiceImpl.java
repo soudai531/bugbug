@@ -1,13 +1,15 @@
 package com.example.bugbug.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.repository.TagRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
@@ -27,5 +29,19 @@ public class TagServiceImpl implements TagService {
         // タグを取得
         recipeTags.forEach(recipeTag -> tags.add(tagRepository.findById(recipeTag.getTagId()).get()));
         return tags;
+    }
+    
+    @Override
+    public  Tag saveTag(Tag tag) {
+    	return tagRepository.save(tag);
+    }
+    
+    @Override
+    public int getId(String name) {
+    	if(!tagRepository.existsByName(name)) {
+    		tagRepository.save(new Tag(null,name,0));
+    	}
+    	Tag tag = tagRepository.findByName(name);
+    	return tag.getTagId();
     }
 }

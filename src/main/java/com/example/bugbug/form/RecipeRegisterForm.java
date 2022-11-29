@@ -10,7 +10,7 @@ import lombok.Data;
 public class RecipeRegisterForm {
 	private String name;
 	private List<String> tags;
-	private MultipartFile images;
+	private MultipartFile image;
 	private String explan;
 	private String point;
 	private List<String> materials;

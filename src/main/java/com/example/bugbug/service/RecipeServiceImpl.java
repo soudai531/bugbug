@@ -1,27 +1,41 @@
 package com.example.bugbug.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.bugbug.config.AppConfig;
 import com.example.bugbug.entity.Recipe;
+import com.example.bugbug.entity.RecipeMaterial;
 import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
-import com.example.bugbug.repository.RecipeTagRepository;
+import com.example.bugbug.repository.MaterialRepository;
+import com.example.bugbug.repository.ProcedureRepository;
 import com.example.bugbug.repository.RecipeRepository;
+import com.example.bugbug.repository.RecipeTagRepository;
 import com.example.bugbug.service.dto.RecipeDto;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-    private RecipeRepository recipeRepository;
-    private RecipeTagRepository recipeTagRepository;
+    private final RecipeRepository recipeRepository;
+    private final RecipeTagRepository recipeTagRepository;
+    private final MaterialRepository materialRepository;
+    private final ProcedureRepository procedureRepository;
 
-    private TagService tagService;
-    private AccountService accountService;
+    private final TagService tagService;
+    private final AccountService accountService;
+    
+    // 画像の保存場所を保持しているBean
+    private final AppConfig appConfig;
 
     /**
      *レシピをすべて取得
@@ -69,4 +83,57 @@ public class RecipeServiceImpl implements RecipeService {
 
             return recipeDto;
     }
+    
+    //レシピ登録
+    public Recipe saveRecipe(Recipe recipe) {
+    	return recipeRepository.save(recipe);
+    }
+    
+    
+    
+    /**
+     * レシピ画像の登録
+     * @param recipe_id 登録するレシピのID
+     * @return 画像ファイル名
+     */
+    public String saveRecipeImage(MultipartFile file, int recipe_id){
+        // IDのフォーマット(0埋め)
+        String RecipeImageFormat = String.format("%010d", recipe_id);
+        // ファイル名の作成
+        String fileName = "RecipeImage_" + RecipeImageFormat +".jpg";
+        // URIの作成
+        File dest = new File(appConfig.getDirMap().get("recipe-image"),fileName);
+        try {
+            //ファイルをパス(dest)に転送する
+            file.transferTo(dest);
+        } catch (IllegalStateException e) {
+            // TODO 自動生成された catch ブロック
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO 自動生成された catch ブロック
+            e.printStackTrace();
+        }
+        // DBにファイル名を保存する
+        recipeRepository.updateRecipeImage(fileName,recipe_id);
+        return fileName;
+    }
+    
+   public void saveTag(int recipe_id,List<String> tags) {
+    	tags.forEach(tag -> {
+    			int tagId = tagService.getId(tag);
+    			
+    			recipeTagRepository.save(new RecipeTag(null,recipe_id,tagId,0));
+    	});
+    }
+   
+   public void saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
+	   System.out.println("text");
+	   for(int i=0;i < materials.size();i++) {
+		   
+		   if(!materials.get(i).equals("") && !amounts.get(i).equals("")) {
+			   materialRepository.save(new RecipeMaterial(null,recipe_id,materials.get(i),amounts.get(i)));
+			  
+		   }
+	   }
+   }
 }

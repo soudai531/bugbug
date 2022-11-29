@@ -51,16 +51,25 @@ public class RecipeController {
             return "redirect:/login/form";
         }
         int image_blurred=0;
+        //日付の取得
         Date date = dateComponent.getDate();
+        //画像表示フラグの設定
         if(form.getImage_blurred()!=null) {
         	image_blurred = 1;
         }
-        
-        Recipe recipe = new Recipe((Integer) null,(Integer) session.getAttribute("user_id"),form.getName()
+        //登録するエンティティの作成
+        Recipe recipe = new Recipe(null,(Integer) session.getAttribute("user_id"),form.getName()
         					,null,form.getExplan(),form.getPoint(),image_blurred,0,date,0);
         
-        recipeService.save();
+        Recipe savedRecipe = recipeService.saveRecipe(recipe);
         
-		return "";
+        
+        //画像の登録
+        recipeService.saveRecipeImage(form.getImage(), savedRecipe.getRecipeId());
+        //タグの登録
+        recipeService.saveTag(savedRecipe.getRecipeId(),form.getTags());
+        //材料の登録
+        recipeService.saveMaterial(savedRecipe.getRecipeId(),form.getMaterials(),form.getAmounts());
+		return "index";
 	}
 }

@@ -2,6 +2,8 @@ package com.example.bugbug.common;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+@Component
 public class DateComponentImpl implements DateComponent {
 
 	// 日付の取得
