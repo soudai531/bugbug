@@ -6,19 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bugbug</title>
     <link rel="icon" href="./img/logoicon.png" />
-    <link rel="preload" href="./img/header.jpeg" as="image" CSS />
-    <link rel="preload" href="./img/footer.jpg" as="image" />
     <!-- 共通CSS -->
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <!-- 各ページCSS -->
-    <link rel="stylesheet" href="./css/signup.css" />
+    <link rel="stylesheet" th:href="@{/css/signup.css}" />
   </head>
   <body>
-    <main>
+    <main class="main js-headerScrollOn">
       <header th:replace="header"></header>
-      <div class="acount">
-        <h1 class="title">新規アカウント登録</h1>
-        <form th:action="@{/sinup}" method="post" th:object="${inputForm}">
+      <div class="signup">
+        <h3 class="signup__title">新規アカウント登録</h3>
+        <form class="signup__form" th:action="@{/sinup}" method="post" th:object="${inputForm}">
           <!--メールアドレス-->
           <div class="signup__form__item">
             <p class="signup__form__item__text required">メールアドレス</p>
@@ -41,7 +39,7 @@
           </div>
           <!--バリデーションエラー-->
           <ul class="signup__form__validation" th:if="${#fields.hasErrors('*')}">
-            <li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+            <li th:each="err:${#fields.errors('*')}" th:text="'※ ' + ${err}"></li>
           </ul>
           <button class="signup__form__btn confirm__open" type="button"><span>アカウント作成</span></button>
           <h:outputText styleClass="required" />
@@ -59,7 +57,7 @@
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="./js/confirm.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/confirm.js}"></script>
   </body>
 </html>
