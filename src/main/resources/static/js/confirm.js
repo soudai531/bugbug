@@ -12,3 +12,11 @@ confirmClose.addEventListener("click", () => {
   addClassHidden(confirmCover);
   addClassHidden(confirmDiv);
 });
+
+/* ダイアログメソッド */
+const addClassHidden = el => {
+  el.classList.add('hidden');
+}
+const removeClassHidden = el => {
+  el.classList.remove('hidden');
+}
