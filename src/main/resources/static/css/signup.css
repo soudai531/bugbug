@@ -129,5 +129,8 @@
 .signup__form__validation {
   width: 100%;
   list-style: none;
-  background: red;
+}
+.signup__form__validation li {
+  font-size: 12px;
+  color: red;
 }/*# sourceMappingURL=signup.css.map */
