@@ -1,3 +1,18 @@
+.main.js-headerScrollOn {
+  padding: 0;
+  padding-top: 100px;
+  height: calc(100% - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .main.js-headerScrollOn {
+    height: calc(100% - 160px);
+    padding-top: 160px;
+  }
+}
+
 .login {
   display: flex;
   flex-direction: column;
