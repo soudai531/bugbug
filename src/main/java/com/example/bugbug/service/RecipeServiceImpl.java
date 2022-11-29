@@ -64,12 +64,10 @@ public class RecipeServiceImpl implements RecipeService {
             List<Tag> tags = tagService.getTags(recipeTags);
             // DTOにタグ情報を格納
             recipeDto.ofTag(tags);
-            // Todo　ユーザー情報を格納する
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
-            // Todo お気に入り数を格納する
-
-
+            int favoriteNum = favoriteRepository.countFavorite(recipe.getUserId());
+            recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
 }

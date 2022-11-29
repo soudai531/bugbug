@@ -18,5 +18,5 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	// ユーザーアイコンの更新
 	@Modifying
 	@Query("UPDATE users SET icon = :fileName WHERE user_id = :userId")
-	void updateIcon(@Param("fileName") String fileName, @Param("userId") int userId);
+	void updateIcon(String fileName, int userId);
 }
