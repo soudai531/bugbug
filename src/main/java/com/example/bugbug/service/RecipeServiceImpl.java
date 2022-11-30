@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.bugbug.config.AppConfig;
 import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeMaterial;
+import com.example.bugbug.entity.RecipeProcedure;
 import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
@@ -118,22 +119,63 @@ public class RecipeServiceImpl implements RecipeService {
         return fileName;
     }
     
+    //レシピタグの登録
    public void saveTag(int recipe_id,List<String> tags) {
+	   //タグリストの要素がある間
     	tags.forEach(tag -> {
-    			int tagId = tagService.getId(tag);
-    			
-    			recipeTagRepository.save(new RecipeTag(null,recipe_id,tagId,0));
+    		//IDの取得
+    		int tagId = tagService.getId(tag);
+    		//登録
+    		recipeTagRepository.save(new RecipeTag(null,recipe_id,tagId,0));
     	});
     }
    
+   //材料の登録
    public void saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
-	   System.out.println("text");
+	   //材料リストの要素がある間
 	   for(int i=0;i < materials.size();i++) {
-		   
+		   //名前と数量がどちらも入力されている時
 		   if(!materials.get(i).equals("") && !amounts.get(i).equals("")) {
+			   //登録
 			   materialRepository.save(new RecipeMaterial(null,recipe_id,materials.get(i),amounts.get(i)));
 			  
 		   }
 	   }
+   }
+   
+   //手順の登録
+   public void saveProcedure(int recipe_id,List<MultipartFile> images,List<String> contexts) {
+	   //imageリストに要素がある間
+	   for(int i=0;i<images.size();i++) {
+		    String image = uploadProcedureImage(images.get(i),recipe_id);
+		    if(!contexts.get(i).equals("")) {
+		    	procedureRepository.save(new RecipeProcedure(null,recipe_id,image,contexts.get(i),0));
+		    }
+	   }
+   }
+   
+   /**
+    * レシピ画像の登録
+    * @param recipe_id 登録するレシピのID
+    * @return 画像ファイル名
+    */
+   public String uploadProcedureImage(MultipartFile file, int recipe_id){
+       // IDのフォーマット(0埋め)
+       String ProcedureImageFormat = String.format("%010d", recipe_id);
+       // ファイル名の作成
+       String fileName = "recipe-procedure-images_" + ProcedureImageFormat +".jpg";
+       // URIの作成
+       File dest = new File(appConfig.getDirMap().get("recipe-procedure-images"),fileName);
+       try {
+           //ファイルをパス(dest)に転送する
+           file.transferTo(dest);
+       } catch (IllegalStateException e) {
+           // TODO 自動生成された catch ブロック
+           e.printStackTrace();
+       } catch (IOException e) {
+           // TODO 自動生成された catch ブロック
+           e.printStackTrace();
+       }
+       return fileName;
    }
 }

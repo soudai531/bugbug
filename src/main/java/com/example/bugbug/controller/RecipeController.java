@@ -70,6 +70,8 @@ public class RecipeController {
         recipeService.saveTag(savedRecipe.getRecipeId(),form.getTags());
         //材料の登録
         recipeService.saveMaterial(savedRecipe.getRecipeId(),form.getMaterials(),form.getAmounts());
+        //手順の登録
+        recipeService.saveProcedure(savedRecipe.getRecipeId(),form.getDatail_images(),form.getContexts());
 		return "index";
 	}
 }
