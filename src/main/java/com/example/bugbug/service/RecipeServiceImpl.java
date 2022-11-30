@@ -101,7 +101,7 @@ public class RecipeServiceImpl implements RecipeService {
         // IDのフォーマット(0埋め)
         String RecipeImageFormat = String.format("%010d", recipe_id);
         // ファイル名の作成
-        String fileName = "RecipeImage_" + RecipeImageFormat +".jpg";
+        String fileName = "recipe-image_" + RecipeImageFormat +".jpg";
         // URIの作成
         File dest = new File(appConfig.getDirMap().get("recipe-image"),fileName);
         try {
@@ -147,9 +147,10 @@ public class RecipeServiceImpl implements RecipeService {
    public void saveProcedure(int recipe_id,List<MultipartFile> images,List<String> contexts) {
 	   //imageリストに要素がある間
 	   for(int i=0;i<images.size();i++) {
-		    String image = uploadProcedureImage(images.get(i),recipe_id);
+		    
 		    if(!contexts.get(i).equals("")) {
-		    	procedureRepository.save(new RecipeProcedure(null,recipe_id,image,contexts.get(i),0));
+		    	RecipeProcedure saved = procedureRepository.save(new RecipeProcedure(null,recipe_id,null,contexts.get(i),0));
+		    	String image = saveProcedureImage(images.get(i),saved.getProcedureId());
 		    }
 	   }
    }
@@ -159,9 +160,9 @@ public class RecipeServiceImpl implements RecipeService {
     * @param recipe_id 登録するレシピのID
     * @return 画像ファイル名
     */
-   public String uploadProcedureImage(MultipartFile file, int recipe_id){
+   public String saveProcedureImage(MultipartFile file, int ProcedureId){
        // IDのフォーマット(0埋め)
-       String ProcedureImageFormat = String.format("%010d", recipe_id);
+       String ProcedureImageFormat = String.format("%010d", ProcedureId);
        // ファイル名の作成
        String fileName = "recipe-procedure-images_" + ProcedureImageFormat +".jpg";
        // URIの作成
@@ -176,6 +177,8 @@ public class RecipeServiceImpl implements RecipeService {
            // TODO 自動生成された catch ブロック
            e.printStackTrace();
        }
+       // DBにファイル名を保存する
+       procedureRepository.updateProcedureImage(fileName,ProcedureId);
        return fileName;
    }
 }
