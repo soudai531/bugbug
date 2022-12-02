@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
   }
 
   // ログイン・アカウント作成ページはナビボタンを非表示
-  const headerHiddenPaths = ['/sinup/form', '/login/form'];
+  const headerHiddenPaths = ['/sinup/form', '/sinup', '/login/form', '/login'];
   if(headerHiddenPaths.includes(location.pathname)) {
     navBtns.style.display = 'none';
     insectFilterBtn.style.display = 'none';
