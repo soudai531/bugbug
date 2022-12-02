@@ -1,6 +1,6 @@
 "use strict";
 
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
   const header = document.querySelector(".header");
   const siteExpl = document.querySelector(".siteExpl");
   const logo = document.querySelector(".logo");
@@ -12,17 +12,24 @@ window.addEventListener('load', () => {
   const headerElemnts = [header, siteExpl, logo, insectFilterBtn, navBtns, ...navBtns__btn, ...navBtns__btn__text, main];
 
   // トップページでのみスクロール処理用クラスを操作
-  const paths = ['', '/', '/index', '/index.html'];
-  if(paths.includes(location.pathname)) {
+  const indexPaths = ['', '/', '/index', '/index.html'];
+  if(indexPaths.includes(location.pathname)) {
     for (let el of headerElemnts) {
       el.classList.remove("js-headerScrollOn");
     }
+  }
+
+  // ログイン・アカウント作成ページはナビボタンを非表示
+  const headerHiddenPaths = ['/sinup/form', '/login/form'];
+  if(headerHiddenPaths.includes(location.pathname)) {
+    navBtns.style.display = 'none';
+    insectFilterBtn.style.display = 'none';
   }
   
   /* スクロール時ヘッダー処理 */
   const scrollHeaderHandle = () => {
     // トップページでのみスクロール処理
-    if(!paths.includes(location.pathname)) return;
+    if(!indexPaths.includes(location.pathname)) return;
     if (set_position > document.documentElement.scrollTop) {
       for (let el of headerElemnts) {
         el.classList.remove("js-headerScrollOn");
@@ -43,8 +50,8 @@ window.addEventListener('load', () => {
   const insectFilter = document.querySelector(".insectFilterBtn__input");
   const recipeImgArray = document.querySelectorAll(".recomRecipe__list__item__img");
   let recipeImgArrayLength = recipeImgArray.length;
-  if(recipeImgArrayLength > 0) {
-    for (let i = 0 ; i < recipeImgArrayLength ; i++) {
+  if (recipeImgArrayLength > 0) {
+    for (let i = 0; i < recipeImgArrayLength; i++) {
       recipeImgArray[i].originImg = recipeImgArray[i].firstElementChild.src;
     }
   }
@@ -60,6 +67,14 @@ window.addEventListener('load', () => {
     }
   });
   
+  /* ダイアログメソッド */
+  const addClassHidden = (el) => {
+    el.classList.add("hidden");
+  };
+  const removeClassHidden = (el) => {
+    el.classList.remove("hidden");
+  };
+
   /* 検索フォームJS処理 */
   const searchFormCover = document.querySelector(".search__form__cover");
   const searchFormClose = document.querySelector(".search__form__close");
@@ -79,16 +94,26 @@ window.addEventListener('load', () => {
     addClassHidden(searchForm);
   });
   
-  /* ダイアログメソッド */
-  const addClassHidden = el => {
-    el.classList.add('hidden');
-  }
-  const removeClassHidden = el => {
-    el.classList.remove('hidden');
+  /* 登録時確認ダイアログ */
+  const confirmPaths = ['/sinup/form', '/sinup'];
+  if (confirmPaths.includes(location.pathname)) {
+    const confirmCover = document.querySelector(".confirm__cover");
+    const confirmClose = document.querySelector(".confirm__btns__btn--no");
+    const confirmDiv = document.querySelector(".confirm");
+    const confirmOpen = document.querySelector(".confirm__open");
+
+    confirmOpen.addEventListener("click", () => {
+      removeClassHidden(confirmCover);
+      removeClassHidden(confirmDiv);
+    });
+    confirmClose.addEventListener("click", () => {
+      addClassHidden(confirmCover);
+      addClassHidden(confirmDiv);
+    });
   }
   
-  /* お気に入りボタンクリック処理 */
-  const hearts = document.querySelectorAll(".recomRecipe__list__item__heartBtn");
+  /* お気に入りボタンクリック処理(仮) */
+  const hearts = document.querySelectorAll(".heartBtn");
   for (let el of hearts) {
     el.addEventListener("click", () => {
       const ionicon = el.firstElementChild;
