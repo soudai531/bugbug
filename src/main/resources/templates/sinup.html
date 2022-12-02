@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bugbug</title>
-    <link rel="icon" href="./img/logoicon.png" />
+    <link rel="icon" th:href="@{/img/logoicon.png}" />
     <!-- 共通CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <!-- 各ページCSS -->
@@ -25,7 +25,7 @@
           <!--ユーザーネーム-->
           <div class="signup__form__item">
             <p class="signup__form__item__text required">ユーザーネーム</p>
-            <input type="text" name="username" class="signup__form__input" placeholder="ユーザーネーム" />
+            <input type="text" name="name" class="signup__form__input" placeholder="ユーザーネーム" />
           </div>
           <!--パスワード-->
           <div class="signup__form__item">
@@ -58,6 +58,5 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/confirm.js}"></script>
   </body>
 </html>
