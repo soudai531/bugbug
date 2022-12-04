@@ -16,5 +16,5 @@ public interface RecipeTagRepository extends CrudRepository<RecipeTag, Integer> 
      * @return レシピに紐づいているレシピタグ
      */
     @Query("SELECT * FROM recipe_tags WHERE recipe_id = :recipeId")
-    List<RecipeTag> getRecipeTagsId(int recipeId);
+    List<RecipeTag> getRecipeTagsId(@Param("recipeId")int recipeId);
 }
