@@ -1,18 +1,22 @@
 package com.example.bugbug.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.bugbug.common.DateComponent;
 import com.example.bugbug.entity.Recipe;
-import com.example.bugbug.form.RecipeRegisterForm;
-import com.example.bugbug.service.AuthService;
+import com.example.bugbug.entity.RecipeMaterial;
+import com.example.bugbug.entity.RecipeProcedure;
+import com.example.bugbug.entity.RecipeTag;
+import com.example.bugbug.entity.User;
+import com.example.bugbug.service.AccountService;
 import com.example.bugbug.service.RecipeService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,47 +24,30 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Controller
 public class RecipeController {
+	
 	@Autowired
     private HttpSession session;
-	private final DateComponent dateComponent;
-	private final AuthService authService;
-	private final RecipeService recipeService;
+    private final RecipeService recipeService;
+    private final AccountService accountService;
 	
-	// Form初期設定エリア
-    @ModelAttribute
-    public RecipeRegisterForm RecipeRegisterSetUpForm() {
-        return new RecipeRegisterForm();
-    }
-    
-	//レシピ登録画面表示
-	@RequestMapping("/recipes/new/register/form")
-	public String viewNewRecipeForm() {
-	//  ログイン状態判定
-        if (!authService.isLogin()) {
-            return "redirect:/login/form";
-        }
-		return "recipe/register";
-	}
-	
-	@PostMapping("/recipes/new/register")
-	public String saveRecipe(RecipeRegisterForm form,Model model) {
-	//  ログイン状態判定
-        if (!authService.isLogin()) {
-            return "redirect:/login/form";
-        }
-        
-        
-        Recipe savedRecipe = recipeService.createRecipe(form);
-        
-        
-        //画像の登録
-        recipeService.saveRecipeImage(form.getImage(), savedRecipe.getRecipeId());
-        //タグの登録
-        recipeService.saveRecipeTag(savedRecipe.getRecipeId(),form.getTags());
-        //材料の登録
-        recipeService.saveMaterial(savedRecipe.getRecipeId(),form.getMaterials(),form.getAmounts());
-        //手順の登録
-        recipeService.saveProcedure(savedRecipe.getRecipeId(),form.getProcedure_images(),form.getContexts());
-		return "redirect:/index";
+	//レシピ詳細画面の表示
+	@GetMapping("recipe/*")
+	public String viewRecipeDetail(@RequestParam(value="recipeId")int recipe_id,Model model) {
+		//レシピ詳細情報の取得
+		Optional<Recipe> recipe = recipeService.getRecipe(recipe_id);
+		List<RecipeTag> recipeTags = recipeService.getRecipeTag(recipe_id);
+		List<RecipeProcedure> procuderes = recipeService.getProcedure(recipe_id);
+		List<RecipeMaterial> materials = recipeService.getMaterial(recipe_id);
+		User user = accountService.findUserId(recipe.get().getUserId());
+		//モデルへの追加
+		model.addAttribute("recipe",recipe);
+		model.addAttribute("tags",recipeTags);
+		model.addAttribute("procuderes",procuderes);
+		model.addAttribute("materials",materials);
+		model.addAttribute("user",user);
+		
+		//ビュー数のカウント
+		recipeService.addBrow(recipe_id);
+		return "datail";
 	}
 }

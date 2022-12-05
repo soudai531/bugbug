@@ -1,11 +1,12 @@
 package com.example.bugbug.service;
 
 import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
+import java.util.Optional;
 
 import com.example.bugbug.entity.Recipe;
-import com.example.bugbug.form.RecipeRegisterForm;
+import com.example.bugbug.entity.RecipeMaterial;
+import com.example.bugbug.entity.RecipeProcedure;
+import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.service.dto.RecipeDto;
 
 public interface RecipeService {
@@ -16,21 +17,18 @@ public interface RecipeService {
     // おすすめレシピを20件ずつ取得
     List<RecipeDto> getRecommendRecipe(int page);
     
-    //レシピ登録
-    Recipe saveRecipe(Recipe recipe);
+    //特定のレシピの取得
+    Optional<Recipe> getRecipe(int recipeId);
     
-    //エンティティの作
-    public Recipe createRecipe(RecipeRegisterForm form);
+    //レシピタグの取得
+    List<RecipeTag> getRecipeTag(int recipeId);
     
-    //画像の登録
-    public String saveRecipeImage(MultipartFile file, int recipe_id);
+    //レシピ手順の取得
+    List<RecipeProcedure> getProcedure(int recipeId);
     
-    //タグの登録
-    public void saveRecipeTag(int recipe_id,List<String> tags);
+    //レシピ材料の取得
+    List<RecipeMaterial> getMaterial(int recipeId);
     
-    //材料の登録
-    public void saveMaterial(int recipe_id,List<String> materiaals,List<String> amounts);
-    
-    //手順の登録
-    public void saveProcedure(int recipe_id,List<MultipartFile> images,List<String> contexts);
+    //ビュー数の増加
+    void addBrow(int recipeId);
 }
