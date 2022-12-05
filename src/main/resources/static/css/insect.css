@@ -1,0 +1,14 @@
+.title {
+    text-align:center;
+    color: green;
+}
+div.contents {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    width: 90%;
+    margin: 30px 0;
+    padding-top: 30px;
+    text-align: center;
+    color: rgba(174, 211, 7, 0.748);
+}

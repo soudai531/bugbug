@@ -1,0 +1,56 @@
+@charset "UTF-8";
+body{
+    background-color: whitesmoke;
+}
+
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 5%;
+}
+div.img img{
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+}
+.main .flex .name{
+    color: green;
+    text-align: left;
+    font-size: 15px;
+}
+.main .flex .detail{
+    line-height: 1.5;
+}
+
+.rank{
+    margin: 0;
+}
+
+.rank p{
+    margin: 0;
+    margin-left: 70px;
+    font-size: 12px;
+}
+
+.star{
+    color: rgb(234, 234, 46);
+}
+.text{
+    text-align: center;
+}
+
+.name{
+    color: green;
+}
+
+.btn{
+    color: #ffff;
+    background-color: green;
+    border-radius: 15px;
+    
+}
+div{
+    text-align: center;
+}
