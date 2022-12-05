@@ -13,11 +13,12 @@ public interface TagService {
      */
     List<Tag> getTags(List<RecipeTag> recipeTags);
     
-    //タグの登録
-    Tag saveTag(Tag tag);
+    
+    //タグの操作
+    public void saveTag(String name);
     
     //IDの取得
-    int getId(String name);
+    Tag getTag(String name);
     
    
 }

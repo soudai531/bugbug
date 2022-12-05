@@ -2,12 +2,17 @@ package com.example.bugbug.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.bugbug.common.DateComponent;
 import com.example.bugbug.config.AppConfig;
 import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeMaterial;
@@ -15,6 +20,7 @@ import com.example.bugbug.entity.RecipeProcedure;
 import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
+import com.example.bugbug.form.RecipeRegisterForm;
 import com.example.bugbug.repository.MaterialRepository;
 import com.example.bugbug.repository.ProcedureRepository;
 import com.example.bugbug.repository.RecipeRepository;
@@ -34,6 +40,10 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final TagService tagService;
     private final AccountService accountService;
+    private final DateComponent dateComponent;
+    
+    @Autowired
+    private HttpSession session;
     
     // 画像の保存場所を保持しているBean
     private final AppConfig appConfig;
@@ -90,6 +100,22 @@ public class RecipeServiceImpl implements RecipeService {
     	return recipeRepository.save(recipe);
     }
     
+    //登録用エンティティ作成
+    @Override
+    public Recipe createRecipe(RecipeRegisterForm form) {
+    	int image_blurred=0;
+        //日付の取得
+        Date date = dateComponent.getDate();
+        //画像表示フラグの設定
+        if(form.getImage_blurred()!=null) {
+        	image_blurred = 1;
+        }
+        //登録するエンティティの作成
+        Recipe recipe = new Recipe(null,(Integer) session.getAttribute("user_id"),form.getName()
+        					,null,form.getExplanation(),form.getPoint(),image_blurred,0,date,0);
+    	return saveRecipe(recipe);
+    }
+    
     
     
     /**
@@ -120,25 +146,30 @@ public class RecipeServiceImpl implements RecipeService {
     }
     
     //レシピタグの登録
-   public void saveTag(int recipe_id,List<String> tags) {
+   public void saveRecipeTag(int recipe_id,List<String> tags) {
 	   //タグリストの要素がある間
     	tags.forEach(tag -> {
+    		//タグの登録
+    		tagService.saveTag(tag);
     		//IDの取得
-    		int tagId = tagService.getId(tag);
+    		int tagId = tagService.getTag(tag).getTagId();
     		//登録
     		recipeTagRepository.save(new RecipeTag(null,recipe_id,tagId,0));
     	});
     }
    
    //材料の登録
-   public void saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
+   public String saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
 	   //材料リストの要素がある間
 	   for(int i=0;i < materials.size();i++) {
 		   //名前と数量がどちらも入力されている時
 		   if(!materials.get(i).equals("") && !amounts.get(i).equals("")) {
 			   //登録
 			   materialRepository.save(new RecipeMaterial(null,recipe_id,materials.get(i),amounts.get(i)));
-			  
+			   return "";
+		   }else {
+			   //TODO
+			   return "空白が入ってる行は追加できませんでした。";
 		   }
 	   }
    }

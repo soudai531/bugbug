@@ -11,11 +11,11 @@ public class RecipeRegisterForm {
 	private String name;
 	private List<String> tags;
 	private MultipartFile image;
-	private String explan;
+	private String explanation;
 	private String point;
 	private List<String> materials;
 	private List<String> amounts;
-	private List<MultipartFile> datail_images;
+	private List<MultipartFile> procedure_images;
 	private List<String> contexts;
 	private Integer image_blurred;
 }

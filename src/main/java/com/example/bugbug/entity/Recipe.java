@@ -22,7 +22,8 @@ public class Recipe {
     private Integer userId;
     private String name;
     private String image;
-    private String explan;
+    @Column("explan")
+    private String explanation;
     private String point;
     @Column("image_blurred")
     private Integer imageBlurred;
