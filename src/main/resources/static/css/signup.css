@@ -1,0 +1,149 @@
+@charset "UTF-8";
+.main.js-headerScrollOn {
+  height: 700px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .main.js-headerScrollOn {
+    height: 900px;
+  }
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup__form {
+  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .signup__form {
+    width: auto;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.signup__title {
+  margin-bottom: 20px;
+}
+
+.signup__form__item {
+  margin: 10px 10px;
+}
+
+.signup__form__item__text {
+  margin-bottom: 8px;
+  padding-left: 15px;
+}
+
+.signup__form__input {
+  display: block;
+  width: 300px;
+  height: 55px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background: #FDFDFD;
+  border: none;
+  border: 3px solid transparent;
+  border-radius: 100px;
+  font-family: "NotoJP";
+  font-size: 16px;
+  transition: border 0.3s;
+  will-change: border;
+}
+.signup__form__input::placeholder {
+  color: #acacac;
+  font-family: "Kiwi Maru", sans-serif;
+}
+.signup__form__input:focus {
+  outline: none;
+  border: 3px solid #147647;
+}
+
+.signup__form__btn {
+  width: 140px;
+  height: 45px;
+  color: #ffffff;
+  background: #147647;
+  margin-top: 20px;
+  border: none;
+  font-size: 13px;
+  border-radius: 100px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.signup__form__btn span {
+  display: block;
+  position: relative;
+  z-index: 200;
+  color: white;
+}
+.signup__form__btn::before {
+  content: "";
+  display: block;
+  width: 140px;
+  height: 140px;
+  background: #145E3A;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 100;
+  scale: 0;
+  transition: scale 0.3s;
+  will-change: scale;
+}
+.signup__form__btn:hover::before {
+  scale: 1;
+}
+
+.signup__forn__item__text {
+  margin: 0;
+  display: inline-block;
+  font-size: 16px;
+  color: #147647;
+  width: 15%;
+  text-align: left;
+}
+
+.required::after {
+  content: "必須";
+  background: #ffe8e8;
+  color: #e45f5f;
+  font-size: 10px;
+  min-width: 10px;
+  padding: 5px 8px;
+  margin: 0px 5px;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.signup__form__validation {
+  width: 100%;
+  list-style: none;
+}
+.signup__form__validation li {
+  font-size: 12px;
+  color: red;
+}/*# sourceMappingURL=signup.css.map */
