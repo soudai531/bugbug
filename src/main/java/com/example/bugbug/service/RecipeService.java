@@ -29,7 +29,7 @@ public interface RecipeService {
     public void saveRecipeTag(int recipe_id,List<String> tags);
     
     //材料の登録
-    public String saveMaterial(int recipe_id,List<String> materiaals,List<String> amounts);
+    public void saveMaterial(int recipe_id,List<String> materiaals,List<String> amounts);
     
     //手順の登録
     public void saveProcedure(int recipe_id,List<MultipartFile> images,List<String> contexts);

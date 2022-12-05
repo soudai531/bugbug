@@ -159,18 +159,16 @@ public class RecipeServiceImpl implements RecipeService {
     }
    
    //材料の登録
-   public String saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
+   public void saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
 	   //材料リストの要素がある間
 	   for(int i=0;i < materials.size();i++) {
 		   //名前と数量がどちらも入力されている時
 		   if(!materials.get(i).equals("") && !amounts.get(i).equals("")) {
 			   //登録
 			   materialRepository.save(new RecipeMaterial(null,recipe_id,materials.get(i),amounts.get(i)));
-			   return "";
-		   }else {
-			   //TODO
-			   return "空白が入ってる行は追加できませんでした。";
+			   
 		   }
+		   
 	   }
    }
    
