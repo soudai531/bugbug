@@ -4,6 +4,7 @@ import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
+import com.example.bugbug.repository.FavoriteRepository;
 import com.example.bugbug.repository.RecipeTagRepository;
 import com.example.bugbug.repository.RecipeRepository;
 import com.example.bugbug.service.dto.RecipeDto;
@@ -19,6 +20,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     private RecipeRepository recipeRepository;
     private RecipeTagRepository recipeTagRepository;
+    private FavoriteRepository favoriteRepository;
 
     private TagService tagService;
     private AccountService accountService;
@@ -62,11 +64,10 @@ public class RecipeServiceImpl implements RecipeService {
             List<Tag> tags = tagService.getTags(recipeTags);
             // DTOにタグ情報を格納
             recipeDto.ofTag(tags);
-            // Todo　ユーザー情報を格納する
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
-            // Todo お気に入り数を格納する
-
+            int favoriteNum = favoriteRepository.countFavorite(recipe.getUserId());
+            recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
 }
