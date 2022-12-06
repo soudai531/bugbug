@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeMaterial;
 import com.example.bugbug.entity.RecipeProcedure;
-import com.example.bugbug.entity.RecipeTag;
+import com.example.bugbug.entity.Tag;
 import com.example.bugbug.service.dto.RecipeDto;
 
 public interface RecipeService {
@@ -21,7 +21,7 @@ public interface RecipeService {
     Optional<Recipe> getRecipe(int recipeId);
     
     //レシピタグの取得
-    List<RecipeTag> getRecipeTag(int recipeId);
+    List<Tag> getRecipeTag(int recipeId);
     
     //レシピ手順の取得
     List<RecipeProcedure> getProcedure(int recipeId);

@@ -49,6 +49,7 @@
 						<span th:data-url="|/serch?tag=${tag.tagId}|" class="recomRecipe__list__item__tag__name"><span>#</span>[[${tag.name}]]</span>
 	<!--				</a>-->
 					</th:block>
+					<a th:href="@{/recipes/{id}?recipeId={id}(id=${recipe.recipeId})}">詳細画面へ</a>
 				</div>
 			</section>
 		</th:block>

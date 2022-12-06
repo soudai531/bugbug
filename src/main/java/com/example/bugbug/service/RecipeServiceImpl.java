@@ -86,8 +86,8 @@ public class RecipeServiceImpl implements RecipeService {
     }
     
     //レシピのタグを表示
-    public List<RecipeTag> getRecipeTag(int recipeId){
-    	return recipeTagRepository.getRecipeTagsId(recipeId);
+    public List<Tag> getRecipeTag(int recipeId){
+    	return recipeTagRepository.getRecipeTagsName(recipeId);
     }
     
     //レシピ手順の取得
