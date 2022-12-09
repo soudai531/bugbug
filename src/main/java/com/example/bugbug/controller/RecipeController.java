@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,18 +42,15 @@ public class RecipeController {
         }
 		return "recipe/register";
 	}
-	
+
+    @Transactional
 	@PostMapping("/recipes/new/register")
 	public String saveRecipe(RecipeRegisterForm form,Model model) {
 	//  ログイン状態判定
         if (!authService.isLogin()) {
             return "redirect:/login/form";
         }
-        
-        
         Recipe savedRecipe = recipeService.createRecipe(form);
-        
-        
         //画像の登録
         recipeService.saveRecipeImage(form.getImage(), savedRecipe.getRecipeId());
         //タグの登録
