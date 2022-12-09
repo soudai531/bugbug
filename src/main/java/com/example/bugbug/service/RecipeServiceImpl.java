@@ -54,6 +54,7 @@ public class RecipeServiceImpl implements RecipeService {
     /**
      * レシピ情報からレシピDTOを作成する
      */
+    @Override
     public RecipeDto repackDto(Recipe recipe){
             RecipeDto recipeDto = new RecipeDto(recipe);
             // Todo レシピ画像URLを格納する

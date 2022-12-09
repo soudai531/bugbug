@@ -15,6 +15,6 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
     /**
      * レシピ検索
      */
-    @Query("SELECT * FROM recipes WHERE name LIKE '%:keyword%' ")
-    Optional<Recipe> serchRecipe(@Param("keyword") String keyword);
+    @Query("SELECT * FROM `recipes` WHERE name LIKE :keyword")
+    List<Recipe> searchRecipe(@Param("keyword") String keyword);
 }
