@@ -13,7 +13,7 @@
 		<span>[[${recipe.regDateOn}]] [[${favorite}]]</span>
 		<img th:src="*{recipe.image}" alt="レシピ画像">
 		<div th:if="${!#lists.isEmpty(tags)}" th:each="tag : ${tags}">
-			[[${tag.name}]]
+			<a th:href="|/serch/tag?tag=${tag.tagId}|">[[${tag.name}]]</a>
 		</div>
 		<div>
 			<h3>材料</h3>
