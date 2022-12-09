@@ -30,6 +30,7 @@ public class SearchController {
             System.out.println(keyword + "の検索に一致する商品はありませんでした。");
             model.addAttribute("error", keyword + "の検索に一致する商品はありませんでした。");
         }
+        model.addAttribute("keyword", keyword);
         return "search";
     }
 
