@@ -23,8 +23,8 @@ public class SearchController {
      * @param model
      */
     @GetMapping("search/keyword")
-    public String searchKeyword(@RequestParam("q") String keyword, @RequestParam("page") int page, Model model) {
-        List<RecipeDto> resultList = searchService.searchKeyword(keyword,page);
+    public String searchKeyword(@RequestParam("q") String keyword, Model model) {
+        List<RecipeDto> resultList = searchService.searchKeyword(keyword);
         model.addAttribute("recipes" ,resultList);
         if(resultList.isEmpty()){
             System.out.println(keyword + "の検索に一致する商品はありませんでした。");

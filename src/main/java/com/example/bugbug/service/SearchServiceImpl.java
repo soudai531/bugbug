@@ -18,15 +18,16 @@ public class SearchServiceImpl implements SearchService{
 
     /**
      * キーワードからレシピを検索して、20件取得する
+     *
      * @param keyword
      * @param page
      */
     @Override
-    public List<RecipeDto> searchKeyword(final String keyword, final int page) {
+    public List<RecipeDto> searchKeyword(final String keyword) {
         String queryKeyword = "%" + keyword + "%";
         System.out.println(keyword);
         // keywordからレシピを検索して取得
-        List<Recipe> recipeList = recipeRepository.searchRecipe(queryKeyword);
+        List<Recipe> recipeList = recipeRepository.searchRecipeNameTag(queryKeyword);
         // レシピDTOに詰めなおす
         List<RecipeDto> result = new ArrayList<>();
         for(Recipe recipe : recipeList) {
