@@ -1,38 +1,38 @@
 <!-- ヘッダー -->
-<header class="header">
+<header class="header js-headerScrollOn">
   <!-- ロゴ -->
-  <a class="logo" href="index.html">
+  <a class="logo js-headerScrollOn" th:href="@{/index}">
     <img class="logo__img" th:src="@{/img/logo_white.png}" alt="" srcset="" />
   </a>
   <!-- サイト説明 -->
-  <section class="siteExpl">
+  <section class="siteExpl js-headerScrollOn">
     <p class="siteExpl__text--row1">bugbugとは昆虫食を専門とした</p>
     <p class="siteExpl__text--row2">レシピ共有サイトです</p>
   </section>
   <!-- 虫フィルターボタン -->
-  <section class="insectFilterBtn">
+  <section class="insectFilterBtn js-headerScrollOn">
     <span class="insectFilterBtn__text">虫フィルター</span>
     <input type="checkbox" class="insectFilterBtn__input" id="label-insectFilterBtn" />
     <label class="insectFilterBtn__label" for="label-insectFilterBtn"></label>
   </section>
   <!-- ナビボタン -->
-  <nav class="navBtns">
-    <button class="navBtns__btn navBtns__btn--insectBook" type="button">
-      <span class="navBtns__btn__text">昆虫食図鑑</span>
+  <nav class="navBtns js-headerScrollOn">
+    <a class="navBtns__btn navBtns__btn--insectBook js-headerScrollOn">
+      <span class="navBtns__btn__text js-headerScrollOn">昆虫食図鑑</span>
       <ion-icon name="bug-outline"></ion-icon>
-    </button>
-    <button class="navBtns__btn navBtns__btn--searchRecipe" type="button">
-      <span class="navBtns__btn__text">レシピを探す</span>
+    </a>
+    <a class="navBtns__btn navBtns__btn--searchRecipe js-headerScrollOn">
+      <span class="navBtns__btn__text js-headerScrollOn">レシピを探す</span>
       <ion-icon name="search-outline"></ion-icon>
-    </button>
-    <button class="navBtns__btn navBtns__btn--registerAcount" type="button">
-      <span class="navBtns__btn__text">会員登録</span>
+    </a>
+    <a class="navBtns__btn navBtns__btn--registerAcount js-headerScrollOn" th:href="@{/sinup/form}">
+      <span class="navBtns__btn__text js-headerScrollOn">会員登録</span>
       <ion-icon name="person-add-outline"></ion-icon>
-    </button>
-    <button class="navBtns__btn navBtns__btn--login" type="button">
-      <span class="navBtns__btn__text">ログイン</span>
+    </a>
+    <a class="navBtns__btn navBtns__btn--login js-headerScrollOn" th:href="@{/login/form}">
+      <span class="navBtns__btn__text js-headerScrollOn">ログイン</span>
       <ion-icon name="log-in-outline"></ion-icon>
-    </button>
+    </a>
   </nav>
   <div class="search__form__cover hidden"></div>
   <form class="search__form hidden" action="search.html">
@@ -49,9 +49,9 @@
       <span class="search__form__title">タグから探す</span>
       <!-- ここで表示するタグ一覧の取得は未実装() -->
       <div class="search__form__tag__tags">
-        <button class="search__form__tag__tags__btn" type="submit" name="tag__id" value="1">
+        <a class="search__form__tag__tags__btn" name="tag__id" value="1">
           <span class="search__form__tag__tags__btn__name"><span>#</span>コロギ</span>
-        </button>
+        </a>
       </div>
     </section>
   </form>

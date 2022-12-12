@@ -1,102 +1,31 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bugbug</title>
     <link rel="icon" href="@{/img/logoicon.png}" />
-    <link rel="preload" href="@{/img/header.jpeg}" as="image" CSS />
-    <link rel="preload" href="@{/img/footer.jpg}" as="image" />
     <!-- 共通CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <!-- 各ページCSS -->
     <link rel="stylesheet" th:href="@{/css/login.css}" />
   </head>
   <body>
-    <div class="loading"></div>
-    <!-- ヘッダー -->
-    <header class="header">
-      <!-- ロゴ -->
-      <a class="logo" href="index.html">
-        <img class="logo__img" src="@{/img/logo_white.png}" alt="" srcset="" />
-      </a>
-      <!-- サイト説明 -->
-      <section class="siteExpl">
-        <p class="siteExpl__text--row1">bugbugとは昆虫食を専門とした</p>
-        <p class="siteExpl__text--row2">レシピ共有サイトです</p>
-      </section>
-      <!-- 虫フィルターボタン -->
-      <section class="insectFilterBtn">
-        <span class="insectFilterBtn__text">虫フィルター</span>
-        <input type="checkbox" class="insectFilterBtn__input" id="label-insectFilterBtn" />
-        <label class="insectFilterBtn__label" for="label-insectFilterBtn"></label>
-      </section>
-      <!-- ナビボタン -->
-      <nav class="navBtns">
-        <button class="navBtns__btn navBtns__btn--insectBook" type="button">
-          <span class="navBtns__btn__text">昆虫食図鑑</span>
-          <ion-icon name="bug-outline"></ion-icon>
-        </button>
-        <button class="navBtns__btn navBtns__btn--searchRecipe" type="button">
-          <span class="navBtns__btn__text">レシピを探す</span>
-          <ion-icon name="search-outline"></ion-icon>
-        </button>
-        <button class="navBtns__btn navBtns__btn--registerAcount" type="button">
-          <span class="navBtns__btn__text">会員登録</span>
-          <ion-icon name="person-add-outline"></ion-icon>
-        </button>
-        <button class="navBtns__btn navBtns__btn--login" type="button">
-          <span class="navBtns__btn__text">ログイン</span>
-          <ion-icon name="log-in-outline"></ion-icon>
-        </button>
-      </nav>
-      <div class="search__form__cover hidden"></div>
-      <form class="search__form hidden" action="search.html">
-        <button class="search__form__close" type="button">×</button>
-        <section class="search__form__keyword">
-          <span class="search__form__title">キーワードから探す</span>
-          <div class="search__form__keyword__input">
-            <input type="text" name="keyword" placeholder="キーワードを入力" />
-            <button class="search__form__keyword__btn" type="submit">検索</button>
-          </div>
-        </section>
-        <hr>
-        <section class="search__form__tag">
-          <span class="search__form__title">タグから探す</span>
-          <div class="search__form__tag__tags">
-            <button class="search__form__tag__tags__btn" type="submit" name="tag__id" value="1">
-              <span class="search__form__tag__tags__btn__name"><span>#</span>コロギ</span>
-            </button>
-            <button class="search__form__tag__tags__btn" type="submit" name="tag__id" value="1">
-              <span class="search__form__tag__tags__btn__name"><span>#</span>コロギgetoいｗｔいｗｔ</span>
-            </button>
-            <button class="search__form__tag__tags__btn" type="submit" name="tag__id" value="1">
-              <span class="search__form__tag__tags__btn__name"><span>#</span>コロギsorlighsogri</span>
-            </button>
-            <button class="search__form__tag__tags__btn" type="submit" name="tag__id" value="1">
-              <span class="search__form__tag__tags__btn__name"><span>#</span>コロギfffffffff</span>
-            </button>
-            <button class="search__form__tag__tags__btn" type="submit" name="tag__id" value="1">
-              <span class="search__form__tag__tags__btn__name"><span>#</span>コロギfffffffff</span>
-            </button>
-          </div>
-        </section>
-      </form>
-    </header>
+    <header th:replace="header"></header>
     <!-- メインコンテンツ -->
-    <main class="main">
+    <main class="main js-headerScrollOn">
       <div class="login">
         <h3 class="login__title">LOGIN</h3>
         <!-- ログインフォーム -->
-        <form class="login__form" th:action="@{/login}" th:object="${LoginForm}" method="post" >
+        <form class="login__form" th:action="@{/index}" th:object="${LoginForm}" method="post" >
           <!--メールアドレス-->
           <input type="email" name="mail" class="login__form__input" placeholder="メールアドレス" autocomplete="on" />
           <!--パスワード-->
           <input type="password" name="password" class="login__form__input" placeholder="パスワード" />
           <button class="login__form__btn" type="submit"><span>ログイン ▶</span></button>
         </form>
-        <a href="register-acount.html" class="no-acaunt">
+        <a th:href="@{/sinup/form}" class="no-acaunt">
           <p>アカウントをお持ちでない方はこちら</p>
         </a>
       </div>
@@ -104,7 +33,6 @@
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="@{/js/main.js}"></script>
-    <script src="@{/js/login.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
   </body>
 </html>

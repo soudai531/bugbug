@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bugbug</title>
     <link rel="icon" th:href="@{/img/logoicon.png}" />
-    <link rel="preload" th:href="@{/img/header.jpeg}" as="image" CSS/>
-    <link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
     <!-- 共通CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <!-- 各ページCSS -->
@@ -26,7 +24,7 @@
         <p class="question__title__detail">虫の写真を一部イラストに置き換えます</p>
         <p class="question__title__detail">※一部フィルタリングが出来ないものもあります</p>
       </div>
-      <form class="question__btns" action="./index.html" method="post">
+      <form class="question__btns" th:action="/index" method="post">
         <button class="question__btn question__btn--yes" type="submit" name="answer" value="yes"><span>はい</span></button>
         <button class="question__btn question__btn--no" type="submit" name="answer" value="no">いいえ</button>
       </form>
@@ -34,6 +32,6 @@
   
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="./js/main.js"></script>
+    <script th:src="@{/js/main.js}"></script>
   </body>
 </html>
