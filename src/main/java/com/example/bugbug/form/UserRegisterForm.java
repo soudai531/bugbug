@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class InputForm {
+public class UserRegisterForm {
 	@Email
 	private String mail;
 	@NotBlank

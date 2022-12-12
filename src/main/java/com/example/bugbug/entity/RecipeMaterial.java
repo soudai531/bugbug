@@ -11,14 +11,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("recipe_tags")
-public class RecipeTag {
+@Table("recipe_materials")
+public class RecipeMaterial {
 	@Id
-    @Column("recipe_tag_id")
-    private Integer recipeTagId;
-    @Column("recipe_id")
-    private Integer recipeId;
-    @Column("tag_id")
-    private Integer tagId;
-    private Integer deleted;
+	@Column("material_id")
+	private Integer procedureId;
+	@Column("recipe_id")
+	private Integer recipeId;
+	private String name;
+	private String amount;
 }
