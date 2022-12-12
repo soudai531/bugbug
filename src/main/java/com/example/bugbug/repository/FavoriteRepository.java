@@ -1,14 +1,14 @@
 package com.example.bugbug.repository;
 
-import com.example.bugbug.entity.RecipeTag;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.example.bugbug.entity.Favorite;
 
-
-public interface FavoriteRepository extends CrudRepository<RecipeTag, Integer> {
+@Repository
+public interface FavoriteRepository extends CrudRepository<Favorite, Integer> {
     /**
      * レシピのお気に入り数を返す
      * @param recipeId レシピID
