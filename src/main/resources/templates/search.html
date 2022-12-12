@@ -14,6 +14,7 @@
   <link rel="stylesheet" th:href="@{/css/index.css}" />
 <body>
   <span th:text="${error}"></span>
+  <span>「[[${keyword}]]」の検索結果</span>
   <section class="recomRecipe__list">
     <th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
       <section th:href="|/recipes/${recipe.recipeId}|" class="recomRecipe__list__item">

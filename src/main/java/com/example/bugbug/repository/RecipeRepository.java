@@ -19,12 +19,15 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
     List<Recipe> searchRecipe(@Param("keyword") String keyword);
 
     /**
-     * レシピ名とタグ名からレシピを検索する
+     * レシピ名と説明とタグ名からレシピを検索し閲覧数の降順
      */
     @Query("SELECT DISTINCT recipes.recipe_id, recipes.user_id, recipes.name, recipes.image, recipes.image_blurred, recipes.browes " +
             "FROM recipes INNER JOIN tags INNER JOIN recipe_tags " +
             "ON recipes.recipe_id = recipe_tags.recipe_id " +
             "AND tags.tag_id = recipe_tags.tag_id " +
-            "AND tags.name LIKE :keyword OR recipes.name LIKE :keyword;")
+            "AND tags.name LIKE :keyword " +
+            "OR recipes.name LIKE :keyword " +
+            "OR recipes.explan LIKE :keyword " +
+            "ORDER BY recipes.browes DESC;")
     List<Recipe> searchRecipeNameTag(@Param("keyword") String keyword);
 }
