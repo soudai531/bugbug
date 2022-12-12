@@ -15,10 +15,7 @@
   </head>
   <body>
     <header th:replace="header"></header>
-    <a th:href="@{/users/{id}/logout(id=${user_id})}">ログアウト</a>
-    <p th:text="${session_name}+さんようこそ"></p>
-    <a href="/mypage">マイページへ</a>
-    <th:block th:if="${msg} != null"> [[${msg}]] </th:block>
+
     <!-- メインコンテンツ -->
     <main class="main">
       <section class="popRecipe">
@@ -50,16 +47,17 @@
                   </span>
                   <span class="popRecipe__list__item__user__name">[[${recipe.postUserName}]]</span>
                 </a>
-								<div class="heartBtn">
-									<ion-icon name="heart-outline"></ion-icon>
-									<span class="heartNum">[[${recipe.favoriteNumber}]]</span>
-								</div>
+                <div class="heartBtn">
+                  <ion-icon name="heart-outline"></ion-icon>
+                  <span class="heartNum">[[${recipe.favoriteNumber}]]</span>
+                </div>
               </div>
             </section>
           </th:block>
         </section>
       </section>
     </main>
+
     <footer th:replace="footer"></footer>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
