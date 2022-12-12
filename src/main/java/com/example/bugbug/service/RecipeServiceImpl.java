@@ -23,6 +23,8 @@ import com.example.bugbug.entity.User;
 import com.example.bugbug.form.RecipeRegisterForm;
 import com.example.bugbug.repository.MaterialRepository;
 import com.example.bugbug.repository.ProcedureRepository;
+import com.example.bugbug.repository.FavoriteRepository;
+import com.example.bugbug.repository.RecipeTagRepository;
 import com.example.bugbug.repository.RecipeRepository;
 import com.example.bugbug.repository.RecipeTagRepository;
 import com.example.bugbug.service.dto.RecipeDto;
@@ -37,7 +39,8 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeTagRepository recipeTagRepository;
     private final MaterialRepository materialRepository;
     private final ProcedureRepository procedureRepository;
-
+    private final RecipeRepository recipeRepository;
+    private final FavoriteRepository favoriteRepository;
     private final TagService tagService;
     private final AccountService accountService;
     private final DateComponent dateComponent;
@@ -87,11 +90,10 @@ public class RecipeServiceImpl implements RecipeService {
             List<Tag> tags = tagService.getTags(recipeTags);
             // DTOにタグ情報を格納
             recipeDto.ofTag(tags);
-            // Todo　ユーザー情報を格納する
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
-            // Todo お気に入り数を格納する
-
+            int favoriteNum = favoriteRepository.countFavorite(recipe.getUserId());
+            recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
     

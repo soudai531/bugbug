@@ -12,12 +12,12 @@ import java.util.List;
 public class RecipeDto {
     // レシピ情報
     private int recipeId;
-    private String recipeImageUrl;
+    private String recipeImage;
     private String recipeName;
 
     // 投稿者情報
     private int postUserId;
-    private String postUserImageUrl;
+    private String postUserImage;
     private String postUserName;
 
     // お気に入り数
@@ -32,8 +32,7 @@ public class RecipeDto {
      */
     public RecipeDto(Recipe recipe){
         this.recipeId = recipe.getRecipeId();
-        // Todo 写真urlの作成
-        
+        this.recipeImage = recipe.getImage();
         this.recipeName = recipe.getName();
         this.postUserId = recipe.getUserId();
     }
@@ -51,14 +50,14 @@ public class RecipeDto {
     public void ofUser(User user){
         this.postUserId = user.getUserId();
         this.postUserName = user.getName();
-        this.postUserImageUrl = user.getIcon();
+        this.postUserImage = user.getIcon();
     }
 
     /**
      * お気に入り数を格納
      */
     public void ofFavorite(int favoriteNum){
-
+        this.favoriteNumber = favoriteNum;
     }
 
 }
