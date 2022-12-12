@@ -17,17 +17,18 @@ import lombok.NoArgsConstructor;
 public class Recipe {
 	@Id
     @Column("recipe_id")
-    private int recipeId;
+    private Integer recipeId;
     @Column("user_id")
-    private int userId;
+    private Integer userId;
     private String name;
     private String image;
-    private String explan;
+    @Column("explan")
+    private String explanation;
     private String point;
     @Column("image_blurred")
-    private int imageBlurred;
-    private int browes;
+    private Integer imageBlurred;
+    private Integer browes;
     @Column("reg_date_on")
     private Date regDateOn;
-    private int deleted;
+    private Integer deleted;
 }
