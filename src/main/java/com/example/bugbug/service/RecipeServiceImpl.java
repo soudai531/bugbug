@@ -39,7 +39,6 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeTagRepository recipeTagRepository;
     private final MaterialRepository materialRepository;
     private final ProcedureRepository procedureRepository;
-    private final RecipeRepository recipeRepository;
     private final FavoriteRepository favoriteRepository;
     private final TagService tagService;
     private final AccountService accountService;
@@ -92,7 +91,8 @@ public class RecipeServiceImpl implements RecipeService {
             recipeDto.ofTag(tags);
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
-            int favoriteNum = favoriteRepository.countFavorite(recipe.getUserId());
+            int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
+            System.out.println(recipe.getRecipeId() + recipe.getName() + ":" + favoriteNum);
             recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
