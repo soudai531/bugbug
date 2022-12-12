@@ -21,9 +21,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Controller
 public class RecipeController {
-	@Autowired
-    private HttpSession session;
-	private final DateComponent dateComponent;
 	private final AuthService authService;
 	private final RecipeService recipeService;
 	
@@ -34,31 +31,31 @@ public class RecipeController {
     }
     
 	//レシピ登録画面表示
-	@RequestMapping("/recipes/new/register/form")
-	public String viewNewRecipeForm() {
-	//  ログイン状態判定
+	@RequestMapping("/recipes/register/form")
+	public String viewRegisterRecipeForm() {
+	    //  ログイン状態判定
         if (!authService.isLogin()) {
             return "redirect:/login/form";
         }
-		return "recipe/register";
+		return "register-recipe";
 	}
 
     @Transactional
-	@PostMapping("/recipes/new/register")
+	@PostMapping("/recipes/register")
 	public String saveRecipe(RecipeRegisterForm form,Model model) {
-	//  ログイン状態判定
+	    //  ログイン状態判定
         if (!authService.isLogin()) {
             return "redirect:/login/form";
         }
         Recipe savedRecipe = recipeService.createRecipe(form);
         //画像の登録
-        recipeService.saveRecipeImage(form.getImage(), savedRecipe.getRecipeId());
+        recipeService.saveRecipeImage(form.getRecipeImage(), savedRecipe.getRecipeId());
         //タグの登録
         recipeService.saveRecipeTag(savedRecipe.getRecipeId(),form.getTags());
         //材料の登録
         recipeService.saveMaterial(savedRecipe.getRecipeId(),form.getMaterials(),form.getAmounts());
         //手順の登録
-        recipeService.saveProcedure(savedRecipe.getRecipeId(),form.getProcedure_images(),form.getContexts());
+        recipeService.saveProcedure(savedRecipe.getRecipeId(),form.getProcedureImages(),form.getContexts());
 		return "redirect:/index";
 	}
 }
