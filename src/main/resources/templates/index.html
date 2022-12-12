@@ -11,7 +11,10 @@
 <a href="/login/form">ログイン</a>
 <a href="/sinup/form">新規登録</a>
 <a th:href="@{/users/{id}/logout(id=${user_id})}">ログアウト</a>
+<a th:href="@{/recipes/register/form}">レシピ登録</a>
+
 <p th:text="${session_name}+さんようこそ"></p>
+
 <a href="/mypage">マイページへ</a>
 <th:block th:if="${msg} != null">
 	[[${msg}]]
