@@ -162,6 +162,7 @@ public class RecipeServiceImpl implements RecipeService {
    public void saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
 	   //材料リストの要素がある間
 	   for(int i=0;i < materials.size();i++) {
+           // Todo バリデータークラスで相関入力チェックを行う
 		   //名前と数量がどちらも入力されている時
 		   if(!materials.get(i).equals("") && !amounts.get(i).equals("")) {
 			   //登録
