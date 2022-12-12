@@ -12,24 +12,24 @@ window.addEventListener("load", () => {
   const headerElemnts = [header, siteExpl, logo, insectFilterBtn, navBtns, ...navBtns__btn, ...navBtns__btn__text, main];
 
   // トップページでのみスクロール処理用クラスを操作
-  const indexPaths = ['', '/', '/index', '/index.html'];
-  if(indexPaths.includes(location.pathname)) {
+  const indexPaths = ["", "/", "/index", "/index.html"];
+  if (indexPaths.includes(location.pathname)) {
     for (let el of headerElemnts) {
       el.classList.remove("js-headerScrollOn");
     }
   }
 
   // ログイン・アカウント作成ページはナビボタンを非表示
-  const headerHiddenPaths = ['/sinup/form', '/sinup', '/login/form', '/login'];
-  if(headerHiddenPaths.includes(location.pathname)) {
-    navBtns.style.display = 'none';
-    insectFilterBtn.style.display = 'none';
+  const headerHiddenPaths = ["/sinup/form", "/sinup", "/login/form", "/login"];
+  if (headerHiddenPaths.includes(location.pathname)) {
+    navBtns.style.display = "none";
+    insectFilterBtn.style.display = "none";
   }
-  
+
   /* スクロール時ヘッダー処理 */
   const scrollHeaderHandle = () => {
     // トップページでのみスクロール処理
-    if(!indexPaths.includes(location.pathname)) return;
+    if (!indexPaths.includes(location.pathname)) return;
     if (set_position > document.documentElement.scrollTop) {
       for (let el of headerElemnts) {
         el.classList.remove("js-headerScrollOn");
@@ -42,10 +42,10 @@ window.addEventListener("load", () => {
       }
     }
   };
-  
+
   let set_position = 10;
   window.addEventListener("scroll", scrollHeaderHandle);
-  
+
   /* 虫フィルターボタンクリック処理 */
   const insectFilter = document.querySelector(".insectFilterBtn__input");
   const recipeImgArray = document.querySelectorAll(".recomRecipe__list__item__img");
@@ -60,13 +60,13 @@ window.addEventListener("load", () => {
     filterStarte = !filterStarte;
     for (let i = 0, size = recipeImgArray.length; i < size; i++) {
       if (filterStarte) {
-        recipeImgArray[i].firstElementChild.src = "./img/filter.png";
+        recipeImgArray[i].firstElementChild.src = "../img/filter.png";
       } else {
         recipeImgArray[i].firstElementChild.src = recipeImgArray[i].originImg;
       }
     }
   });
-  
+
   /* ダイアログメソッド */
   const addClassHidden = (el) => {
     el.classList.add("hidden");
@@ -80,7 +80,7 @@ window.addEventListener("load", () => {
   const searchFormClose = document.querySelector(".search__form__close");
   const searchForm = document.querySelector(".search__form");
   const nav_searchRecipe = document.querySelector(".navBtns__btn--searchRecipe");
-  
+
   nav_searchRecipe.addEventListener("click", () => {
     removeClassHidden(searchFormCover);
     removeClassHidden(searchForm);
@@ -93,9 +93,9 @@ window.addEventListener("load", () => {
     addClassHidden(searchFormCover);
     addClassHidden(searchForm);
   });
-  
+
   /* 登録時確認ダイアログ */
-  const confirmPaths = ['/sinup/form', '/sinup'];
+  const confirmPaths = ["/sinup/form", "/sinup"];
   if (confirmPaths.includes(location.pathname)) {
     const confirmCover = document.querySelector(".confirm__cover");
     const confirmClose = document.querySelector(".confirm__btns__btn--no");
@@ -111,7 +111,7 @@ window.addEventListener("load", () => {
       addClassHidden(confirmDiv);
     });
   }
-  
+
   /* お気に入りボタンクリック処理(仮) */
   const hearts = document.querySelectorAll(".heartBtn");
   for (let el of hearts) {

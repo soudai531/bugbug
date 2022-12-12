@@ -1,59 +1,65 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<link rel="stylesheet" th:href="@{/css/index.css}" />
-</head>
-<body>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bugbug</title>
+    <link rel="icon" th:href="@{/img/logoicon.png}" />
+    <link rel="preload" th:href="@{/img/header.jpeg}" as="image" />
+    <link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
+    <!-- 共通CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- 各ページCSS -->
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+  </head>
+  <body>
+    <header th:replace="header"></header>
+    <!-- メインコンテンツ -->
+    <main class="main">
+      <section class="popRecipe">
+        <div class="popRecipe__title">
+          <span class="popRecipe__title__text">人気のレシピ</span>
+        </div>
+        <!-- レシピ一覧 -->
+        <section class="popRecipe__list">
+          <!-- レシピ -->
+          <th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
+            <section th:href="|/recipes/${recipe.recipeId}|" class="popRecipe__list__item">
+              <div class="popRecipe__list__item__img">
+                <img img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像" />
+              </div>
+              <div class="popRecipe__list__item__recipeName">
+                <span>[[${recipe.recipeName}]]</span>
+              </div>
+              <div class="popRecipe__list__item__tags">
+                <th:block th:each="tag : ${recipe.tags}">
+                  <a class="popRecipe__list__item__tag" th:href="|/serch?tag=${tag.tagId}|">
+                    <span th:data-url="|/serch?tag=${tag.tagId}|" class="popRecipe__list__item__tag__name"><span>#</span>[[${tag.name}]]</span>
+                  </a>
+                </th:block>
+              </div>
+              <div class="popRecipe__list__item__userAction" th:data-url="|/users/${recipe.postUserId}|">
+                <a class="popRecipe__list__item__user" th:href="|/users/${recipe.postUserId}|">
+                  <span class="popRecipe__list__item__user__icon">
+                    <img th:src="|/images/user-icons/${recipe.postUserImage}|" alt="ユーザーアイコン" />
+                  </span>
+                  <span class="popRecipe__list__item__user__name">[[${recipe.postUserName}]]</span>
+                </a>
+                <div class="heartBtn">
+                  <ion-icon name="heart-outline"></ion-icon>
+                  <span class="heartNum">[[${recipe.favoriteNumber}]]</span>
+                </div>
+              </div>
+            </section>
+          </th:block>
+        </section>
+      </section>
+    </main>
+    <footer th:replace="footer"></footer>
 
-<h2>トップページ</h2>
-<a href="/login/form">ログイン</a>
-<a href="/sinup/form">新規登録</a>
-<a th:href="@{/users/{id}/logout(id=${user_id})}">ログアウト</a>
-<a th:href="@{/recipes/register/form}">レシピ登録</a>
-
-<p th:text="${session_name}+さんようこそ"></p>
-
-<a href="/mypage">マイページへ</a>
-<th:block th:if="${msg} != null">
-	[[${msg}]]
-</th:block>
-<main>
-	<!-- おすすめレシピ -->
-	<h1>おすすめのレシピ</h1>
-	<section class="recomRecipe__list">
-		<th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
-			<section th:href="|/recipes/${recipe.recipeId}|" class="recomRecipe__list__item">
-				<div class="recomRecipe__list__item__img">
-					<img img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像"/>
-				</div>
-				<div class="recomRecipe__list__item__userAction" th:data-url="|/users/${recipe.postUserId}|">
-					<!--<a class="recomRecipe__list__item__user" th:href="|/users/${recipe.postUserId}|">-->
-						<span  class="recomRecipe__list__item__user__icon">
-						  <img th:src="|/images/user-icons/${recipe.postUserImage}|" alt="ユーザーアイコン" />
-						</span>
-						<span class="recomRecipe__list__item__user__name">[[${recipe.postUserName}]]</span>
-					<!--</a>-->
-				</div>
-				<div class="recomRecipe__list__item__heartBtn">
-					<ion-icon name="heart-outline"></ion-icon>
-					<span class="recomRecipe__list__item__heartNum">[[${recipe.favoriteNumber}]]</span>
-				</div>
-				<div class="recomRecipe__list__item__recipeName">
-					<span>[[${recipe.recipeName}]]</span>
-				</div>
-				<div class="recomRecipe__list__item__tags">
-					<th:block th:each="tag : ${recipe.tags}">
-	<!--				<a class="recomRecipe__list__item__tag" th:href="|/serch?tag=${tag.tagId}|" >-->
-						<span th:data-url="|/serch?tag=${tag.tagId}|" class="recomRecipe__list__item__tag__name"><span>#</span>[[${tag.name}]]</span>
-	<!--				</a>-->
-					</th:block>
-				</div>
-			</section>
-		</th:block>
-	</section>
-</main>
-
-</body>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
 </html>
