@@ -15,5 +15,5 @@ public interface FavoriteRepository extends CrudRepository<Favorite, Integer> {
      * @return レシピのお気に入り合計数
      */
     @Query("SELECT count(*) FROM favorites WHERE recipe_id = :recipeId")
-    int countFavorite(@Param("recipeId")int recipeId);
+    int countFavorite(@Param("recipeId") int recipeId);
 }
