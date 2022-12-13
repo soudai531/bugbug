@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.bugbug.common.DateComponent;
 import com.example.bugbug.entity.Favorite;
 import com.example.bugbug.service.FavoriteService;
 
@@ -20,10 +21,11 @@ public class FavoriteController {
 	@Autowired
 	private HttpSession session;
 	private final FavoriteService favoriteService;
+	private final DateComponent dateComponent;
 	
 	@PostMapping("/recipe/favorite/add/*")
 	public int addFavorite(int recipe_id) {
-		Date date;
+		Date date = dateComponent.getDate();
 		Favorite favorite = new Favorite(null,(Integer) session.getAttribute("user_id"),recipe_id,date);
 		favoriteService.addFavorite(favorite);
 		

@@ -37,8 +37,10 @@
 					<!--</a>-->
 				</div>
 				<div class="recomRecipe__list__item__heartBtn">
-					<ion-icon name="heart-outline"></ion-icon>
-					<span class="recomRecipe__list__item__heartNum">[[${recipe.favoriteNumber}]]</span>
+					<form th:action="|/recipe/favorite/add/${recipe.recipeId}|" method="post">
+						<ion-icon name="heart-outline"></ion-icon>
+						<span class="recomRecipe__list__item__heartNum">[[${recipe.favoriteNumber}]]</span>
+					</form>
 				</div>
 				<div class="recomRecipe__list__item__recipeName">
 					<span>[[${recipe.recipeName}]]</span>

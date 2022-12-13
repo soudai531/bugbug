@@ -118,6 +118,8 @@ window.addEventListener("load", () => {
     el.addEventListener("click", () => {
       const ionicon = el.firstElementChild;
       const heartNum = el.lastElementChild;
+      const formData = new FormData(form);
+      const XHR = new XMLHttpRequest();
       if (ionicon.name === "heart") {
         ionicon.name = "heart-outline";
         heartNum.textContent--;
