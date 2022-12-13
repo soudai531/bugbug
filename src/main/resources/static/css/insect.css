@@ -1,14 +1,193 @@
-.title {
-    text-align:center;
-    color: green;
+.Insect {
+    padding: 7%;
+    padding-top: 3%;
 }
-div.contents {
+.title{
+    width: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title:before, .title:after{
+    content: "";
+    display: block;
+    width: 30%;
+    height: 3px;
+    border-radius: 100px;
+    background: #147647;
+}
+.title_text{
+    display: block;
+    font-size: 25px;
+    letter-spacing: 3px;
+    margin-left: 15px;
+    margin-right: 15px;
+    white-space: nowrap;
+    color: #147647;
+}
+
+.insect_list {
+    width: 100%;
+    border-bottom: 2px solid #e6e6e6;
     display: flex;
     flex-wrap: wrap;
-    justify-content:space-around;
-    width: 90%;
-    margin: 30px 0;
-    padding-top: 30px;
-    text-align: center;
-    color: rgba(174, 211, 7, 0.748);
+    justify-content: space-around;
+    align-items: flex-start;
 }
+.insect_list_item {
+    width: 22%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: 0.4s;
+    color: #147647;
+}
+.insect_list_item:hover{
+    opacity: 0.2;
+    cursor: pointer;
+}
+.insect_list_item_img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 5px;
+    overflow: hidden;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    transition: border-radius 0.3s linear;
+}
+.insect_list_item_img img {
+    max-width: 100%;
+    border-radius: 10px;
+    transition: 0.4s;
+    will-change: scale;
+}
+.insect_list_item_img img:hover{
+    border-radius: 100px;
+    transition: 0.4s;
+}
+.insect_list_item_insectName {
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Nova Square", "Kiwi Maru";
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+    color: #147647;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: opacity 0.3s;
+    will-change: opacity;
+}
+
+
+
+
+
+.detail_form {
+    width: 700px;
+    background: #FDFDFD;
+    padding: 25px 50px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 50%;
+    top: 100px;
+    translate: -50% 0;
+    opacity: 1;
+    z-index: 2000;
+    will-change: opacity;
+    animation-name: detailFormAnimate;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+  }
+  @media screen and (max-width: 1024px) {
+    .detail__form {
+      width: 600px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .detail__form {
+      width: 90%;
+      padding: 25px 25px;
+    }
+  }
+  .detail_form hr {
+    display: block;
+    width: 100%;
+    border: 0.5px solid #e6e6e6;
+    border-radius: 100px;
+    margin: 20px 0;
+  }
+  .detail_form.hidden {
+    display: none;
+  }
+  @keyframes detailFormAnimate {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .detail_form_cover {
+    position: fixed;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+    animation-name: detailFormCoverAnimate;
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+  }
+  .detail_form_cover.hidden {
+    display: none;
+  }
+  @keyframes detailFormCoverAnimate {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .detail_form_close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    color: #147647;
+  }
+  
+  .detail_form_title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-family: "Kiwi Maru", sans-serif;
+    color: #147647;
+  }
+  .detail_form_title::before {
+    content: "▶";
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+  }
