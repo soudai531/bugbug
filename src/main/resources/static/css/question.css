@@ -1,0 +1,93 @@
+@charset "UTF-8";
+.main {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*質問テキスト*/
+.question {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*質問文字のスタイル*/
+.question__title {
+  font-weight: 500;
+  color: #147647;
+  font-size: 24px;
+  font-family: "Kiwi Maru";
+  margin-bottom: 10px;
+}
+
+/*注訳のスタイル*/
+.question__title__detail {
+  color: gray;
+  font-size: 12px;
+  font-family: "Kiwi Maru";
+}
+
+.question__btns {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 350px;
+  height: 200px;
+}
+
+/*ボタンのスタイル*/
+.question__btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  font-size: 14px;
+  transition: opacity 0.3s;
+  overflow: hidden;
+  z-index: 1;
+}
+.question__btn--yes {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  background: #147647;
+}
+.question__btn--yes::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  background: #145E3A;
+  border-radius: 100%;
+  z-index: 50;
+  transition: width 0.3s, height 0.3s;
+  will-change: width, height;
+}
+.question__btn--yes:hover::before {
+  width: 150px;
+  height: 150px;
+}
+.question__btn--no {
+  border: 2px solid #147647;
+  color: #147647;
+  background: #ffffff;
+}
+.question__btn--no:hover {
+  opacity: 0.6;
+}
+.question__btn span {
+  display: block;
+  z-index: 100;
+}/*# sourceMappingURL=question.css.map */

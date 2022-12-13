@@ -17,8 +17,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-### application.properties ###
-*.properties
+images/
 
 # External tool builders
 .externalToolBuilders/

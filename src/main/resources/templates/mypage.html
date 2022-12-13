@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+
+
+
+    <!-- ユーザーアイコンの変更用フォーム -->
+    <form th:action="|/users/${userId}/user-icon/update|" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/jpeg,image/png">
+        <input type="submit" value="完了">
+    </form>
+    <!-- テスト表示 -->
+    <img th:src="|/images/user-icons/${userIcon}|" alt="ユーザーアイコン" width="400px"/>
+    <p th:if="${error}" th:text="${error}">エラーメッセージ</p>
+    </body>
+</html>

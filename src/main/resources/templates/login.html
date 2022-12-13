@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bugbug</title>
+    <link rel="icon" href="@{/img/logoicon.png}" />
+    <!-- 共通CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- 各ページCSS -->
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+  </head>
+  <body>
+    <header th:replace="header"></header>
+    <!-- メインコンテンツ -->
+    <main class="main js-headerScrollOn">
+      <div class="login">
+        <h3 class="login__title">LOGIN</h3>
+        <!-- ログインフォーム -->
+        <form class="login__form" th:action="@{/index}" th:object="${LoginForm}" method="post" >
+          <!--メールアドレス-->
+          <input type="email" name="mail" class="login__form__input" placeholder="メールアドレス" autocomplete="on" />
+          <!--パスワード-->
+          <input type="password" name="password" class="login__form__input" placeholder="パスワード" />
+          <button class="login__form__btn" type="submit"><span>ログイン ▶</span></button>
+        </form>
+        <a th:href="@{/sinup/form}" class="no-acaunt">
+          <p>アカウントをお持ちでない方はこちら</p>
+        </a>
+      </div>
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>
