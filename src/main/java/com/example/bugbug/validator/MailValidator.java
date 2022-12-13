@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.example.bugbug.entity.User;
-import com.example.bugbug.form.UserRegisterForm;
+import com.example.bugbug.form.InputForm;
 
 import lombok.RequiredArgsConstructor;
 //メールのバリデーション
@@ -20,13 +20,13 @@ public class MailValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return UserRegisterForm.class.isAssignableFrom(clazz);
+		return InputForm.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
 		//対象のフォームの取得
-		UserRegisterForm form = (UserRegisterForm) target;
+		InputForm form = (InputForm) target;
 		//メールの検索
 		List<User> list = service.findMail(form.getMail());
 		System.out.println(list);

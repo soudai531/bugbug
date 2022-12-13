@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 public class RecipeTag {
 	@Id
     @Column("recipe_tag_id")
-    private Integer recipeTagId;
+    private int recipeTagId;
     @Column("recipe_id")
-    private Integer recipeId;
+    private int recipeId;
     @Column("tag_id")
-    private Integer tagId;
-    private Integer deleted;
+    private int tagId;
+    private int deleted;
 }

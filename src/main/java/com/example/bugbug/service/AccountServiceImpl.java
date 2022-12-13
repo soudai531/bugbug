@@ -1,15 +1,14 @@
 package com.example.bugbug.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.example.bugbug.entity.User;
+import com.example.bugbug.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.bugbug.entity.User;
-import com.example.bugbug.repository.UserRepository;
-
-import lombok.RequiredArgsConstructor;
+import java.sql.Date;
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -38,7 +37,13 @@ public class AccountServiceImpl implements AccountService{
         return hash;
     }
 
-    
+    // 日付の取得
+    @Override
+    public Date getDate() {
+        // 日付の取得
+        Date date = new Date(new java.util.Date().getTime());
+        return date;
+    }
 
     // ユーザー情報1件取得
     public User findUserId(int id){

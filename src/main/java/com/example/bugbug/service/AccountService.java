@@ -1,8 +1,9 @@
 package com.example.bugbug.service;
 
-import java.util.List;
-
 import com.example.bugbug.entity.User;
+
+import java.sql.Date;
+import java.util.List;
 
 public interface AccountService {
 
@@ -15,7 +16,8 @@ public interface AccountService {
     // ハッシュ化
     String hash(String pass);
 
-    
+    // 日付取得
+    Date getDate();
 
     // ユーザー情報1件取得
     User findUserId(int id);
