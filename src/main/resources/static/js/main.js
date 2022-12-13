@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
   }
 
   // ログイン・アカウント作成ページはナビボタンを非表示
-  const headerHiddenPaths = ["/sinup/form", "/sinup", "/login/form", "/login"];
+  const headerHiddenPaths = ["/signup/form", "/signup", "/login/form", "/login"];
   if (headerHiddenPaths.includes(location.pathname)) {
     navBtns.style.display = "none";
     insectFilterBtn.style.display = "none";
@@ -95,7 +95,7 @@ window.addEventListener("load", () => {
   });
 
   /* 登録時確認ダイアログ */
-  const confirmPaths = ["/sinup/form", "/sinup"];
+  const confirmPaths = ["/signup/form", "/signup"];
   if (confirmPaths.includes(location.pathname)) {
     const confirmCover = document.querySelector(".confirm__cover");
     const confirmClose = document.querySelector(".confirm__btns__btn--no");

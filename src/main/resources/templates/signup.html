@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bugbug</title>
+    <title>新規アカウント登録 : bugbug</title>
     <link rel="icon" th:href="@{/img/logoicon.png}" />
     <!-- 共通CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}" />
@@ -16,7 +16,7 @@
       <header th:replace="header"></header>
       <div class="signup">
         <h3 class="signup__title">新規アカウント登録</h3>
-        <form class="signup__form" th:action="@{/sinup}" method="post" th:object="${inputForm}">
+        <form class="signup__form" th:action="@{/signup}" method="post" th:object="${userRegisterForm}">
           <!--メールアドレス-->
           <div class="signup__form__item">
             <p class="signup__form__item__text required">メールアドレス</p>
@@ -39,10 +39,10 @@
           </div>
           <!--バリデーションエラー-->
           <ul class="signup__form__validation" th:if="${#fields.hasErrors('*')}">
-            <li th:each="err:${#fields.errors('*')}" th:text="'※ ' + ${err}"></li>
+            <li th:each="error:${#fields.errors('*')}" th:text="'※ ' + ${error}"></li>
           </ul>
           <button class="signup__form__btn confirm__open" type="button"><span>アカウント作成</span></button>
-          <h:outputText styleClass="required" />
+          <h :outputText styleClass="required" />
           <div class="confirm__cover hidden"></div>
           <div class="confirm hidden">
             <p class="confirm__message">この内容で登録しますか？</p>
