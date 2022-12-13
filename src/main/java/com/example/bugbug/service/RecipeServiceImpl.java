@@ -63,7 +63,6 @@ public class RecipeServiceImpl implements RecipeService {
         for(Recipe recipe :recipes) {
             recipeDtoList.add(repackDto(recipe));
         }
-        System.out.println(recipeDtoList);
         return recipeDtoList;
     }
 
@@ -81,18 +80,17 @@ public class RecipeServiceImpl implements RecipeService {
      */
     public RecipeDto repackDto(Recipe recipe){
             RecipeDto recipeDto = new RecipeDto(recipe);
-            // Todo レシピ画像URLを格納する
-
             // レシピについているタグIDを取得
             List<RecipeTag> recipeTags = recipeTagRepository.getRecipeTagsId(recipe.getRecipeId());
             //　レシピについているタグのタグ情報をまとめて取得
             List<Tag> tags = tagService.getTags(recipeTags);
             // DTOにタグ情報を格納
             recipeDto.ofTag(tags);
+            // ユーザー情報を取得、格納
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
+            // お気に入り数を取得、格納
             int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
-            System.out.println(recipe.getRecipeId() + recipe.getName() + ":" + favoriteNum);
             recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
