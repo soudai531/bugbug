@@ -1,61 +1,33 @@
 package com.example.bugbug.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.example.bugbug.common.DateComponent;
-import com.example.bugbug.config.AppConfig;
 import com.example.bugbug.entity.Recipe;
-import com.example.bugbug.entity.RecipeMaterial;
-import com.example.bugbug.entity.RecipeProcedure;
 import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
-
-
-
-
-
-import com.example.bugbug.form.RecipeRegisterForm;
-import com.example.bugbug.repository.MaterialRepository;
-import com.example.bugbug.repository.ProcedureRepository;
 import com.example.bugbug.repository.FavoriteRepository;
 import com.example.bugbug.repository.RecipeTagRepository;
 
 import com.example.bugbug.repository.RecipeRepository;
-import com.example.bugbug.repository.RecipeTagRepository;
 import com.example.bugbug.service.dto.RecipeDto;
-
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-
-
-
-
-
     private final RecipeRepository recipeRepository;
     private final RecipeTagRepository recipeTagRepository;
+    private final FavoriteRepository favoriteRepository;
     private final MaterialRepository materialRepository;
     private final ProcedureRepository procedureRepository;
-    private final FavoriteRepository favoriteRepository;
-
     private final TagService tagService;
     private final AccountService accountService;
     private final DateComponent dateComponent;
-    
+
     @Autowired
     private HttpSession session;
     
@@ -103,12 +75,10 @@ public class RecipeServiceImpl implements RecipeService {
             recipeDto.ofTag(tags);
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
-            int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
-            System.out.println(recipe.getRecipeId() + recipe.getName() + ":" + favoriteNum);
+            int favoriteNum = favoriteRepository.countFavorite(recipe.getUserId());
             recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
-    
     //レシピ登録
     public Recipe saveRecipe(Recipe recipe) {
     	return recipeRepository.save(recipe);
