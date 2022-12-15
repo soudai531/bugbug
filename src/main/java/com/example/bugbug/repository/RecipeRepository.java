@@ -18,4 +18,9 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
  	@Modifying
  	@Query("UPDATE recipes SET image = :fileName WHERE recipe_id = :recipeId")
  	void updateRecipeImage(@Param("fileName") String fileName, @Param("recipeId") int recipeId);
+ 	
+ 	//ビュー数の増加
+ 	@Modifying
+ 	@Query("UPDATE recipes SET browes = browes+1 WHERE recipe_id = :recipeId")
+ 	void BroweCounta(@Param("recipeId") int recipeId);
 }
