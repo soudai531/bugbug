@@ -18,7 +18,6 @@ import com.example.bugbug.service.FavoriteService;
 import com.example.bugbug.form.RecipeRegisterForm;
 import com.example.bugbug.service.AuthService;
 import com.example.bugbug.service.RecipeService;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @RequiredArgsConstructor
@@ -48,7 +47,7 @@ public class RecipeController {
 		model.addAttribute("favorite", favorite);
 		//ビュー数のカウント
 		recipeService.addBrow(recipeId);
-		return "recipe/datail";
+		return "recipe";
 	}
 
 	

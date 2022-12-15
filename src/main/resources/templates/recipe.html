@@ -11,7 +11,7 @@
 	<span>[[${user.name}]]</span>
 		<span>[[${recipe.name}]]</span>
 		<span>[[${recipe.regDateOn}]] [[${favorite}]]</span>
-		<img th:src="*{recipe.image}" alt="レシピ画像">
+		<img th:src="|/images/recipe-images/${recipe.image}|" alt="レシピ画像">
 		<div th:if="${!#lists.isEmpty(tags)}" th:each="tag : ${tags}">
 			<a th:href="|/serch/tag?tag=${tag.tagId}|">[[${tag.name}]]</a>
 		</div>
@@ -36,7 +36,7 @@
 		<th:block th:if="${!#lists.isEmpty(procuderes)}" th:each="procedure,status : ${procuderes}">
 			<div>
 				<span>[[${status.index}+1]]</span>
-				<img th:src="*{procedure.image}" alt="手順画像">
+				<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像">
 				<span>[[${procedure.content}]]</span>
 			</div>
 		</th:block>
