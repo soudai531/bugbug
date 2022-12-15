@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>ヘッダー表示部分</div>
+
+<div>
+	<span>[[${user.name}]]</span>
+		<span>[[${recipe.name}]]</span>
+		<span>[[${recipe.regDateOn}]] [[${favorite}]]</span>
+		<img th:src="|/images/recipe-images/${recipe.image}|" alt="レシピ画像">
+		<div th:if="${!#lists.isEmpty(tags)}" th:each="tag : ${tags}">
+			<a th:href="|/serch/tag?tag=${tag.tagId}|">[[${tag.name}]]</a>
+		</div>
+		<div>
+			<h3>材料</h3>
+			<th:block th:if="${!#lists.isEmpty(materials)}" th:each="material : ${materials}">
+				<p>[[${material.name}]] [[${material.amount}]]</p>
+			</th:block>
+		</div>
+		
+		<div>
+			<h3>説明</h3>
+			<p>[[${recipe.explanation}]]</p>
+		</div>
+		
+		<div>
+			<h3>コツやポイント</h3>
+			<p>[[${recipe.point}]]</p>
+		</div>
+		
+		<h2>作り方</h2>
+		<th:block th:if="${!#lists.isEmpty(procuderes)}" th:each="procedure,status : ${procuderes}">
+			<div>
+				<span>[[${status.index}+1]]</span>
+				<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像">
+				<span>[[${procedure.content}]]</span>
+			</div>
+		</th:block>
+		
+		
+		
+		
+	
+</body>
+</html>

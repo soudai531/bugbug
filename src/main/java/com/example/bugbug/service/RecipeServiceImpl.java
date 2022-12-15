@@ -1,16 +1,17 @@
 package com.example.bugbug.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
+import lombok.AllArgsConstructor;
 
 import com.example.bugbug.common.DateComponent;
 import com.example.bugbug.config.AppConfig;
@@ -21,15 +22,15 @@ import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
 import com.example.bugbug.form.RecipeRegisterForm;
+
 import com.example.bugbug.repository.MaterialRepository;
 import com.example.bugbug.repository.ProcedureRepository;
 import com.example.bugbug.repository.FavoriteRepository;
-import com.example.bugbug.repository.RecipeTagRepository;
 import com.example.bugbug.repository.RecipeRepository;
 import com.example.bugbug.repository.RecipeTagRepository;
 import com.example.bugbug.service.dto.RecipeDto;
 
-import lombok.AllArgsConstructor;
+
 
 @AllArgsConstructor
 @Service
@@ -63,7 +64,7 @@ public class RecipeServiceImpl implements RecipeService {
         for(Recipe recipe :recipes) {
             recipeDtoList.add(repackDto(recipe));
         }
-        System.out.println(recipeDtoList);
+        
         return recipeDtoList;
     }
 
@@ -92,11 +93,35 @@ public class RecipeServiceImpl implements RecipeService {
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
             int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
-            System.out.println(recipe.getRecipeId() + recipe.getName() + ":" + favoriteNum);
             recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
+
+    //レシピ一件取得
+    public Optional<Recipe> getRecipe(int recipeId) {
+    	return recipeRepository.findById(recipeId);
+    }
     
+    //レシピのタグを表示
+    public List<Tag> getRecipeTag(int recipeId){
+    	return recipeTagRepository.getRecipeTagsName(recipeId);
+    }
+    
+    //レシピ手順の取得
+    public List<RecipeProcedure> getProcedure(int recipeId){
+    	return procedureRepository.getProceduresByID(recipeId);
+    }
+    
+  //レシピ材料の取得
+    public List<RecipeMaterial> getMaterial(int recipeId){
+    	return materialRepository.getMaterialsByID(recipeId);
+    }
+    
+    //ビュー数の増加
+    public void addBrow(int recipeId) {
+    	recipeRepository.BroweCounta(recipeId);
+    }
+
     //レシピ登録
     public Recipe saveRecipe(Recipe recipe) {
     	return recipeRepository.save(recipe);
@@ -188,9 +213,7 @@ public class RecipeServiceImpl implements RecipeService {
    }
    
    /**
-    * レシピ画像の登録
-    * @param recipe_id 登録するレシピのID
-    * @return 画像ファイル名
+    * 手順画像の登録
     */
    public String saveProcedureImage(MultipartFile file, int ProcedureId){
        // IDのフォーマット(0埋め)
