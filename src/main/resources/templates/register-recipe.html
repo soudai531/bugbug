@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>レシピ登録 : bugbug</title>
+</head>
+<body>
+	<header th:replace="header"></header>
+	<div>
+		<form th:action="@{/recipes/register}" method="post"  enctype="multipart/form-data" th:object="${recipeRegisterForm}">
+			<div>
+				<span>レシピ名</span>
+				<input type="text" placeholder="レシピ名を入力" th:field="*{name}">
+			</div>
+			<div class="tag_area">
+				<span>タグ</span>
+				<input type="text" th:field="*{tags}">
+				<input type="text" th:field="*{tags}">
+			</div>
+			<div>
+				<span>レシピ画像</span>
+				<input type="file" th:field="*{recipeImage}" accept="image/jpeg,image/png">
+				<span>説明</span>
+				<input type="text" th:field="*{explanation}">
+				<span>コツやポイント</span>
+				<input type="text" th:field="*{point}">
+			</div>
+
+			<div class="material_area">
+				<span>材料</span>
+				<div class="material">
+					<input type="text" th:field="*{materials}" placeholder="材料名">
+					<input type="text" th:field="*{amounts}" placeholder="数量">
+					<button>削除ボタン</button>
+					<input type="text" th:field="*{materials}" placeholder="材料名">
+					<input type="text" th:field="*{amounts}" placeholder="数量">
+					<button>削除ボタン</button>
+				</div>
+			</div>
+			<div class="procedure_area">
+				<span>作り方</span>
+				<div class="procedure_item">
+					<span>1</span>
+					<button>削除ボタン</button>
+					<input type="file" th:field="*{procedureImages}" accept="image/jpeg,image/png">
+					<input type="text" th:field="*{contexts}" placeholder="作り方">
+				</div>
+				<div class="procedure_item">
+					<span>2</span>
+					<button>削除ボタン</button>
+					<input type="file" th:field="*{procedureImages}" accept="image/jpeg,image/png">
+					<input type="text" th:field="*{contexts}" placeholder="作り方">
+				</div>
+			</div>
+			<div>
+				<span>虫が苦手な人への写真の非表示</span>
+				<input type="checkbox" value="1" th:field="*{image_blurred}">
+				<input type="submit" value="登録">
+			</div>
+
+		</form>
+	</div>
+	<footer th:replace="footer"></footer>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
