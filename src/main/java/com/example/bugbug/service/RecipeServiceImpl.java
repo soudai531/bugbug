@@ -93,7 +93,6 @@ public class RecipeServiceImpl implements RecipeService {
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
             int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
-            System.out.println(recipe.getRecipeId() + recipe.getName() + ":" + favoriteNum);
             recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
