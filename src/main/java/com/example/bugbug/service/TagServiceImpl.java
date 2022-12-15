@@ -3,6 +3,7 @@ package com.example.bugbug.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.bugbug.repository.RecipeTagRepository;
 import org.springframework.stereotype.Service;
 
 import com.example.bugbug.entity.RecipeTag;
@@ -16,12 +17,24 @@ import lombok.AllArgsConstructor;
 public class TagServiceImpl implements TagService {
 
     private TagRepository tagRepository;
+    private RecipeTagRepository recipeTagRepository;
 
+    /**
+     * レシピIdから紐づいているタグをリストで返す
+     * @param recipeId レシピのid
+     */
+    @Override
+    public List<Tag> getTagsForRecipeId(int recipeId){
+        // レシピについているタグIDを取得
+        List<RecipeTag> recipeTags = recipeTagRepository.getRecipeTagsId(recipeId);
+        //　レシピについているタグのタグ情報をまとめて取得
+        List<Tag> tags = getTags(recipeTags);
+        return tags;
+    }
 
     /**
      * レシピタグのリストを受け取りタグ情報をリストで返す
      * @param recipeTags
-     * @return
      */
     @Override
     public List<Tag> getTags(List<RecipeTag> recipeTags) {
@@ -30,7 +43,7 @@ public class TagServiceImpl implements TagService {
         recipeTags.forEach(recipeTag -> tags.add(tagRepository.findById(recipeTag.getTagId()).get()));
         return tags;
     }
-    
+
     //タグが存在しなかったら登録かつタグIDの取得
     @Override
     public void saveTag(String name) {
@@ -46,4 +59,6 @@ public class TagServiceImpl implements TagService {
     public Tag getTag(String name) {
     	 return tagRepository.findByName(name);
     }
+
+
 }

@@ -203,7 +203,6 @@ public class RecipeServiceImpl implements RecipeService {
    public void saveProcedure(int recipe_id,List<MultipartFile> images,List<String> contexts) {
 	   //imageリストに要素がある間
 	   for(int i=0;i<images.size();i++) {
-		    
 		    if(!contexts.get(i).equals("")) {
 		    	RecipeProcedure saved = procedureRepository.save(new RecipeProcedure(null,recipe_id,null,contexts.get(i),0));
 		    	String image = saveProcedureImage(images.get(i),saved.getProcedureId());

@@ -6,8 +6,16 @@ import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 
 public interface TagService {
+
     /**
-     * レシピに紐づいているタグの情報をまとめて取得
+     *
+     * @param recipeId
+     * @return
+     */
+    List<Tag> getTagsForRecipeId(int recipeId);
+
+    /**
+     * レシピタグに紐づいているタグの情報をまとめて取得
      * @param recipeTags
      * @return
      */
