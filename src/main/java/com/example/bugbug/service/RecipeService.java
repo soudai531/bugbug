@@ -23,19 +23,19 @@ public interface RecipeService {
     // おすすめレシピを20件ずつ取得
     List<RecipeDto> getRecommendRecipe(int page);
 
-    //特定のレシピの取得
+    // 特定のレシピの取得
     Optional<Recipe> getRecipe(int recipeId);
     
-    //レシピタグの取得
+    // レシピタグの取得
     List<Tag> getRecipeTag(int recipeId);
     
-    //レシピ手順の取得
+    // レシピ手順の取得
     List<RecipeProcedure> getProcedure(int recipeId);
     
-    //レシピ材料の取得
+    // レシピ材料の取得
     List<RecipeMaterial> getMaterial(int recipeId);
     
-    //ビュー数の増加
+    // ビュー数の増加
     void addBrow(int recipeId);
 
     //レシピ登録
