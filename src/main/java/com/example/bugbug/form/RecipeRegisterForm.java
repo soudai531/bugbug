@@ -10,12 +10,12 @@ import lombok.Data;
 public class RecipeRegisterForm {
 	private String name;
 	private List<String> tags;
-	private MultipartFile image;
+	private MultipartFile recipeImage;
 	private String explanation;
 	private String point;
 	private List<String> materials;
 	private List<String> amounts;
-	private List<MultipartFile> procedure_images;
+	private List<MultipartFile> procedureImages;
 	private List<String> contexts;
 	private Integer image_blurred;
 }

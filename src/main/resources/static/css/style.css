@@ -121,6 +121,161 @@ a {
   }
 }
 
+.confirm {
+  width: 400px;
+  height: 200px;
+  background: #FDFDFD;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  top: 100px;
+  translate: -50% 0;
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  will-change: opacity;
+  animation-name: confirmAnimate;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+@media screen and (max-width: 767px) {
+  .confirm {
+    width: 300px;
+  }
+}
+.confirm.hidden {
+  display: none;
+}
+@keyframes confirmAnimate {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.confirm__cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  transition: background 0.3s;
+  z-index: 1000;
+  animation-name: confirmCoverAnimate;
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
+}
+.confirm__cover.hidden {
+  display: none;
+}
+@keyframes confirmCoverAnimate {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.confirm__message {
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.confirm__btns {
+  width: 225px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confirm__btns__btn {
+  font-size: 13px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 100px;
+  transition: opacity 0.3s;
+}
+.confirm__btns__btn--yes {
+  background: #147647;
+  color: #FDFDFD;
+}
+.confirm__btns__btn--no {
+  background: #F4F4F4;
+  color: #636363;
+}
+.confirm__btns__btn:hover {
+  opacity: 0.7;
+}
+
+.registerRecipeBtn {
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  background: #147647;
+  color: #FDFDFD;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  text-decoration: none;
+  bottom: 50px;
+  right: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  transition: box-shadow 0.2s;
+  will-change: box-shadow;
+}
+.registerRecipeBtn::before {
+  content: "";
+  display: block;
+  background: #145E3A;
+  border-radius: 100%;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 100;
+  transition: width 0.3s, height 0.3s;
+  will-change: width, height;
+}
+.registerRecipeBtn span {
+  display: block;
+  font-size: 16px;
+  letter-spacing: 2px;
+  z-index: 101;
+}
+.registerRecipeBtn:hover {
+  box-shadow: none;
+}
+.registerRecipeBtn:hover::before {
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 767px) {
+  .registerRecipeBtn {
+    width: 100px;
+    height: 100px;
+    bottom: 25px;
+    right: 25px;
+  }
+  .registerRecipeBtn span {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+}
+
 .recipeList {
   width: 100%;
   border-bottom: 2px solid #e6e6e6;
@@ -155,11 +310,16 @@ a {
 .recipe:hover .recipe__name {
   opacity: 0.5;
 }
+.recipe a {
+  text-decoration: none;
+}
+.recipe a:hover .recipe__name {
+  text-decoration: underline;
+}
 
 .recipe__img {
   width: 100%;
   height: 150px;
-  margin-bottom: 5px;
   overflow: hidden;
   display: flex;
   border-radius: 10px;
@@ -182,7 +342,6 @@ a {
 .recipe__userAction {
   width: 100%;
   height: 30px;
-  margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -260,11 +419,13 @@ a {
 }
 
 .recipe__name {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   font-family: "Nova Square", "Kiwi Maru";
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   letter-spacing: 1px;
+  text-decoration: none;
   color: #147647;
   display: flex;
   justify-content: flex-start;
@@ -275,6 +436,7 @@ a {
 
 .recipe__tags, .search__form__tag__tags {
   width: 100%;
+  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -382,7 +544,7 @@ a {
   }
 }
 .header.js-headerScrollOn::before {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 /* --- サイトロゴ --- */
@@ -566,6 +728,7 @@ a {
   height: 200px;
   margin-left: 20px;
   margin-right: 20px;
+  text-decoration: none;
   transition: 0;
 }
 @media screen and (max-width: 1024px) {
@@ -829,11 +992,13 @@ a {
 .search__form__cover {
   position: fixed;
   top: 0;
+  left: 0;
   min-width: 100%;
   min-height: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   transition: background 0.3s;
+  z-index: 1000;
   animation-name: searchFormCoverAnimate;
   animation-duration: 0.4s;
   animation-fill-mode: both;
@@ -896,6 +1061,7 @@ a {
   border: 2px solid #e6e6e6;
   border-radius: 100px;
   padding-left: 20px;
+  padding-right: 20px;
   font-size: 16px;
   display: flex;
   justify-content: flex-start;
