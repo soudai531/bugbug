@@ -86,28 +86,28 @@
           <hr class="recipeDetail__itemTitle__line" />
           <div class="recipeDetail__howto__list">
             <th:block th:if="${!#lists.isEmpty(procuderes)}" th:each="procedure,status : ${procuderes}">
-							<div class="howto">
-								<span class="howto__num">[[${status.index}+1]]</span>
-								<div class="howto__item">
-									<div class="howto__image">
-										<th:block th:if="${procedure.image != null}">
-											<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像" />
-										</th:block>
-									</div>
-									<div class="howto__text">[[${procedure.content}]]</div>
-								</div>
-							</div>
+              <div class="howto">
+                <span class="howto__num">[[${status.index}+1]]</span>
+                <div class="howto__item">
+                  <div class="howto__image">
+                    <th:block th:if="${procedure.image != null}">
+                      <img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像" />
+                    </th:block>
+                  </div>
+                  <div class="howto__text">[[${procedure.content}]]</div>
+                </div>
+              </div>
             </th:block>
           </div>
         </div>
-				<!-- /* コメント取得(未実装) */ -->
-				<div class="recipeDetail__comments">
+        <!-- /* コメント取得(未実装) */ -->
+        <div class="recipeDetail__comments">
           <span class="recipeDetail__itemTitle">コメント</span>
-          <hr class="recipeDetail__itemTitle__line"/>
+          <hr class="recipeDetail__itemTitle__line" />
           <div class="recipeDetail__comments__item">
             <a class="recipeDetail__comments__user" href="user.html">
               <span class="recipeDetail__comments__user__icon">
-                <img th:src="|/images/user-icons/recipe4.jpg|" alt="">
+                <img th:src="|/images/user-icons/recipe4.jpg|" alt="" />
               </span>
               <span class="recipeDetail__comments__user__name">user_name</span>
             </a>
@@ -117,7 +117,7 @@
           <div class="recipeDetail__comments__item">
             <a class="recipeDetail__comments__user" href="user.html">
               <span class="recipeDetail__comments__user__icon">
-                <img th:src="|/images/user-icons/recipe4.jpg|" alt="">
+                <img th:src="|/images/user-icons/recipe4.jpg|" alt="" />
               </span>
               <span class="recipeDetail__comments__user__name">user_name</span>
             </a>
@@ -127,15 +127,17 @@
           <div class="recipeDetail__comments__item">
             <a class="recipeDetail__comments__user" href="user.html">
               <span class="recipeDetail__comments__user__icon">
-                <img th:src="|/images/user-icons/recipe4.jpg|" alt="">
+                <img th:src="|/images/user-icons/recipe4.jpg|" alt="" />
               </span>
               <span class="recipeDetail__comments__user__name">user_name</span>
             </a>
-            <div class="recipeDetail__comments__text">コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントｖｖｖ</div>
+            <div class="recipeDetail__comments__text">
+              コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントｖｖｖ
+            </div>
             <div class="recipeDetail__comments__date">2022/12/XX</div>
           </div>
           <form class="recipeDetail__comments__form" action="./recipe.html" method="post">
-            <input type="text" placeholder="コメントを入力"/>
+            <input type="text" placeholder="コメントを入力" />
             <button class="recipeDetail__comments__form__btn" type="submit">送信</button>
           </form>
         </div>
