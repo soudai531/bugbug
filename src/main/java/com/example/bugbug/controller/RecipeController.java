@@ -26,23 +26,24 @@ public class RecipeController {
 	//レシピ詳細画面の表示
 	@GetMapping("recipes/{recipeId}")
 	public String viewRecipeDetail(@PathVariable("recipeId") int recipeId, Model model) {
-		//レシピ詳細情報の取得
-		Optional<Recipe> recipe = recipeService.getRecipe(recipeId);
-		// レシピIDからタグのリストを取得
-		List<Tag> tags = tagService.getTagsForRecipeId(recipeId);
-		List<RecipeProcedure> procuderes = recipeService.getProcedure(recipeId);
-		List<RecipeMaterial> materials = recipeService.getMaterial(recipeId);
-		User user = accountService.findUserId(recipe.get().getUserId());
-		int favorite = favoriteService.getFavorite(recipeId);
-		//モデルへの追加
-		model.addAttribute("recipe", recipe.get());
-		model.addAttribute("tags", tags);
-		model.addAttribute("procuderes", procuderes);
-		model.addAttribute("materials", materials);
-		model.addAttribute("user", user);
-		model.addAttribute("favorite", favorite);
-		//ビュー数のカウント
-		recipeService.addBrow(recipeId);
+//		//レシピ詳細情報の取得
+//		Optional<Recipe> recipe = recipeService.getRecipe(recipeId);
+//		// レシピIDからタグのリストを取得
+//		List<Tag> tags = tagService.getTagsForRecipeId(recipeId);
+//		List<RecipeProcedure> procedures = recipeService.getProcedure(recipeId);
+//		List<RecipeMaterial> materials = recipeService.getMaterial(recipeId);
+//		User user = accountService.findUserId(recipe.get().getUserId());
+//		int favorite = favoriteService.getFavorite(recipeId);
+//		//モデルへの追加
+//		model.addAttribute("recipe", recipe);
+//		model.addAttribute("user", user);
+//		model.addAttribute("tags", tags);
+//		model.addAttribute("procedures", procedures);
+//		model.addAttribute("materials", materials);
+//		model.addAttribute("favorite", favorite);
+//		System.out.println(recipe);
+//		//ビュー数のカウント
+//		recipeService.addView(recipeId);
 		return "recipe";
 	}
 

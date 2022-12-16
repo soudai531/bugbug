@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>[[${recipe.name}]] : bugbug</title>
-</head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>レシピ投稿 : bugbug</title>
+	<link rel="icon" th:href="@{/img/logoicon.png}" />
+	<link rel="preload" th:href="@{/img/header.jpeg}" as="image" />
+	<link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
+	<!-- 共通CSS -->
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<!-- 各ページCSS -->
 <body>
 	<div>
 		<a th:href="|/users/${user.userId}|">[[${user.name}]]</a>
@@ -36,11 +43,11 @@
 		</div>
 
 		<span>作り方</span>
-		<th:block th:if="${!#lists.isEmpty(procuderes)}" th:each="procedure,status : ${procuderes}">
+		<th:block th:if="${!#lists.isEmpty(procedures)}" th:each="procedure,status : ${procedures}">
 			<div>
 				<span>[[${status.index}+1]]</span>
-				<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像" />
-				<span>[[${procedure.content}]]</span>
+				<img th:src="|/images/recipe-procedure-images/${procedures.image}|" alt="手順画像" />
+				<span>[[${procedures.content}]]</span>
 			</div>
 		</th:block>
 	</div>

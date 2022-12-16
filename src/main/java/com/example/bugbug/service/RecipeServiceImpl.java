@@ -72,56 +72,64 @@ public class RecipeServiceImpl implements RecipeService {
      */
     @Override
     public List<RecipeDto> getRecommendRecipe(int page){
-        return new ArrayList<RecipeDto>();
+        return new ArrayList<>();
     }
 
 
     /**
      * レシピ情報からレシピDTOを作成する
      */
+    @Override
     public RecipeDto repackDto(Recipe recipe){
-            RecipeDto recipeDto = new RecipeDto(recipe);
-            // レシピについているタグIDを取得
-            List<RecipeTag> recipeTags = recipeTagRepository.getRecipeTagsId(recipe.getRecipeId());
-            //　レシピについているタグのタグ情報をまとめて取得
-            List<Tag> tags = tagService.getTags(recipeTags);
-            // DTOにタグ情報を格納
-            recipeDto.ofTag(tags);
-            // ユーザー情報を取得、格納
-            User user = accountService.findUserId(recipe.getUserId());
-            recipeDto.ofUser(user);
-            // お気に入り数を取得、格納
-            int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
-            recipeDto.ofFavorite(favoriteNum);
-            return recipeDto;
+        RecipeDto recipeDto = new RecipeDto(recipe);
+        // レシピについているタグIDを取得
+        List<RecipeTag> recipeTags = recipeTagRepository.getRecipeTagsId(recipe.getRecipeId());
+        //　レシピについているタグのタグ情報をまとめて取得
+        List<Tag> tags = tagService.getTags(recipeTags);
+        // DTOにタグ情報を格納
+        recipeDto.ofTag(tags);
+        // ユーザー情報を取得、格納
+        User user = accountService.findUserId(recipe.getUserId());
+        recipeDto.ofUser(user);
+        // お気に入り数を取得、格納
+        int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
+        recipeDto.ofFavorite(favoriteNum);
+        return recipeDto;
     }
 
     //レシピ一件取得
+    @Override
     public Optional<Recipe> getRecipe(int recipeId) {
     	return recipeRepository.findById(recipeId);
     }
     
     //レシピのタグを表示
+    @Override
     public List<Tag> getRecipeTag(int recipeId){
     	return recipeTagRepository.getRecipeTagsName(recipeId);
     }
     
     //レシピ手順の取得
+    @Override
     public List<RecipeProcedure> getProcedure(int recipeId){
     	return procedureRepository.getProceduresByID(recipeId);
     }
-    
-  //レシピ材料の取得
+
+
+    //レシピ材料の取得
+    @Override
     public List<RecipeMaterial> getMaterial(int recipeId){
     	return materialRepository.getMaterialsByID(recipeId);
     }
-    
+
     //ビュー数の増加
-    public void addBrow(int recipeId) {
-    	recipeRepository.BroweCounta(recipeId);
+    @Override
+    public void addView(int recipeId) {
+    	recipeRepository.viewCounta(recipeId);
     }
 
     //レシピ登録
+    @Override
     public Recipe saveRecipe(Recipe recipe) {
     	return recipeRepository.save(recipe);
     }
@@ -149,6 +157,7 @@ public class RecipeServiceImpl implements RecipeService {
      * @param recipe_id 登録するレシピのID
      * @return 画像ファイル名
      */
+    @Override
     public String saveRecipeImage(MultipartFile file, int recipe_id){
         // IDのフォーマット(0埋め)
         String RecipeImageFormat = String.format("%010d", recipe_id);
@@ -172,6 +181,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
     
     //レシピタグの登録
+    @Override
    public void saveRecipeTag(int recipe_id,List<String> tags) {
 	   //タグリストの要素がある間
     	tags.forEach(tag -> {
@@ -185,6 +195,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
    
    //材料の登録
+    @Override
    public void saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
 	   //材料リストの要素がある間
 	   for(int i=0;i < materials.size();i++) {
@@ -200,6 +211,7 @@ public class RecipeServiceImpl implements RecipeService {
    }
    
    //手順の登録
+    @Override
    public void saveProcedure(int recipe_id,List<MultipartFile> images,List<String> contexts) {
 	   //imageリストに要素がある間
 	   for(int i=0;i<images.size();i++) {
@@ -213,6 +225,7 @@ public class RecipeServiceImpl implements RecipeService {
    /**
     * 手順画像の登録
     */
+   @Override
    public String saveProcedureImage(MultipartFile file, int ProcedureId){
        // IDのフォーマット(0埋め)
        String ProcedureImageFormat = String.format("%010d", ProcedureId);

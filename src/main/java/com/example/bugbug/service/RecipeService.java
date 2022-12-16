@@ -23,6 +23,8 @@ public interface RecipeService {
     // おすすめレシピを20件ずつ取得
     List<RecipeDto> getRecommendRecipe(int page);
 
+    RecipeDto repackDto(Recipe recipe);
+
     // 特定のレシピの取得
     Optional<Recipe> getRecipe(int recipeId);
     
@@ -34,9 +36,9 @@ public interface RecipeService {
     
     // レシピ材料の取得
     List<RecipeMaterial> getMaterial(int recipeId);
-    
-    // ビュー数の増加
-    void addBrow(int recipeId);
+
+    //ビュー数の増加
+    void addView(int recipeId);
 
     //レシピ登録
     Recipe saveRecipe(Recipe recipe);
@@ -55,4 +57,6 @@ public interface RecipeService {
     
     //手順の登録
     public void saveProcedure(int recipe_id,List<MultipartFile> images,List<String> contexts);
+
+    String saveProcedureImage(MultipartFile file, int ProcedureId);
 }
