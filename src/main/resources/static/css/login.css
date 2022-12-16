@@ -102,6 +102,25 @@
   scale: 1;
 }
 
+.login__form__errorMessage {
+  width: 100%;
+  margin: 10px 0;
+  font-size: 14px;
+  font-weight: 400px;
+  font-family: "Noto Sans JP";
+  letter-spacing: 1px;
+  color: #e45f5f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login__form__errorMessage ion-icon {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .no-acaunt {
   text-decoration: none;
   color: #ACACAC;
