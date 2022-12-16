@@ -5,6 +5,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  -webkit-appearance: none;
 }
 
 body,
@@ -68,10 +69,12 @@ select {
 }
 * {
   font-family: "Kiwi Maru", sans-serif;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   width: 100%;
+  min-height: 100vh;
   position: relative;
   background: #f8f8f8;
   display: flex;
@@ -81,30 +84,36 @@ body {
 button,
 a {
   cursor: pointer;
+  touch-action: manipulation;
+  position: relative;
+  text-decoration: none;
+}
+
+.recipeImage.filter {
+  filter: blur(5px);
 }
 
 /* --- メインコンテンツ --- */
 .main {
   width: 100%;
   min-height: 100vh;
+  padding-bottom: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   transition: padding-top 0.2s;
   padding-top: 530px;
-  padding-bottom: 200px;
+  animation: mainAnimate 1s;
 }
 @media screen and (max-width: 1024px) {
   .main {
     padding-top: 380px;
-    padding-bottom: 180px;
   }
 }
 @media screen and (max-width: 767px) {
   .main {
     padding-top: 300px;
-    padding-bottom: 140px;
   }
 }
 .main.js-headerScrollOn {
@@ -120,6 +129,14 @@ a {
     padding-top: 250px;
   }
 }
+@keyframes mainAnimate {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 .confirm {
   width: 400px;
@@ -132,11 +149,11 @@ a {
   align-items: center;
   position: fixed;
   left: 50%;
-  top: 100px;
-  translate: -50% 0;
+  top: 50%;
+  translate: -50% -50%;
   opacity: 1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 2000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 2500;
   will-change: opacity;
   animation-name: confirmAnimate;
   animation-duration: 0.3s;
@@ -147,9 +164,6 @@ a {
     width: 300px;
   }
 }
-.confirm.hidden {
-  display: none;
-}
 @keyframes confirmAnimate {
   0% {
     opacity: 0;
@@ -159,22 +173,19 @@ a {
   }
 }
 
-.confirm__cover {
+.confirmDialog__cover {
   position: fixed;
   top: 0;
   left: 0;
-  min-width: 100%;
-  min-height: 100%;
+  z-index: 2000;
+  width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.8);
   transition: background 0.3s;
-  z-index: 1000;
   animation-name: confirmCoverAnimate;
-  animation-duration: 0.4s;
+  animation-duration: 0.2s;
   animation-fill-mode: both;
-}
-.confirm__cover.hidden {
-  display: none;
+  will-change: opacity;
 }
 @keyframes confirmCoverAnimate {
   0% {
@@ -208,7 +219,7 @@ a {
   background: #147647;
   color: #FDFDFD;
 }
-.confirm__btns__btn--no {
+.confirm__btns__btn--cancel {
   background: #F4F4F4;
   color: #636363;
 }
@@ -231,7 +242,7 @@ a {
   bottom: 50px;
   right: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 2000;
+  z-index: 1500;
   transition: box-shadow 0.2s;
   will-change: box-shadow;
 }
@@ -247,7 +258,7 @@ a {
   left: 50%;
   translate: -50% -50%;
   z-index: 100;
-  transition: width 0.3s, height 0.3s;
+  transition: width 0.1s, height 0.1s;
   will-change: width, height;
 }
 .registerRecipeBtn span {
@@ -284,10 +295,41 @@ a {
   justify-content: space-around;
   align-items: flex-start;
 }
+.recipeList::before {
+  content: "";
+  width: 22%;
+  display: block;
+  order: 1;
+}
+@media screen and (max-width: 1024px) {
+  .recipeList::before {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .recipeList::before {
+    width: 70%;
+  }
+}
+.recipeList::after {
+  content: "";
+  width: 22%;
+  display: block;
+}
+@media screen and (max-width: 1024px) {
+  .recipeList::after {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .recipeList::after {
+    width: 70%;
+  }
+}
 
 .recipe {
   width: 22%;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
@@ -330,7 +372,7 @@ a {
   transition: border-radius 0.3s linear;
 }
 .recipe__img img {
-  max-width: 100%;
+  width: 100%;
   border-radius: 10px;
   transition: scale 0.6s, opacity 0.4s, filter 0.2s;
   will-change: scale;
@@ -350,6 +392,7 @@ a {
 .recipe__user {
   width: fit-content;
   height: 100%;
+  text-decoration: none;
   display: flex;
   text-decoration: none;
   justify-content: center;
@@ -365,6 +408,7 @@ a {
   height: 30px;
   display: block;
   border-radius: 100%;
+  background: #e6e6e6;
   margin-right: 5px;
   display: flex;
   justify-content: center;
@@ -503,7 +547,7 @@ a {
   align-items: center;
   position: fixed;
   top: 0;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: height 0.3s;
   will-change: height;
@@ -629,8 +673,8 @@ a {
   align-items: center;
   top: 25px;
   right: 30px;
-  transition: top 0.4s, scale 0.3s;
-  will-change: top, right, scale;
+  transition: top 0.4s;
+  will-change: top, right;
 }
 @media screen and (max-width: 1024px) {
   .insectFilterBtn {
@@ -708,10 +752,19 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: navBtnsAnimate 0.5s;
 }
 @media screen and (max-width: 767px) {
   .navBtns.js-headerScrollOn {
     translate: 0 25px;
+  }
+}
+@keyframes navBtnsAnimate {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -780,6 +833,35 @@ a {
     font-size: 20px;
     margin-top: 8px;
   }
+}
+.navBtns__btn--mypage__icon {
+  width: 40px;
+  height: 40px;
+  margin-top: 20px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: translate 0.4s;
+  will-change: translate;
+}
+@media screen and (max-width: 1024px) {
+  .navBtns__btn--mypage__icon {
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .navBtns__btn--mypage__icon {
+    width: 25px;
+    height: 25px;
+    margin-top: 8px;
+  }
+}
+.navBtns__btn--mypage__icon img {
+  width: 100%;
 }
 .navBtns__btn::before {
   content: "";
@@ -871,6 +953,19 @@ a {
   .navBtns__btn.js-headerScrollOn--login ion-icon {
     font-size: 40px;
     margin-top: 0;
+  }
+}
+.navBtns__btn.js-headerScrollOn .navBtns__btn--mypage__icon {
+  width: 25px;
+  height: 25px;
+  margin-top: 0;
+  margin-right: 10px;
+}
+@media screen and (max-width: 1024px) {
+  .navBtns__btn.js-headerScrollOn .navBtns__btn--mypage__icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 0;
   }
 }
 .navBtns__btn.js-headerScrollOn::before {
@@ -1053,16 +1148,16 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "Kiwi Maru", sans-serif;
 }
 .search__form__keyword__input input {
   width: calc(100% - 70px);
-  height: 35px;
+  height: 40px;
+  outline: none;
   border: 2px solid #e6e6e6;
   border-radius: 100px;
   padding-left: 20px;
   padding-right: 20px;
-  font-size: 16px;
+  font-size: 12px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
