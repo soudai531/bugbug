@@ -24,6 +24,14 @@ public class IndexController {
 
     @RequestMapping(value = {"/", "/index", "/index.html"})
     public String viewIndex(Model model){
+    	boolean loginState = true;
+    	if(session.getAttribute("user_id") == null) {
+    		loginState = true;
+    		model.addAttribute("loginState", loginState);
+    	}else {
+    		loginState = true;
+    		model.addAttribute("loginState", loginState);
+    	}
         model.addAttribute("session_name",session.getAttribute("user_name"));
         model.addAttribute("user_id",session.getAttribute("user_id"));
         List<RecipeDto> recipes = recipeService.getAllRecipe();
