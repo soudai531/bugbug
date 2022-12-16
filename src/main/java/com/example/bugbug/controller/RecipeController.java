@@ -31,7 +31,6 @@ public class RecipeController {
 		RecipeDetailDTO recipe = recipeService.getRecipeDetail(recipeId);
 		//モデルへの追加
 		model.addAttribute("recipe", recipe);
-		System.out.println(recipe.getTags().get(0).getName());
 		//ビュー数のカウント
 		recipeService.addView(recipeId);
 		return "recipe";
