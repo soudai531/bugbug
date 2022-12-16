@@ -4,7 +4,7 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>「${recipe.recipeName}」 : bugbug</title>
+	<title>[[${recipe.recipeName}]] : bugbug</title>
 	<link rel="icon" th:href="@{/img/logoicon.png}" />
 	<link rel="preload" th:href="@{/img/header.jpeg}" as="image" />
 	<link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
@@ -22,6 +22,7 @@
 			<ion-icon name="heart-outline"></ion-icon>
 			<span class="heartNum">[[${recipe.favoriteNumber}]]</span>
 		</div>
+		<span>[[${recipe.recipeName}]]</span>
 		<span><img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像" width="300px"/></span>
 		<div th:if="${!#lists.isEmpty(recipe.tags)}" th:each="tag : ${recipe.tags}">
 			<a th:href="|/serch/tag?tag=${tag.tagId}|">#[[${tag.name}]]</a>
