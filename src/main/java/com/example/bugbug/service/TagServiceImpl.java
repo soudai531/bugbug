@@ -59,6 +59,4 @@ public class TagServiceImpl implements TagService {
     public Tag getTag(String name) {
     	 return tagRepository.findByName(name);
     }
-
-
 }

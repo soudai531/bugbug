@@ -41,6 +41,7 @@ public class AccountServiceImpl implements AccountService{
     
 
     // ユーザー情報1件取得
+    @Override
     public User findUserId(int id){
         Optional<User> user= userRepository.findById(id);
         return user.get();

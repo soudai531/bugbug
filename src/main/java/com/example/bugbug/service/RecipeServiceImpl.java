@@ -78,7 +78,6 @@ public class RecipeServiceImpl implements RecipeService {
         return new ArrayList<>();
     }
 
-
     /**
      * レシピ情報からレシピDTOを作成する
      */
@@ -174,9 +173,7 @@ public class RecipeServiceImpl implements RecipeService {
         					,null,form.getExplanation(),form.getPoint(),image_blurred,0,date,0);
     	return saveRecipe(recipe);
     }
-    
-    
-    
+
     /**
      * レシピ画像の登録
      * @param recipe_id 登録するレシピのID

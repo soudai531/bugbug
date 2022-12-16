@@ -11,7 +11,9 @@ import lombok.RequiredArgsConstructor;
 public class FavoriteServiceImpl implements FavoriteService{
 	
 	private final FavoriteRepository favoriteRepository;
+
 	//レシピのお気に入り登録数の取得
+	@Override
 	public int getFavorite(int recipe_id) {
 		return favoriteRepository.countFavorite(recipe_id);
 	}
