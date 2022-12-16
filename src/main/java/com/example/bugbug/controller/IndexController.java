@@ -26,7 +26,7 @@ public class IndexController {
     public String viewIndex(Model model){
     	boolean loginState = true;
     	if(session.getAttribute("user_id") == null) {
-    		loginState = true;
+    		loginState = false;
     		model.addAttribute("loginState", loginState);
     	}else {
     		loginState = true;
