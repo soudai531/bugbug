@@ -24,7 +24,7 @@ public class RecipeDto {
     private int favoriteNumber;
 
     // タグ
-    private List<Tag> tags = new ArrayList<>();;
+    private List<Tag> tags = new ArrayList<>();
 
     /**
      * コンストラクタ

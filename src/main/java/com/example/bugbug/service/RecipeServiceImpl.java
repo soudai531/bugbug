@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.sql.Date;
 
 import javax.servlet.http.HttpSession;
+
+import com.example.bugbug.service.dto.RecipeDetailDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,6 +45,7 @@ public class RecipeServiceImpl implements RecipeService {
     private final FavoriteRepository favoriteRepository;
     private final TagService tagService;
     private final AccountService accountService;
+    private final FavoriteService favoriteService;
     private final DateComponent dateComponent;
     
     @Autowired
@@ -62,7 +65,7 @@ public class RecipeServiceImpl implements RecipeService {
         List<RecipeDto> recipeDtoList = new ArrayList<>();
         //　レシピをDTOに詰め替える
         for(Recipe recipe :recipes) {
-            recipeDtoList.add(repackDto(recipe));
+            recipeDtoList.add(repackRecipeDto(recipe));
         }
         return recipeDtoList;
     }
@@ -80,7 +83,7 @@ public class RecipeServiceImpl implements RecipeService {
      * レシピ情報からレシピDTOを作成する
      */
     @Override
-    public RecipeDto repackDto(Recipe recipe){
+    public RecipeDto repackRecipeDto(Recipe recipe){
         RecipeDto recipeDto = new RecipeDto(recipe);
         // レシピについているタグIDを取得
         List<RecipeTag> recipeTags = recipeTagRepository.getRecipeTagsId(recipe.getRecipeId());
@@ -95,6 +98,28 @@ public class RecipeServiceImpl implements RecipeService {
         int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
         recipeDto.ofFavorite(favoriteNum);
         return recipeDto;
+    }
+
+    // レシピIdからレシピ詳細情報を取得する
+    @Override
+    public RecipeDetailDTO getRecipeDetail(int recipeId) {
+        //レシピ詳細情報の取得
+		Optional<Recipe> recipe = getRecipe(recipeId);
+        // レシピIDからタグのリストを取得
+		List<Tag> tags = tagService.getTagsForRecipeId(recipeId);
+        // 手順エンティティを取得
+		List<RecipeProcedure> procedures = getProcedure(recipeId);
+        // 材料エンティティを取得
+		List<RecipeMaterial> materials = getMaterial(recipeId);
+        // ユーザーエンティティを取得
+		User user = accountService.findUserId(recipe.get().getUserId());
+        // お気に入り数を取得
+		int favorite = favoriteService.getFavorite(recipeId);
+        // Todo コメントの取得
+
+        // レシピ情報をレシピ詳細DTOに詰め変える
+        RecipeDetailDTO recipeDetailDTO = new RecipeDetailDTO(recipe.get(),user,favorite,tags,procedures,materials);
+        return recipeDetailDTO;
     }
 
     //レシピ一件取得
@@ -195,7 +220,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
    
    //材料の登録
-    @Override
+   @Override
    public void saveMaterial(int recipe_id,List<String> materials,List<String> amounts) {
 	   //材料リストの要素がある間
 	   for(int i=0;i < materials.size();i++) {
@@ -211,7 +236,7 @@ public class RecipeServiceImpl implements RecipeService {
    }
    
    //手順の登録
-    @Override
+   @Override
    public void saveProcedure(int recipe_id,List<MultipartFile> images,List<String> contexts) {
 	   //imageリストに要素がある間
 	   for(int i=0;i<images.size();i++) {

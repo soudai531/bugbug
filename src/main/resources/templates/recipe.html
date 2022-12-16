@@ -13,41 +13,37 @@
 	<!-- 各ページCSS -->
 <body>
 	<div>
-		<a th:href="|/users/${user.userId}|">[[${user.name}]]</a>
-		<span>[[${recipe.name}]]</span>
+		<a th:href="|/users/${recipe.postUserId}|">
+			<img th:src="|/images/user-icons/${recipe.postUserImage}|" alt="ユーザーアイコン" width="50px"/>
+			<span>[[${recipe.postUserName}]]</span>
+		</a>
 		<span>[[${recipe.regDateOn}]]</span>
 		<div class="heartBtn">
 			<ion-icon name="heart-outline"></ion-icon>
-			<span class="heartNum">[[${favorite}]]</span>
+			<span class="heartNum">[[${recipe.favoriteNumber}]]</span>
 		</div>
-		<img th:src="|/images/recipe-images/${recipe.image}|" alt="レシピ画像" />
-		<div th:if="${!#lists.isEmpty(tags)}" th:each="tag : ${tags}">
-			<a th:href="|/serch/tag?tag=${tag.tagId}|">[[${tag.name}]]</a>
+		<span><img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像" width="300px"/></span>
+		<div th:if="${!#lists.isEmpty(recipe.tags)}" th:each="tag : ${recipe.tags}">
+			<a th:href="|/serch/tag?tag=${tag.tagId}|">#[[${tag.name}]]</a>
 		</div>
-		<div>
-			<span>材料</span>
-			<th:block th:if="${!#lists.isEmpty(materials)}" th:each="material : ${materials}">
-				<span>[[${material.name}]]</span>
-				<span>[[${material.amount}]]</span>
-			</th:block>
+		<div th:if="${!#lists.isEmpty(recipe.materials)}" th:each="material : ${recipe.materials}">
+			<span>[[${material.name}]]</span>
+			<span>[[${material.amount}]]</span>
 		</div>
-
 		<div>
 			<span>説明</span>
 			<span>[[${recipe.explanation}]]</span>
 		</div>
-
 		<div>
 			<span>コツやポイント</span>
 			<span>[[${recipe.point}]]</span>
 		</div>
-
 		<span>作り方</span>
-		<th:block th:if="${!#lists.isEmpty(procedures)}" th:each="procedure,status : ${procedures}">
+		<th:block th:if="${!#lists.isEmpty(recipe.procedures)}" th:each="procedure,status : ${recipe.procedures}">
 			<div>
 				<span>[[${status.index}+1]]</span>
-				<img th:src="|/images/recipe-procedure-images/${procedures.image}|" alt="手順画像" />
-				<span>[[${procedures.content}]]</span>
+				<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像" width="300px" />
+				<span>[[${procedure.content}]]</span>
 			</div>
 		</th:block>
 	</div>

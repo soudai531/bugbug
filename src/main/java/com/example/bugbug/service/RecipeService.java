@@ -7,6 +7,7 @@ import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeMaterial;
 import com.example.bugbug.entity.RecipeProcedure;
 import com.example.bugbug.entity.Tag;
+import com.example.bugbug.service.dto.RecipeDetailDTO;
 import com.example.bugbug.service.dto.RecipeDto;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +24,10 @@ public interface RecipeService {
     // おすすめレシピを20件ずつ取得
     List<RecipeDto> getRecommendRecipe(int page);
 
-    RecipeDto repackDto(Recipe recipe);
+    RecipeDto repackRecipeDto(Recipe recipe);
+
+    // レシピIdからレシピ詳細情報を取得する
+    RecipeDetailDTO getRecipeDetail(int recipeId);
 
     // 特定のレシピの取得
     Optional<Recipe> getRecipe(int recipeId);
