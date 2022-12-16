@@ -61,6 +61,7 @@ public class AccountController {
     public String createAcount(@Validated UserRegisterForm f, BindingResult bindingResult, Model model) {
         // validation
         if (bindingResult.hasErrors()) {
+        	model.addAttribute("msg", "エラー");
             return "signup";
         }
         // パスワードのハッシュ化
