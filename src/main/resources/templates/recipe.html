@@ -1,49 +1,151 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div>ヘッダー表示部分</div>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>bugbug</title>
+    <link rel="icon" th:href="@{/img/logoicon.png}" />
+    <link rel="preload" th:href="@{/img/header.jpeg}" as="image" />
+    <link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
+    <!-- 共通CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- 各ページCSS -->
+    <link rel="stylesheet" th:href="@{/css/recipe.css}" />
+  </head>
+  <body>
+    <header th:replace="header"></header>
 
-<div>
-	<span>[[${user.name}]]</span>
-		<span>[[${recipe.name}]]</span>
-		<span>[[${recipe.regDateOn}]] [[${favorite}]]</span>
-		<img th:src="|/images/recipe-images/${recipe.image}|" alt="レシピ画像">
-		<div th:if="${!#lists.isEmpty(tags)}" th:each="tag : ${tags}">
-			<a th:href="|/serch/tag?tag=${tag.tagId}|">[[${tag.name}]]</a>
-		</div>
-		<div>
-			<h3>材料</h3>
-			<th:block th:if="${!#lists.isEmpty(materials)}" th:each="material : ${materials}">
-				<p>[[${material.name}]] [[${material.amount}]]</p>
-			</th:block>
-		</div>
-		
-		<div>
-			<h3>説明</h3>
-			<p>[[${recipe.explanation}]]</p>
-		</div>
-		
-		<div>
-			<h3>コツやポイント</h3>
-			<p>[[${recipe.point}]]</p>
-		</div>
-		
-		<h2>作り方</h2>
-		<th:block th:if="${!#lists.isEmpty(procuderes)}" th:each="procedure,status : ${procuderes}">
-			<div>
-				<span>[[${status.index}+1]]</span>
-				<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像">
-				<span>[[${procedure.content}]]</span>
-			</div>
-		</th:block>
-		
-		
-		
-		
-	
-</body>
+    <!-- メインコンテンツ -->
+    <main class="main">
+      <section class="recipeDetail">
+        <div class="recipeDetail__userAction">
+          <a class="recipeDetail__user" th:href="|/users/${user.userId}|">
+            <div class="recipeDetail__user__icon">
+              <img th:src="|/images/user-icons/${user.icon}|" />
+            </div>
+            <span class="recipeDetail__user__name">[[${user.name}]]</span>
+          </a>
+          <div class="heartBtn">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span class="heartNum">[[${favorite}]]</span>
+          </div>
+        </div>
+        <th:block th:if="true">
+          <!-- /* ログイン済みかつ自分のレシピの場合編集・削除ボタンを表示(未実装) */ -->
+          <!-- /* とりあえず今は常時表示しておく */ -->
+          <div class="recipeDetail__recipeAction">
+            <div class="recipeDetail__recipeAction__btns">
+              <a class="recipeDetail__recipeAction__btns__btn recipeDetail__recipeAction__btns__btn--edit" href="edit-recipe.html">編集</a>
+              <form action="mypage.html" method="post">
+                <button class="recipeDetail__recipeAction__btns__btn recipeDetail__recipeAction__btns__btn--delete" type="button">削除</button>
+              </form>
+            </div>
+            <span class="recipeDetail__date">レシピ作成日 : [[${recipe.regDateOn}]]</span>
+          </div>
+        </th:block>
+        <div class="recipeDetail__recipeName">「[[${recipe.name}]]」</div>
+        <div class="recipeDetail__image">
+          <img th:src="|/images/recipe-images/${recipe.image}|" />
+        </div>
+        <div class="recipeDetail__tags">
+          <th:block th:if="${!#lists.isEmpty(tags)}" th:each="tag : ${tags}">
+            <a class="recipeDetail__tag" th:href="|/serch?tag=${tag.tagId}|">
+              <span class="recipeDetail__tag__name"><span>#</span>[[${tag.name}]]</span>
+            </a>
+          </th:block>
+        </div>
+        <div class="recipeDetail__layout1">
+          <div class="recipeDetail__materials">
+            <span class="recipeDetail__itemTitle">材料</span>
+            <hr class="recipeDetail__itemTitle__line" />
+            <ul>
+              <th:block th:if="${!#lists.isEmpty(materials)}" th:each="material : ${materials}">
+                <li>
+                  <span class="material__name">[[${material.name}]]</span>
+                  <span class="material__amount">[[${material.amount}]]</span>
+                </li>
+              </th:block>
+            </ul>
+          </div>
+          <div class="recipeDetail__layout2">
+            <div class="recipeDetail__expl">
+              <span class="recipeDetail__itemTitle">説明</span>
+              <hr class="recipeDetail__itemTitle__line" />
+              [[${recipe.explanation}]]
+            </div>
+            <div class="recipeDetail__points">
+              <span class="recipeDetail__itemTitle">コツやポイント</span>
+              <hr class="recipeDetail__itemTitle__line" />
+              [[${recipe.point}]]
+            </div>
+          </div>
+        </div>
+        <div class="recipeDetail__howto">
+          <span class="recipeDetail__itemTitle">作り方</span>
+          <hr class="recipeDetail__itemTitle__line" />
+          <div class="recipeDetail__howto__list">
+            <th:block th:if="${!#lists.isEmpty(procuderes)}" th:each="procedure,status : ${procuderes}">
+							<div class="howto">
+								<span class="howto__num">[[${status.index}+1]]</span>
+								<div class="howto__item">
+									<div class="howto__image">
+										<th:block th:if="${procedure.image != null}">
+											<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像" />
+										</th:block>
+									</div>
+									<div class="howto__text">[[${procedure.content}]]</div>
+								</div>
+							</div>
+            </th:block>
+          </div>
+        </div>
+				<!-- /* コメント取得(未実装) */ -->
+				<div class="recipeDetail__comments">
+          <span class="recipeDetail__itemTitle">コメント</span>
+          <hr class="recipeDetail__itemTitle__line"/>
+          <div class="recipeDetail__comments__item">
+            <a class="recipeDetail__comments__user" href="user.html">
+              <span class="recipeDetail__comments__user__icon">
+                <img th:src="|/images/user-icons/recipe4.jpg|" alt="">
+              </span>
+              <span class="recipeDetail__comments__user__name">user_name</span>
+            </a>
+            <div class="recipeDetail__comments__text">コメントコメントントｖｖｖ</div>
+            <div class="recipeDetail__comments__date">2022/12/XX</div>
+          </div>
+          <div class="recipeDetail__comments__item">
+            <a class="recipeDetail__comments__user" href="user.html">
+              <span class="recipeDetail__comments__user__icon">
+                <img th:src="|/images/user-icons/recipe4.jpg|" alt="">
+              </span>
+              <span class="recipeDetail__comments__user__name">user_name</span>
+            </a>
+            <div class="recipeDetail__comments__text">コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントｖｖｖ</div>
+            <div class="recipeDetail__comments__date">2022/12/XX</div>
+          </div>
+          <div class="recipeDetail__comments__item">
+            <a class="recipeDetail__comments__user" href="user.html">
+              <span class="recipeDetail__comments__user__icon">
+                <img th:src="|/images/user-icons/recipe4.jpg|" alt="">
+              </span>
+              <span class="recipeDetail__comments__user__name">user_name</span>
+            </a>
+            <div class="recipeDetail__comments__text">コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントｖｖｖ</div>
+            <div class="recipeDetail__comments__date">2022/12/XX</div>
+          </div>
+          <form class="recipeDetail__comments__form" action="./recipe.html" method="post">
+            <input type="text" placeholder="コメントを入力"/>
+            <button class="recipeDetail__comments__form__btn" type="submit">送信</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer th:replace="footer"></footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
 </html>
