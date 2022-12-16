@@ -1,13 +1,13 @@
 <!-- フッター -->
 <footer class="footer">
   <section class="footer__logo">
-    <img class="logo__img" th:src="@{/img/logo_white.png}" alt="" srcset="" />
+    <img class="logo__img" th:src="@{/img/logo_white.png}" />
   </section>
   <ul class="footer__nav">
-    <li><a href="index.html">トップ</a></li>
-    <li><a href="login.html">ログイン</a></li>
-    <li><a href="register-acount.html">会員登録</a></li>
-    <li><a href="">お問い合わせ</a></li>
+    <li><a th:href="@{/index}">トップ</a></li>
+    <li><a th:href="@{/login/form}">ログイン</a></li>
+    <li><a th:href="@{/signup/form}">会員登録</a></li>
+    <li><a th:href="@{/index}">お問い合わせ</a></li>
   </ul>
   <section class="footer_copyright">© 2022 bugbug.</section>
 </footer>
