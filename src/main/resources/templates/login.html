@@ -20,9 +20,15 @@
         <!-- ログインフォーム -->
         <form class="login__form" th:action="@{/login}" th:object="${LoginForm}" method="post" >
           <!--メールアドレス-->
-          <input type="email" name="mail" class="login__form__input" placeholder="メールアドレス" autocomplete="on" />
+          <input type="email" name="mail" class="login__form__input" placeholder="メールアドレス" autocomplete="on" required/>
           <!--パスワード-->
-          <input type="password" name="password" class="login__form__input" placeholder="パスワード" />
+          <input type="password" name="password" class="login__form__input" placeholder="パスワード" required/>
+          <th:block th:if="${msg}">
+            <span class="login__form__errorMessage">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              メールアドレスまたはパスワードが違います
+            </span>
+          </th:block>
           <button class="login__form__btn" type="submit"><span>ログイン</span></button>
         </form>
         <a th:href="@{/signup/form}" class="no-acaunt">アカウントをお持ちでない方はこちら</a>
