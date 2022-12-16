@@ -27,7 +27,7 @@
           <th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
             <section class="popRecipe__list__item recipeSection" th:data-recipe-href="|/recipes/${recipe.recipeId}|">
               <div class="popRecipe__list__item__img recipeImage">
-                <img img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像" />
+                <img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像" />
               </div>
               <div class="popRecipe__list__item__recipeName">
                 <span>[[${recipe.recipeName}]]</span>
