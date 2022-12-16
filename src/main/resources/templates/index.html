@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <title>bugbug</title>
     <link rel="icon" th:href="@{/img/logoicon.png}" />
     <link rel="preload" th:href="@{/img/header.jpeg}" as="image" />
@@ -25,9 +25,9 @@
         <section class="popRecipe__list">
           <!-- レシピ -->
           <th:block th:if="${!#lists.isEmpty(recipes)}" th:each="recipe : ${recipes}">
-            <section th:href="|/recipes/${recipe.recipeId}|" class="popRecipe__list__item">
-              <div class="popRecipe__list__item__img">
-                <img img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像" />
+            <section class="popRecipe__list__item recipeSection" th:data-recipe-href="|/recipes/${recipe.recipeId}|">
+              <div class="popRecipe__list__item__img recipeImage">
+                <img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像" />
               </div>
               <div class="popRecipe__list__item__recipeName">
                 <span>[[${recipe.recipeName}]]</span>
@@ -35,11 +35,11 @@
               <div class="popRecipe__list__item__tags">
                 <th:block th:each="tag : ${recipe.tags}">
                   <a class="popRecipe__list__item__tag" th:href="|/serch?tag=${tag.tagId}|">
-                    <span th:data-url="|/serch?tag=${tag.tagId}|" class="popRecipe__list__item__tag__name"><span>#</span>[[${tag.name}]]</span>
+                    <span class="popRecipe__list__item__tag__name"><span>#</span>[[${tag.name}]]</span>
                   </a>
                 </th:block>
               </div>
-              <div class="popRecipe__list__item__userAction" th:data-url="|/users/${recipe.postUserId}|">
+              <div class="popRecipe__list__item__userAction">
                 <a class="popRecipe__list__item__user" th:href="|/users/${recipe.postUserId}|">
                   <span class="popRecipe__list__item__user__icon">
                     <img th:src="|/images/user-icons/${recipe.postUserImage}|" alt="ユーザーアイコン" />
