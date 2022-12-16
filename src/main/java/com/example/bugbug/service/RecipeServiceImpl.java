@@ -14,44 +14,43 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.bugbug.common.DateComponent;
 import com.example.bugbug.config.AppConfig;
+
+
+import java.util.Optional;
+
+
+import lombok.AllArgsConstructor;
+
+import com.example.bugbug.common.DateComponent;
+import com.example.bugbug.config.AppConfig;
 import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeMaterial;
 import com.example.bugbug.entity.RecipeProcedure;
 import com.example.bugbug.entity.RecipeTag;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
-
-
-
-
-
 import com.example.bugbug.form.RecipeRegisterForm;
+
+import com.example.bugbug.repository.FavoriteRepository;
+import com.example.bugbug.repository.RecipeRepository;
 import com.example.bugbug.repository.MaterialRepository;
 import com.example.bugbug.repository.ProcedureRepository;
-import com.example.bugbug.repository.FavoriteRepository;
 import com.example.bugbug.repository.RecipeTagRepository;
 
-import com.example.bugbug.repository.RecipeRepository;
-import com.example.bugbug.repository.RecipeTagRepository;
 import com.example.bugbug.service.dto.RecipeDto;
 
-import lombok.AllArgsConstructor;
+
+
 
 @AllArgsConstructor
 @Service
 public class RecipeServiceImpl implements RecipeService {
-
-
-
-
-
 
     private final RecipeRepository recipeRepository;
     private final RecipeTagRepository recipeTagRepository;
     private final MaterialRepository materialRepository;
     private final ProcedureRepository procedureRepository;
     private final FavoriteRepository favoriteRepository;
-
     private final TagService tagService;
     private final AccountService accountService;
     private final DateComponent dateComponent;
@@ -61,6 +60,7 @@ public class RecipeServiceImpl implements RecipeService {
     
     // 画像の保存場所を保持しているBean
     private final AppConfig appConfig;
+    
 
     /**
      *レシピをすべて取得
@@ -75,7 +75,7 @@ public class RecipeServiceImpl implements RecipeService {
         for(Recipe recipe :recipes) {
             recipeDtoList.add(repackDto(recipe));
         }
-        System.out.println(recipeDtoList);
+        
         return recipeDtoList;
     }
 
@@ -103,12 +103,36 @@ public class RecipeServiceImpl implements RecipeService {
             recipeDto.ofTag(tags);
             User user = accountService.findUserId(recipe.getUserId());
             recipeDto.ofUser(user);
-            int favoriteNum = favoriteRepository.countFavorite(recipe.getRecipeId());
-            System.out.println(recipe.getRecipeId() + recipe.getName() + ":" + favoriteNum);
+            int favoriteNum = favoriteRepository.countFavorite(recipe.getUserId());
             recipeDto.ofFavorite(favoriteNum);
             return recipeDto;
     }
+
+    //レシピ一件取得
+    public Optional<Recipe> getRecipe(int recipeId) {
+    	return recipeRepository.findById(recipeId);
+    }
     
+    //レシピのタグを表示
+    public List<Tag> getRecipeTag(int recipeId){
+    	return recipeTagRepository.getRecipeTagsName(recipeId);
+    }
+    
+    //レシピ手順の取得
+    public List<RecipeProcedure> getProcedure(int recipeId){
+    	return procedureRepository.getProceduresByID(recipeId);
+    }
+    
+  //レシピ材料の取得
+    public List<RecipeMaterial> getMaterial(int recipeId){
+    	return materialRepository.getMaterialsByID(recipeId);
+    }
+    
+    //ビュー数の増加
+    public void addBrow(int recipeId) {
+    	recipeRepository.BroweCounta(recipeId);
+    }
+
     //レシピ登録
     public Recipe saveRecipe(Recipe recipe) {
     	return recipeRepository.save(recipe);
@@ -200,9 +224,7 @@ public class RecipeServiceImpl implements RecipeService {
    }
    
    /**
-    * レシピ画像の登録
-    * @param recipe_id 登録するレシピのID
-    * @return 画像ファイル名
+    * 手順画像の登録
     */
    public String saveProcedureImage(MultipartFile file, int ProcedureId){
        // IDのフォーマット(0埋め)
@@ -225,4 +247,8 @@ public class RecipeServiceImpl implements RecipeService {
        procedureRepository.updateProcedureImage(fileName,ProcedureId);
        return fileName;
    }
+    
+    
+   
+   
 }

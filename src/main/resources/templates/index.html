@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
@@ -16,9 +16,8 @@
 </head>
 
 <body>
-
     <header th:replace="header"></header>
-
+    <!-- メインコンテンツ -->
     <main class="main">
         <section class="popRecipe">
             <div class="popRecipe__title">
@@ -45,14 +44,14 @@
                         <div class="popRecipe__list__item__userAction" th:data-url="|/users/${recipe.postUserId}|">
                             <a class="popRecipe__list__item__user" th:href="|/users/${recipe.postUserId}|">
                                 <span class="popRecipe__list__item__user__icon">
-                  <img th:src="|/images/user-icons/${recipe.postUserImage}|" alt="ユーザーアイコン" />
-                </span>
+                    <img th:src="|/images/user-icons/${recipe.postUserImage}|" alt="ユーザーアイコン" />
+                  </span>
                                 <span class="popRecipe__list__item__user__name">[[${recipe.postUserName}]]</span>
                             </a>
                             <div class="heartBtn">
                                 <form th:action="|/recipe/favorite/add/${recipe.recipeId}|" method="post"></form>
-                                	<ion-icon name="heart-outline"></ion-icon>
-                                	<span class="heartNum">[[${recipe.favoriteNumber}]]</span>
+                                <ion-icon name="heart-outline"></ion-icon>
+                                <span class="heartNum">[[${recipe.favoriteNumber}]]</span>
                                 </form>
                             </div>
                         </div>
