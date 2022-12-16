@@ -8,6 +8,7 @@ import { setRecipeHeartBtn } from "./module/recipeHeartBtn";
 import { setRecipeImageFilterBtn } from "./module/recipeImageFilterBtn";
 import { setRecipeHowtoImage } from "./module/page/recipe/pageRecipe";
 
+
 setRecipeSearchForm();
 
 /* PAGE : index */
