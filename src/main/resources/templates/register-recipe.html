@@ -1,68 +1,98 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>レシピ登録 : bugbug</title>
-</head>
-<body>
-	<header th:replace="header"></header>
-	<div>
-		<form th:action="@{/recipes/register}" method="post"  enctype="multipart/form-data" th:object="${recipeRegisterForm}">
-			<div>
-				<span>レシピ名</span>
-				<input type="text" placeholder="レシピ名を入力" th:field="*{name}">
-			</div>
-			<div class="tag_area">
-				<span>タグ</span>
-				<input type="text" th:field="*{tags}">
-				<input type="text" th:field="*{tags}">
-			</div>
-			<div>
-				<span>レシピ画像</span>
-				<input type="file" th:field="*{recipeImage}" accept="image/jpeg,image/png">
-				<span>説明</span>
-				<input type="text" th:field="*{explanation}">
-				<span>コツやポイント</span>
-				<input type="text" th:field="*{point}">
-			</div>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>bugbug</title>
+    <link rel="icon" th:href="@{/img/logoicon.png}" />
+    <link rel="preload" th:href="@{/img/header.jpeg}" as="image" />
+    <link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
+    <!-- 共通CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- 各ページCSS -->
+    <link rel="stylesheet" th:href="@{/css/registerRecipe.css}" />
+  </head>
+  <body>
+    <header th:replace="header"></header>
 
-			<div class="material_area">
-				<span>材料</span>
-				<div class="material">
-					<input type="text" th:field="*{materials}" placeholder="材料名">
-					<input type="text" th:field="*{amounts}" placeholder="数量">
-					<button>削除ボタン</button>
-					<input type="text" th:field="*{materials}" placeholder="材料名">
-					<input type="text" th:field="*{amounts}" placeholder="数量">
-					<button>削除ボタン</button>
-				</div>
-			</div>
-			<div class="procedure_area">
-				<span>作り方</span>
-				<div class="procedure_item">
-					<span>1</span>
-					<button>削除ボタン</button>
-					<input type="file" th:field="*{procedureImages}" accept="image/jpeg,image/png">
-					<input type="text" th:field="*{contexts}" placeholder="作り方">
-				</div>
-				<div class="procedure_item">
-					<span>2</span>
-					<button>削除ボタン</button>
-					<input type="file" th:field="*{procedureImages}" accept="image/jpeg,image/png">
-					<input type="text" th:field="*{contexts}" placeholder="作り方">
-				</div>
-			</div>
-			<div>
-				<span>虫が苦手な人への写真の非表示</span>
-				<input type="checkbox" value="1" th:field="*{image_blurred}">
-				<input type="submit" value="登録">
-			</div>
+    <!-- メインコンテンツ -->
+    <main class="main">
+      <form class="registerRecipe registerForm" name="registerRecipeForm" th:action="@{/recipes/register}" enctype="multipart/form-data" method="post" th:object="${recipeRegisterForm}">
+        <div class="registerRecipe__recipeName">
+          <span class="registerRecipe__itemTitle">レシピ名</span>
+          <hr class="registerRecipe__itemTitle__line" />
+          <input class="registerRecipe__name" type="text" th:field="*{name}" placeholder="レシピ名を入力" />
+        </div>
+        <div class="registerRecipe__image">
+          <label class="registerRecipe__image__input__label">
+            <span class="registerRecipe__image__input__label__text">画像を選択</span>
+            <input class="registerRecipe__image__input" type="file" th:field="*{recipeImage}" accept="image/jpeg,image/png" />
+          </label>
+          <span>レシピ画像プレビュー</span>
+          <img class="registerRecipe__image__preview" src="" alt="" />
+        </div>
+        <div class="registerRecipe__tags">
+          <span class="registerRecipe__itemTitle">タグ</span>
+          <hr class="registerRecipe__itemTitle__line" />
+          <div class="tag__create__area">
+            <div class="tag__select">
+              <button class="tag__select__btn" type="button">一覧から選ぶ</button>
+              <div class="tag__select__list hidden">
+                <ul>
+                  <li data-tag-value="sample01">sample01</li>
+                  <li data-tag-value="sample02">sample02</li>
+                  <li data-tag-value="sample03">sample03</li>
+                  <li data-tag-value="sample04">sample04</li>
+                  <li data-tag-value="sample05">sample05</li>
+                </ul>
+              </div>
+            </div>
+            <div class="tag__self">
+              <input class="tag__input" type="text" placeholder="タグ名を入力" />
+              <button class="tag__addBtn" type="button">追加</button>
+            </div>
+          </div>
+        </div>
+        <div class="registerRecipe__layout1">
+          <div class="registerRecipe__materials">
+            <span class="registerRecipe__itemTitle">材料</span>
+            <hr class="registerRecipe__itemTitle__line" />
+            <button class="material__addBtn" type="button">材料を追加</button>
+            <ul class="registerRecipe__materials__list"></ul>
+          </div>
+          <div class="registerRecipe__layout2">
+            <div class="registerRecipe__expl">
+              <span class="registerRecipe__itemTitle">説明</span>
+              <hr class="registerRecipe__itemTitle__line" />
+              <textarea th:field="*{explanation}" placeholder="レシピの説明を入力"></textarea>
+            </div>
+            <div class="registerRecipe__points">
+              <span class="registerRecipe__itemTitle">コツやポイント</span>
+              <hr class="registerRecipe__itemTitle__line" />
+              <textarea th:field="*{point}" placeholder="コツやポイントを入力"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="registerRecipe__howto">
+          <span class="registerRecipe__itemTitle">作り方</span>
+          <hr class="registerRecipe__itemTitle__line" />
+          <button class="howto__addBtn" type="button">作り方を追加</button>
+          <div class="registerRecipe__howto__list"></div>
+        </div>
+        <div class="registerRecipe__filterCheck">
+          <span class="registerRecipe__itemTitle">虫が苦手な人への写真の非表示</span>
+          <hr class="registerRecipe__itemTitle__line" />
+          <input class="registerRecipe__filterCheck__input" type="checkbox" value="1" th:field="*{image_blurred}" id="registerRecipe__filterCheck__input" />
+          <label class="registerRecipe__filterCheck__label" for="registerRecipe__filterCheck__input"></label>
+        </div>
+        <button class="registerRecipe__submitBtn" type="button"><span>レシピ登録</span></button>
+      </form>
+    </main>
 
-		</form>
-	</div>
-	<footer th:replace="footer"></footer>
-	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-	<script th:src="@{/js/main.js}"></script>
-</body>
+    <footer th:replace="footer"></footer>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
 </html>
