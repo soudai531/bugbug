@@ -1,5 +1,6 @@
 package com.example.bugbug.controller;
 
+import com.example.bugbug.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import com.example.bugbug.entity.Recipe;
-import com.example.bugbug.service.*;
 import com.example.bugbug.form.RecipeRegisterForm;
 import com.example.bugbug.service.dto.RecipeDetailDTO;
 
@@ -16,10 +16,7 @@ import com.example.bugbug.service.dto.RecipeDetailDTO;
 public class RecipeController {
 
     private final RecipeService recipeService;
-    private final AccountService accountService;
-    private final FavoriteService favoriteService;
 	private final AuthService authService;
-	private final TagService tagService;
 
 	//レシピ詳細画面の表示
 	@GetMapping("recipes/{recipeId}")
