@@ -22,4 +22,9 @@ public class FavoriteServiceImpl implements FavoriteService{
 	public int countFavorite(int recipe_id) {
 		return favoriteRepository.countFavorite(recipe_id);
 	}
+	
+	//お気に入りに登録
+	public void addFavorite(Favorite favorite) {
+		favoriteRepository.save(favorite);
+	}
 }

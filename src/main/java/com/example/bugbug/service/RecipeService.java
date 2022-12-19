@@ -3,21 +3,12 @@ package com.example.bugbug.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeMaterial;
 import com.example.bugbug.entity.RecipeProcedure;
 import com.example.bugbug.entity.Tag;
-
-
-import org.springframework.web.multipart.MultipartFile;
-
-
-import com.example.bugbug.form.RecipeRegisterForm;
-import com.example.bugbug.service.dto.RecipeDto;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.form.RecipeRegisterForm;
 import com.example.bugbug.service.dto.RecipeDto;
 
@@ -25,6 +16,9 @@ public interface RecipeService {
 
     // レシピをすべて取得
     List<RecipeDto> getAllRecipe();
+    
+    // 特定のレシピの取得
+    Optional<Recipe> getRecipe(int recipeId);
 
     // おすすめレシピを20件ずつ取得
     List<RecipeDto> getRecommendRecipe(int page);

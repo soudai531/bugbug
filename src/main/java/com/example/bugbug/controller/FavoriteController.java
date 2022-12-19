@@ -23,6 +23,7 @@ public class FavoriteController {
 	private final FavoriteService favoriteService;
 	private final DateComponent dateComponent;
 	
+	//お気に入りに登録
 	@PostMapping("/recipe/favorite/add/*")
 	public int addFavorite(int recipe_id) {
 		Date date = dateComponent.getDate();

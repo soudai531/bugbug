@@ -116,6 +116,8 @@ window.addEventListener("load", () => {
   const hearts = document.querySelectorAll(".heartBtn");
   for (let el of hearts) {
     el.addEventListener("click", () => {
+	  const xhr = new XMLHttpRequest();
+	  xhr.open("POST", "");
       const ionicon = el.firstElementChild;
       const heartNum = el.lastElementChild;
       if (ionicon.name === "heart") {

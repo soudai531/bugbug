@@ -10,4 +10,8 @@ public interface FavoriteService {
 	
 	//お気に入り数の取得
 	public int countFavorite(int recipe_id);
+	
+	//お気に入りに登録
+	void addFavorite(Favorite favorite);
+	
 }
