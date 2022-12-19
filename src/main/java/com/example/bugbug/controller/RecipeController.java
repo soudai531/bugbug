@@ -31,6 +31,12 @@ public class RecipeController {
 	//レシピ詳細画面の表示
 	@GetMapping("recipes/{recipeId}")
 	public String viewRecipeDetail(@PathVariable("recipeId") int recipeId, Model model) {
+		//ログイン状態判定
+		boolean loginState = false;
+    	if(authService.isLogin()) {
+    		loginState = true;
+    	}
+    	model.addAttribute("loginState", loginState);
 		//レシピ詳細情報の取得
 		Optional<Recipe> recipe = recipeService.getRecipe(recipeId);
 		List<Tag> recipeTags = recipeService.getRecipeTag(recipeId);

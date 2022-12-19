@@ -18,7 +18,7 @@
       <div class="login">
         <h3 class="login__title">LOGIN</h3>
         <!-- ログインフォーム -->
-        <form class="login__form" th:action="@{/index}" th:object="${LoginForm}" method="post" >
+        <form class="login__form" th:action="@{/login}" th:object="${LoginForm}" method="post" >
           <!--メールアドレス-->
           <input type="email" name="mail" class="login__form__input" placeholder="メールアドレス" autocomplete="on" />
           <!--パスワード-->
