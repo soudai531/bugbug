@@ -100,7 +100,7 @@
 .signup__form__errorMessage {
   width: 100%;
   margin: 10px 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400px;
   font-family: "Noto Sans JP";
   letter-spacing: 1px;
@@ -110,7 +110,7 @@
   align-items: center;
 }
 .signup__form__errorMessage ion-icon {
-  font-size: 25px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;

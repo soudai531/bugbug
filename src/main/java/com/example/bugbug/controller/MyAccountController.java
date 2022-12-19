@@ -40,6 +40,10 @@ public class MyAccountController {
         model.addAttribute("userIcon", myAccountService.getMyIcon());
         // URL用のユーザーID
         model.addAttribute("userId", session.getAttribute("user_id"));
+        
+        /** 下記2つ仮で置いています。後で消してください  */
+        model.addAttribute("userMail", myAccountService.getMyMail());
+        model.addAttribute("userName", myAccountService.getMyUsername());
         return "mypage";
     }
 
