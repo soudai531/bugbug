@@ -20,6 +20,7 @@ import com.example.bugbug.common.DateComponent;
 import com.example.bugbug.entity.User;
 import com.example.bugbug.form.UserRegisterForm;
 import com.example.bugbug.service.AccountService;
+import com.example.bugbug.service.AuthService;
 import com.example.bugbug.validator.MailValidator;
 import com.example.bugbug.validator.PasswordValidator;
 
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AccountController {
 	private final DateComponent dateComponent;
     private final AccountService accountservice;
+    private final AuthService authService;
     private final PasswordValidator passValidator;
     private final MailValidator mailValidator;
 
@@ -54,7 +56,13 @@ public class AccountController {
     // 新規登録フォームへの遷移
     @RequestMapping("signup/form")
     public String viewAccountForm(@ModelAttribute UserRegisterForm f, Model model, RedirectAttributes redirectAttributes) {
-        return "signup";
+    	//ログイン状態判定
+    	boolean loginState = false;
+    	if(authService.isLogin()) {
+    		loginState = true;
+    	}
+    	model.addAttribute("loginState", loginState);
+    	return "signup";
     }
 
     // 新規アカウント登録処理

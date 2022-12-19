@@ -33,7 +33,13 @@ public class AuthController {
 
     // ログイン画面遷移
     @RequestMapping(value = "login/form")
-    public String viewLoginForm(RedirectAttributes redirectAttributes) {
+    public String viewLoginForm(RedirectAttributes redirectAttributes,Model model) {
+    	//ログイン状態判定
+    	boolean loginState = false;
+    	if(service.isLogin()) {
+    		loginState = true;
+    	}
+    	model.addAttribute("loginState", loginState);
         return "login";
     }
 

@@ -21,6 +21,12 @@ public class RecipeController {
 	//レシピ詳細画面の表示
 	@GetMapping("recipes/{recipeId}")
 	public String viewRecipeDetail(@PathVariable("recipeId") int recipeId, Model model) {
+		//ログイン状態判定
+    	boolean loginState = false;
+    	if(authService.isLogin()) {
+    		loginState = true;
+    	}
+    	model.addAttribute("loginState", loginState);
 		RecipeDetailDTO recipe = recipeService.getRecipeDetail(recipeId);
 		//モデルへの追加
 		model.addAttribute("recipe", recipe);
@@ -38,12 +44,17 @@ public class RecipeController {
     
 	//レシピ登録画面表示
 	@RequestMapping("/recipes/register/form")
-	public String viewRegisterRecipeForm() {
-	    //  ログイン状態判定
-        if (!authService.isLogin()) {
-            return "redirect:/login/form";
-        }
-		return "register-recipe";
+	public String viewRegisterRecipeForm(Model model) {
+		//ログイン状態判定
+    	boolean loginState = false;
+    	if(authService.isLogin()) {
+    		loginState = true;
+    		model.addAttribute("loginState", loginState);
+    		return "register-recipe";
+    	}else {
+    		model.addAttribute("loginState", loginState);
+    		return "redirect:/login/form";
+    	}
 	}
 
     @Transactional
