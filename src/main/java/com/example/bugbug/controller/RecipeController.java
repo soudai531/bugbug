@@ -59,12 +59,16 @@ public class RecipeController {
     
 	//レシピ登録画面表示
 	@RequestMapping("/recipes/register/form")
-	public String viewRegisterRecipeForm() {
+	public String viewRegisterRecipeForm(Model model) {
 	    //  ログイン状態判定
-        if (!authService.isLogin()) {
-            return "redirect:/login/form";
+		boolean loginState = false;
+        if (authService.isLogin()) {
+        	loginState = true;
+        	model.addAttribute("loginState", loginState);
+        	return "register-recipe";
         }
-		return "register-recipe";
+        model.addAttribute("loginState", loginState);
+		return "redirect:/login/form";
 	}
 
     @Transactional
