@@ -63,4 +63,30 @@ public class MyAccountServiceImpl implements MyAccountService{
         // ユーザーアイコンのファイル名を返す
         return user.get().getIcon();
     }
+    
+    /** 下記2つ仮で置いています。後で消してください　*/
+    
+    /**
+     * 自分のメールアドレスを取得する
+     */
+    public String getMyMail(){
+        // セッションからユーザーIDの取得
+        int userId = Integer.parseInt(session.getAttribute("user_id").toString());
+        // ユーザー情報を取得
+        Optional<User> user = userRepository.findById(userId);
+        // ユーザーアイコンのファイル名を返す
+        return user.get().getMail();
+    }
+    
+    /**
+     * 自分のユーザーネームを取得する
+     */
+    public String getMyUsername(){
+        // セッションからユーザーIDの取得
+        int userId = Integer.parseInt(session.getAttribute("user_id").toString());
+        // ユーザー情報を取得
+        Optional<User> user = userRepository.findById(userId);
+        // ユーザーアイコンのファイル名を返す
+        return user.get().getName();
+    }
 }

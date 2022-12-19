@@ -7,4 +7,11 @@ public interface MyAccountService {
 
     //アイコンのファイル名を取得
     String getMyIcon();
+    
+    /** 下記2つ仮で置いてます。後で消してください */
+    //メールアドレスを取得
+    String getMyMail();
+    
+    //ユーザーネームを取得
+    String getMyUsername();
 }
