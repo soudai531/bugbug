@@ -20,10 +20,12 @@ import com.example.bugbug.common.DateComponent;
 import com.example.bugbug.entity.User;
 import com.example.bugbug.form.UserRegisterForm;
 import com.example.bugbug.service.AccountService;
+import com.example.bugbug.service.AuthService;
 import com.example.bugbug.validator.MailValidator;
 import com.example.bugbug.validator.PasswordValidator;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 // アカウント登録用のコントローラー
 @RequiredArgsConstructor
@@ -31,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class AccountController {
 	private final DateComponent dateComponent;
     private final AccountService accountservice;
+    private final AuthService authService;
     private final PasswordValidator passValidator;
     private final MailValidator mailValidator;
 
@@ -38,30 +41,36 @@ public class AccountController {
     private HttpSession session;
 
     // Form初期設定エリア
-    @ModelAttribute
-    public UserRegisterForm InputSetUpForm() {
+    @ModelAttribute()
+    public UserRegisterForm UserRegisterSetUpForm() {
         return new UserRegisterForm();
     }
 
     // 自作バリデーションの導入
-    @InitBinder("inputForm")
+    @InitBinder("RecipeRegisterForm")
     public void initBinder(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(passValidator);
         webDataBinder.addValidators(mailValidator);
     }
 
     // 新規登録フォームへの遷移
-    @RequestMapping("sinup/form")
-    public String viewAcountForm() {
-        return "sinup";
+    @RequestMapping("signup/form")
+    public String viewAccountForm(@ModelAttribute UserRegisterForm f, Model model, RedirectAttributes redirectAttributes) {
+    	//ログイン状態判定
+    	boolean loginState = false;
+    	if(authService.isLogin()) {
+    		loginState = true;
+    	}
+    	model.addAttribute("loginState", loginState);
+    	return "signup";
     }
 
     // 新規アカウント登録処理
-    @PostMapping("sinup")
-    public String createAcount(@Validated UserRegisterForm f, BindingResult bindingResult, Model model) {
+    @PostMapping("signup")
+    public String createAccount(@Validated @ModelAttribute UserRegisterForm f, BindingResult bindingResult, Model model , RedirectAttributes redirectAttributes) {
         // validation
         if (bindingResult.hasErrors()) {
-            return "sinup";
+            return "signup";
         }
         // パスワードのハッシュ化
         String hash = accountservice.hash(f.getPassword());

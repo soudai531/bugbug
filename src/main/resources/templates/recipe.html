@@ -1,49 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width" />
+	<title>[[${recipe.recipeName}]] : bugbug</title>
+	<link rel="icon" th:href="@{/img/logoicon.png}" />
+	<link rel="preload" th:href="@{/img/header.jpeg}" as="image" />
+	<link rel="preload" th:href="@{/img/footer.jpg}" as="image" />
+	<!-- 共通CSS -->
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<!-- 各ページCSS -->
 <body>
-<div>ヘッダー表示部分</div>
-
-<div>
-	<span>[[${user.name}]]</span>
-		<span>[[${recipe.name}]]</span>
-		<span>[[${recipe.regDateOn}]] [[${favorite}]]</span>
-		<img th:src="|/images/recipe-images/${recipe.image}|" alt="レシピ画像">
-		<div th:if="${!#lists.isEmpty(tags)}" th:each="tag : ${tags}">
-			<a th:href="|/serch/tag?tag=${tag.tagId}|">[[${tag.name}]]</a>
+	<div>
+		<a th:href="|/users/${recipe.postUserId}|">
+			<img th:src="|/images/user-icons/${recipe.postUserImage}|" alt="ユーザーアイコン" width="50px"/>
+			<span>[[${recipe.postUserName}]]</span>
+		</a>
+		<span>[[${recipe.regDateOn}]]</span>
+		<div class="heartBtn">
+			<ion-icon name="heart-outline"></ion-icon>
+			<span class="heartNum">[[${recipe.favoriteNumber}]]</span>
+		</div>
+		<span>[[${recipe.recipeName}]]</span>
+		<span><img th:src="|/images/recipe-images/${recipe.recipeImage}|" alt="レシピ画像" width="300px"/></span>
+		<div th:if="${!#lists.isEmpty(recipe.tags)}" th:each="tag : ${recipe.tags}">
+			<a th:href="|/serch/tag?tag=${tag.tagId}|">#[[${tag.name}]]</a>
+		</div>
+		<div th:if="${!#lists.isEmpty(recipe.materials)}" th:each="material : ${recipe.materials}">
+			<span>[[${material.name}]]</span>
+			<span>[[${material.amount}]]</span>
 		</div>
 		<div>
-			<h3>材料</h3>
-			<th:block th:if="${!#lists.isEmpty(materials)}" th:each="material : ${materials}">
-				<p>[[${material.name}]] [[${material.amount}]]</p>
-			</th:block>
+			<span>説明</span>
+			<span>[[${recipe.explanation}]]</span>
 		</div>
-		
 		<div>
-			<h3>説明</h3>
-			<p>[[${recipe.explanation}]]</p>
+			<span>コツやポイント</span>
+			<span>[[${recipe.point}]]</span>
 		</div>
-		
-		<div>
-			<h3>コツやポイント</h3>
-			<p>[[${recipe.point}]]</p>
-		</div>
-		
-		<h2>作り方</h2>
-		<th:block th:if="${!#lists.isEmpty(procuderes)}" th:each="procedure,status : ${procuderes}">
+		<span>作り方</span>
+		<th:block th:if="${!#lists.isEmpty(recipe.procedures)}" th:each="procedure,status : ${recipe.procedures}">
 			<div>
 				<span>[[${status.index}+1]]</span>
-				<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像">
+				<img th:src="|/images/recipe-procedure-images/${procedure.image}|" alt="手順画像" width="300px" />
 				<span>[[${procedure.content}]]</span>
 			</div>
 		</th:block>
-		
-		
-		
-		
-	
+	</div>
 </body>
 </html>

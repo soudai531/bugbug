@@ -32,15 +32,20 @@ public class MyAccountController {
      */
     @RequestMapping("mypage")
     public String viewMypage(Model model) {
-        //  ログイン状態判定
-        if (!authService.isLogin()) {
-            return "redirect:/login/form";
-        }
-        // アイコン テスト表示
-        model.addAttribute("userIcon", myAccountService.getMyIcon());
-        // URL用のユーザーID
-        model.addAttribute("userId", session.getAttribute("user_id"));
-        return "mypage";
+    	//ログイン状態判定
+    	boolean loginState = false;
+    	if(authService.isLogin()) {
+    		loginState = true;
+    		model.addAttribute("loginState", loginState);
+    		// アイコン テスト表示
+            model.addAttribute("userIcon", myAccountService.getMyIcon());
+            // URL用のユーザーID
+            model.addAttribute("userId", session.getAttribute("user_id"));
+    		return "mypage";
+    	}else {
+    		model.addAttribute("loginState", loginState);
+    		return "redirect:/login/form";
+    	}
     }
 
     @RequestMapping("users/{userId}/logout")

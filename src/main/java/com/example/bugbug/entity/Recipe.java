@@ -22,12 +22,13 @@ public class Recipe {
     private Integer userId;
     private String name;
     private String image;
-    @Column("explan")
+    @Column("explanation")
     private String explanation;
     private String point;
     @Column("image_blurred")
     private Integer imageBlurred;
-    private Integer browes;
+    @Column("views")
+    private Integer views;
     @Column("reg_date_on")
     private Date regDateOn;
     private Integer deleted;

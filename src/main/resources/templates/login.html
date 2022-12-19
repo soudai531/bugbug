@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bugbug</title>
+    <title>ログイン : bugbug</title>
     <link rel="icon" href="@{/img/logoicon.png}" />
     <!-- 共通CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}" />
@@ -18,14 +18,14 @@
       <div class="login">
         <h3 class="login__title">LOGIN</h3>
         <!-- ログインフォーム -->
-        <form class="login__form" th:action="@{/index}" th:object="${LoginForm}" method="post" >
+        <form class="login__form" th:action="@{/login}" th:object="${LoginForm}" method="post" >
           <!--メールアドレス-->
           <input type="email" name="mail" class="login__form__input" placeholder="メールアドレス" autocomplete="on" />
           <!--パスワード-->
           <input type="password" name="password" class="login__form__input" placeholder="パスワード" />
           <button class="login__form__btn" type="submit"><span>ログイン ▶</span></button>
         </form>
-        <a th:href="@{/sinup/form}" class="no-acaunt">
+        <a th:href="@{/signup/form}" class="no-acaunt">
           <p>アカウントをお持ちでない方はこちら</p>
         </a>
       </div>

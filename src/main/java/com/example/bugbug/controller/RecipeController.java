@@ -1,52 +1,37 @@
 package com.example.bugbug.controller;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.example.bugbug.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
-import com.example.bugbug.entity.Recipe;
-import com.example.bugbug.entity.RecipeMaterial;
-import com.example.bugbug.entity.RecipeProcedure;
-import com.example.bugbug.entity.Tag;
-import com.example.bugbug.entity.User;
-import com.example.bugbug.service.AccountService;
-import com.example.bugbug.service.FavoriteService;
-import com.example.bugbug.form.RecipeRegisterForm;
-import com.example.bugbug.service.AuthService;
-import com.example.bugbug.service.RecipeService;
 
+import com.example.bugbug.entity.Recipe;
+import com.example.bugbug.form.RecipeRegisterForm;
+import com.example.bugbug.service.dto.RecipeDetailDTO;
 
 @RequiredArgsConstructor
 @Controller
 public class RecipeController {
 
     private final RecipeService recipeService;
-    private final AccountService accountService;
-    private final FavoriteService favoriteService;
 	private final AuthService authService;
+
 	//レシピ詳細画面の表示
 	@GetMapping("recipes/{recipeId}")
 	public String viewRecipeDetail(@PathVariable("recipeId") int recipeId, Model model) {
-		//レシピ詳細情報の取得
-		Optional<Recipe> recipe = recipeService.getRecipe(recipeId);
-		List<Tag> recipeTags = recipeService.getRecipeTag(recipeId);
-		List<RecipeProcedure> procuderes = recipeService.getProcedure(recipeId);
-		List<RecipeMaterial> materials = recipeService.getMaterial(recipeId);
-		User user = accountService.findUserId(recipe.get().getUserId());
-		int favorite = favoriteService.getFavorite(recipeId);
+		//ログイン状態判定
+    	boolean loginState = false;
+    	if(authService.isLogin()) {
+    		loginState = true;
+    	}
+    	model.addAttribute("loginState", loginState);
+		RecipeDetailDTO recipe = recipeService.getRecipeDetail(recipeId);
 		//モデルへの追加
-		model.addAttribute("recipe", recipe.get());
-		model.addAttribute("tags", recipeTags);
-		model.addAttribute("procuderes", procuderes);
-		model.addAttribute("materials", materials);
-		model.addAttribute("user", user);
-		model.addAttribute("favorite", favorite);
+		model.addAttribute("recipe", recipe);
 		//ビュー数のカウント
-		recipeService.addBrow(recipeId);
+		recipeService.addView(recipeId);
 		return "recipe";
 	}
 
@@ -59,12 +44,17 @@ public class RecipeController {
     
 	//レシピ登録画面表示
 	@RequestMapping("/recipes/register/form")
-	public String viewRegisterRecipeForm() {
-	    //  ログイン状態判定
-        if (!authService.isLogin()) {
-            return "redirect:/login/form";
-        }
-		return "register-recipe";
+	public String viewRegisterRecipeForm(Model model) {
+		//ログイン状態判定
+    	boolean loginState = false;
+    	if(authService.isLogin()) {
+    		loginState = true;
+    		model.addAttribute("loginState", loginState);
+    		return "register-recipe";
+    	}else {
+    		model.addAttribute("loginState", loginState);
+    		return "redirect:/login/form";
+    	}
 	}
 
     @Transactional

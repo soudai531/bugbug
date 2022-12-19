@@ -33,7 +33,13 @@ public class AuthController {
 
     // ログイン画面遷移
     @RequestMapping(value = "login/form")
-    public String viewLoginForm() {
+    public String viewLoginForm(RedirectAttributes redirectAttributes,Model model) {
+    	//ログイン状態判定
+    	boolean loginState = false;
+    	if(service.isLogin()) {
+    		loginState = true;
+    	}
+    	model.addAttribute("loginState", loginState);
         return "login";
     }
 
@@ -48,11 +54,9 @@ public class AuthController {
             // sessionに値を登録
             session.setAttribute("user_id", list.get(0).getUserId());
             session.setAttribute("user_name", list.get(0).getName());
-            model.addAttribute("msg", "ログイン成功");
             return "redirect:/index";
         } else {
             redirectAttributes.addFlashAttribute("msg", "メールアドレスかパスワードが違います");
-            System.out.println("ログイン失敗");
             return "redirect:/login/form";
         }
     }

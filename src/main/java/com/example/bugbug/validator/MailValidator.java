@@ -29,8 +29,6 @@ public class MailValidator implements Validator {
 		UserRegisterForm form = (UserRegisterForm) target;
 		//メールの検索
 		List<User> list = service.findMail(form.getMail());
-		System.out.println(list);
-		System.out.println("validate call");
 		//メールがすでに登録されている場合
 		if(!list.isEmpty()) {
 			errors.reject("com.example.demo.validator.MailValidator.message");
