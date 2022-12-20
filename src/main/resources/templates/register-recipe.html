@@ -20,7 +20,11 @@
     <main class="main">
       <form class="registerRecipe registerForm" name="registerRecipeForm" th:action="@{/recipes/register}" enctype="multipart/form-data" method="post" th:object="${recipeRegisterForm}">
         <div class="registerRecipe__recipeName">
-          <span class="registerRecipe__itemTitle">レシピ名</span>
+          <span class="registerRecipe__itemTitle">レシピ名
+          	<th:block th:if="${#fields.hasErrors('*')}">
+          		<span th:each="err:${#fields.errors('name')}" th:text="${err}" class="registerRecipe__form__error"></span>
+          	</th:block>
+          </span>
           <hr class="registerRecipe__itemTitle__line" />
           <input class="registerRecipe__name" type="text" th:field="*{name}" placeholder="レシピ名を入力" />
         </div>

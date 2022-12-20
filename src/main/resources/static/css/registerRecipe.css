@@ -1168,6 +1168,13 @@
   left: 10px;
 }
 
+.registerRecipe__form__error{
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Noto Sans JP";
+  color: #e45f5f;
+}
+
 .registerRecipe__filterCheck__input {
   display: none;
 }
