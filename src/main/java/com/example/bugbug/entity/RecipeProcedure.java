@@ -19,7 +19,7 @@ public class RecipeProcedure {
 	@Column("recipe_id")
 	private Integer recipeId;
 	private String image;
-	@Column("context")
+	@Column("content")
 	private String content;
 	private Integer deleted;
 }
