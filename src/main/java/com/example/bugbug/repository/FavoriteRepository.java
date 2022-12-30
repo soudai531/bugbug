@@ -16,4 +16,7 @@ public interface FavoriteRepository extends CrudRepository<Favorite, Integer> {
      */
     @Query("SELECT count(*) FROM favorites WHERE recipe_id = :recipeId")
     int countFavorite(@Param("recipeId") int recipeId);
+    
+    @Query("delete from favoriets where user_id=:userId and recipe_id=:recipeId ")
+    void delete(@Param("userId") int user_id,@Param("recipeId") int recipe_id);
 }

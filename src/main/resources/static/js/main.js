@@ -116,17 +116,25 @@ window.addEventListener("load", () => {
   const hearts = document.querySelectorAll(".heartBtn");
   for (let el of hearts) {
     el.addEventListener("click", () => {
-	  const xhr = new XMLHttpRequest();
-	  xhr.open("POST", "");
+	  const httpRequest = new XMLHttpRequest();
+	  
+	  const recipe_id = el.children[1].value;
+	  const data = "recipeId=" + recipe_id;
       const ionicon = el.firstElementChild;
       const heartNum = el.lastElementChild;
       if (ionicon.name === "heart") {
         ionicon.name = "heart-outline";
         heartNum.textContent--;
+        const url = "/recipe/favorite/delete/"+recipe_id;
+	 	httpRequest.open("POST", url, true);
       } else {
         ionicon.name = "heart";
         heartNum.textContent++;
+        const url = "/recipe/favorite/add/"+recipe_id;
+	 	httpRequest.open("POST", url, true);
       }
+      httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+      httpRequest.send(data);
     });
   }
 });

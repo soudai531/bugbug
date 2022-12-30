@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.bugbug.common.DateComponent;
 import com.example.bugbug.entity.Favorite;
@@ -25,12 +26,20 @@ public class FavoriteController {
 	
 	//お気に入りに登録
 	@PostMapping("/recipe/favorite/add/*")
-	public int addFavorite(int recipe_id) {
+	public void addFavorite(int recipe_id) {
 		Date date = dateComponent.getDate();
 		Favorite favorite = new Favorite(null,(Integer) session.getAttribute("user_id"),recipe_id,date);
 		favoriteService.addFavorite(favorite);
 		
-		return favoriteService.countFavorite(recipe_id);
+		//favoriteService.countFavorite(recipe_id);
+	}
+	
+	//お気に入りから削除
+	@PostMapping("/recipe/favorite/delete/*")
+	public void deleteFavorite(@RequestParam int recipId) {
+		favoriteService.deleteFavorite((Integer) session.getAttribute("user_id"),recipId);
+		
+		 //favoriteService.countFavorite(recipe_id);
 	}
 	
 }

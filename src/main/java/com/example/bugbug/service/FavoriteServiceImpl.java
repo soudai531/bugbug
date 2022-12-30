@@ -27,4 +27,9 @@ public class FavoriteServiceImpl implements FavoriteService{
 	public void addFavorite(Favorite favorite) {
 		favoriteRepository.save(favorite);
 	}
+	
+	//お気に入りから削除
+	public void deleteFavorite(int user_id,int recipe_id) {
+		favoriteRepository.delete(user_id,recipe_id);
+	}
 }

@@ -52,8 +52,9 @@
                             	<div class="heartBtn">
                                 
                                 	<ion-icon name="heart-outline"></ion-icon>
+                                	<input type="hidden" th:value="${recipe.recipeId}" class="recipeId">
                                 	<span class="heartNum">[[${recipe.favoriteNumber}]]</span>
-                                	<input type="hidden" th:value="${recipe.recipeId}" class="recipe_id">
+                                	
                             	</div>
                            
                         </div>

@@ -14,4 +14,7 @@ public interface FavoriteService {
 	//お気に入りに登録
 	void addFavorite(Favorite favorite);
 	
+	//お気に入りから削除
+	void deleteFavorite(int user_id ,int recipe_id);
+	
 }
