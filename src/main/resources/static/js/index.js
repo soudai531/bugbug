@@ -1,13 +1,13 @@
 "use strict";
 
-import { setHeaderScroll } from "./module/page/index/pageTop";
+import { removeHeaderNavBtn } from "./module/header";
+import { setHeaderScroll} from "./module/page/index/pageTop";
 import { setRecipeSearchForm } from "./module/recipeSearchForm";
 import { setConfirmDialog } from "./module/confirm";
 import { setRecipeHref } from "./module/recipeHref";
 import { setRecipeHeartBtn } from "./module/recipeHeartBtn";
 import { setRecipeImageFilterBtn } from "./module/recipeImageFilterBtn";
-import { setRecipeHowtoImage } from "./module/page/recipe/pageRecipe";
-
+import { setRegisterRecipeImage, setRegisterRecipeTag, setRegisterRecipeMaterial, setRegisterRecipeHowto } from "./module/page/RegisterRecipe/pageRegisterRecipe";
 
 setRecipeSearchForm();
 
@@ -23,14 +23,30 @@ if (["", "/", "/index", "/index.html"].includes(location.pathname)) {
   setRecipeImageFilterBtn();
 }
 
-/* PAGE : recipe */
-if (/^\/recipes\/[0-9]*/.test(location.pathname)) {
-  // SET -> 作り方画像処理
-  setRecipeHowtoImage();
-  // SET - > レシピハートボタンクリック処理
-  setRecipeHeartBtn();
-  // SET -> レシピ画像フィルターボタンクリック処理
-  setRecipeImageFilterBtn();
-  // SET -> 削除時確認ダイアログ処理
-  setConfirmDialog(".recipeDetail__recipeAction__btns__btn--delete", "削除しますか");
+/* PAGE : login */
+if (["/login/form", "/login"].includes(location.pathname)) {
+  // RUN -> ヘッダーナビボタン非表示
+  removeHeaderNavBtn();
+}
+
+/* PAGE : signup */
+if (["/signup/form", "/signup"].includes(location.pathname)) {
+  // RUN -> ヘッダーナビボタン非表示
+  removeHeaderNavBtn();
+  // SET -> 登録時確認ダイアログ処理
+  setConfirmDialog(".signup__form__btn", "この内容で登録しますか");
+}
+
+/* PAGE : registerRecipe */
+if (["/recipes/register/form"].includes(location.pathname)) {
+  // SET -> レシピ登録[画像]処理
+  setRegisterRecipeImage();
+  // SET -> レシピ登録[タグ]処理
+  setRegisterRecipeTag();
+  // SET -> レシピ登録[材料]処理
+  setRegisterRecipeMaterial();
+  // SET -> レシピ登録[作り方]処理
+  setRegisterRecipeHowto();
+  // SET -> 登録時確認ダイアログ処理
+  setConfirmDialog(".registerRecipe__submitBtn", "この内容で登録しますか");
 }
