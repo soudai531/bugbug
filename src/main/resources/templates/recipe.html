@@ -102,6 +102,7 @@
         </div>
         <!-- /* コメント取得(未実装) */ -->
         <div class="recipeDetail__comments">
+          [[${recipeId}]]
           <span class="recipeDetail__itemTitle">コメント</span>
           <hr class="recipeDetail__itemTitle__line" />
           <div class="recipeDetail__comments__item">
@@ -114,29 +115,7 @@
             <div class="recipeDetail__comments__text">コメントコメントントｖｖｖ</div>
             <div class="recipeDetail__comments__date">2022/12/XX</div>
           </div>
-          <div class="recipeDetail__comments__item">
-            <a class="recipeDetail__comments__user" href="user.html">
-              <span class="recipeDetail__comments__user__icon">
-                <img th:src="|/images/user-icons/recipe4.jpg|" alt="" />
-              </span>
-              <span class="recipeDetail__comments__user__name">user_name</span>
-            </a>
-            <div class="recipeDetail__comments__text">コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントｖｖｖ</div>
-            <div class="recipeDetail__comments__date">2022/12/XX</div>
-          </div>
-          <div class="recipeDetail__comments__item">
-            <a class="recipeDetail__comments__user" href="user.html">
-              <span class="recipeDetail__comments__user__icon">
-                <img th:src="|/images/user-icons/recipe4.jpg|" alt="" />
-              </span>
-              <span class="recipeDetail__comments__user__name">user_name</span>
-            </a>
-            <div class="recipeDetail__comments__text">
-              コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントｖｖｖ
-            </div>
-            <div class="recipeDetail__comments__date">2022/12/XX</div>
-          </div>
-          <form class="recipeDetail__comments__form" action="./recipe.html" method="post">
+          <form class="recipeDetail__comments__form" th:action="@{/recipes/__${recipeId}}" method="get">
             <input type="text" placeholder="コメントを入力" />
             <button class="recipeDetail__comments__form__btn" type="submit">送信</button>
           </form>

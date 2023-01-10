@@ -45,6 +45,7 @@ public class RecipeController {
 		User user = accountService.findUserId(recipe.get().getUserId());
 		int favorite = favoriteService.getFavorite(recipeId);
 		//モデルへの追加
+		model.addAttribute("recipeId", recipeId);
 		model.addAttribute("recipe", recipe.get());
 		model.addAttribute("tags", recipeTags);
 		model.addAttribute("procuderes", procuderes);
