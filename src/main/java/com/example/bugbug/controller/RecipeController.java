@@ -4,20 +4,27 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
-import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.example.bugbug.entity.Recipe;
 import com.example.bugbug.entity.RecipeMaterial;
 import com.example.bugbug.entity.RecipeProcedure;
 import com.example.bugbug.entity.Tag;
 import com.example.bugbug.entity.User;
-import com.example.bugbug.service.AccountService;
-import com.example.bugbug.service.FavoriteService;
 import com.example.bugbug.form.RecipeRegisterForm;
+import com.example.bugbug.service.AccountService;
 import com.example.bugbug.service.AuthService;
+import com.example.bugbug.service.FavoriteService;
+import com.example.bugbug.service.MyAccountService;
 import com.example.bugbug.service.RecipeService;
+
+import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
@@ -28,6 +35,7 @@ public class RecipeController {
     private final AccountService accountService;
     private final FavoriteService favoriteService;
 	private final AuthService authService;
+	private final MyAccountService myAccountService;
 	//レシピ詳細画面の表示
 	@GetMapping("recipes/{recipeId}")
 	public String viewRecipeDetail(@PathVariable("recipeId") int recipeId, Model model) {
@@ -47,6 +55,8 @@ public class RecipeController {
 		model.addAttribute("favorite", favorite);
 		//ビュー数のカウント
 		recipeService.addBrow(recipeId);
+		
+		model.addAttribute("userIcon", myAccountService.getMyIcon());
 		return "recipe";
 	}
 
@@ -59,11 +69,12 @@ public class RecipeController {
     
 	//レシピ登録画面表示
 	@RequestMapping("/recipes/register/form")
-	public String viewRegisterRecipeForm() {
+	public String viewRegisterRecipeForm(Model model) {
 	    //  ログイン状態判定
         if (!authService.isLogin()) {
             return "redirect:/login/form";
         }
+        model.addAttribute("userIcon", myAccountService.getMyIcon());
 		return "register-recipe";
 	}
 

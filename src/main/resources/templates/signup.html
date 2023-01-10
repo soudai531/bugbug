@@ -12,45 +12,58 @@
     <link rel="stylesheet" th:href="@{/css/signup.css}" />
   </head>
   <body>
-    <main class="main js-headerScrollOn">
+    <main class="main">
       <header th:replace="header"></header>
       <div class="signup">
-        <h3 class="signup__title">新規アカウント登録</h3>
-        <form class="signup__form" th:action="@{/sinup}" method="post" th:object="${inputForm}">
+        <h3 class="signup__title">SIGNUP</h3>
+        <form class="signup__form registerForm" th:action="@{/signup}" method="post" th:object="${userRegisterForm}">
+          <span class="errorMessage errorMessage--back" th:if="${msg}">
+            <span class="dataWrong">このメールアドレスは既に使用されています</span>
+          </span>
           <!--メールアドレス-->
           <div class="signup__form__item">
             <p class="signup__form__item__text required">メールアドレス</p>
-            <input type="email" th:field="*{mail}" class="signup__form__input" placeholder="メールアドレス" autocomplete="on" />
+            <input type="text" name="mail" th:field="*{mail}" class="signup__form__input form__input mail" th:value="${mail}" placeholder="メールアドレス" autocomplete="on" />
           </div>
           <!--ユーザーネーム-->
           <div class="signup__form__item">
             <p class="signup__form__item__text required">ユーザーネーム</p>
-            <input type="text" name="name" class="signup__form__input" placeholder="ユーザーネーム" />
+            <input type="text" name="name" th:field="*{name}" class="signup__form__input form__input username" th:value="${name}" placeholder="ユーザーネーム" />
           </div>
           <!--パスワード-->
           <div class="signup__form__item">
             <p class="signup__form__item__text required">パスワード</p>
-            <input type="password" th:field="*{password}" class="signup__form__input" placeholder="パスワード" />
+            <input type="password" name="password" th:field="*{password}" class="signup__form__input form__input password" placeholder="パスワード" />
           </div>
           <!--パスワード確認用-->
           <div class="signup__form__item">
             <p class="signup__form__item__text required">パスワード（確認用）</p>
-            <input type="password" th:field="*{confirmPassword}" class="signup__form__input" placeholder="パスワード(確認用)" />
+            <input type="password" name="confirmPassword" th:field="*{confirmPassword}"  class="signup__form__input form__input confirmPassword" placeholder="パスワード(確認用)" />
           </div>
           <!--バリデーションエラー-->
           <ul class="signup__form__validation" th:if="${#fields.hasErrors('*')}">
             <li th:each="err:${#fields.errors('*')}" th:text="'※ ' + ${err}"></li>
           </ul>
-          <button class="signup__form__btn confirm__open" type="button"><span>アカウント作成</span></button>
+          <span class="errorMessage">
+            <span class="validation__blank hidden">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              空欄があります。入力してください。
+            </span>
+            <span class="validation__email hidden">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              メールアドレスの形式で入力してください。
+            </span>
+            <span class="validation__password hidden">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              パスワードは先頭英字<br />全7文字以上(数字を含む)で入力してください
+            </span>
+            <span class="validation__confirm hidden">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              パスワードが一致しません。
+            </span>
+          </span>
+          <button class="signup__form__btn" type="button"><span>アカウント作成</span></button>
           <h:outputText styleClass="required" />
-          <div class="confirm__cover hidden"></div>
-          <div class="confirm hidden">
-            <p class="confirm__message">この内容で登録しますか？</p>
-            <section class="confirm__btns">
-              <button class="confirm__btns__btn confirm__btns__btn--yes" type="submit">はい</button>
-              <button class="confirm__btns__btn confirm__btns__btn--no" type="submit">キャンセル</button>
-            </section>
-          </div>
         </form>
       </div>
     </main>

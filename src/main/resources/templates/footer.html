@@ -5,7 +5,12 @@
   </section>
   <ul class="footer__nav">
     <li><a th:href="@{/index}">トップ</a></li>
-    <li><a th:href="@{/login/form}">ログイン</a></li>
+    <li>
+      <th:block th:switch="${loginState}">
+        <a th:case="true" th:href="@{/users/${user_id}/logout}">ログアウト</a>
+        <a th:case="false" th:href="@{/login/form}">ログイン</a>
+      </th:block>
+    </li>
     <li><a th:href="@{/signup/form}">会員登録</a></li>
     <li><a th:href="@{/index}">お問い合わせ</a></li>
   </ul>

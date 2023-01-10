@@ -51,17 +51,20 @@ public class AccountController {
     }
 
     // 新規登録フォームへの遷移
-    @RequestMapping("sinup/form")
+    @RequestMapping("signup/form")
     public String viewAcountForm() {
-        return "sinup";
+        return "signup";
     }
 
     // 新規アカウント登録処理
-    @PostMapping("sinup")
+    @PostMapping("signup")
     public String createAcount(@Validated UserRegisterForm f, BindingResult bindingResult, Model model) {
         // validation
         if (bindingResult.hasErrors()) {
-            return "sinup";
+        	model.addAttribute("mail", f.getMail());
+        	model.addAttribute("name", f.getName());
+        	model.addAttribute("msg", "このメールアドレスは既に使用されています");
+            return "signup";
         }
         // パスワードのハッシュ化
         String hash = accountservice.hash(f.getPassword());

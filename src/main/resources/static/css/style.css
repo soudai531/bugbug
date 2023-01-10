@@ -68,7 +68,7 @@ select {
   }
 }
 * {
-  font-family: "Kiwi Maru", sans-serif;
+  font-family: "Noto Sans JP";
   -webkit-overflow-scrolling: touch;
 }
 
@@ -87,6 +87,50 @@ a {
   touch-action: manipulation;
   position: relative;
   text-decoration: none;
+}
+
+input.validationError {
+  border: 2px solid #e45f5f;
+}
+input.validationError:focus {
+  border: 2px solid #e45f5f;
+}
+
+.errorMessage {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+.errorMessage ion-icon {
+  font-size: 14px;
+}
+.errorMessage span {
+  color: #e45f5f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+.errorMessage span.hidden {
+  display: none;
+}
+
+.dataWrong {
+  width: 260px;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background: #ffe8e8;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  gap: 0;
 }
 
 .recipeImage.filter {
@@ -139,38 +183,20 @@ a {
 }
 
 .confirm {
-  width: 400px;
+  width: 320px;
   height: 200px;
   background: #FDFDFD;
-  border-radius: 30px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: fixed;
   left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-  opacity: 1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  top: 20%;
+  translate: -50% 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   z-index: 2500;
-  will-change: opacity;
-  animation-name: confirmAnimate;
-  animation-duration: 0.3s;
-  animation-fill-mode: both;
-}
-@media screen and (max-width: 767px) {
-  .confirm {
-    width: 300px;
-  }
-}
-@keyframes confirmAnimate {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 .confirmDialog__cover {
@@ -180,51 +206,48 @@ a {
   z-index: 2000;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8);
-  transition: background 0.3s;
-  animation-name: confirmCoverAnimate;
-  animation-duration: 0.2s;
-  animation-fill-mode: both;
-  will-change: opacity;
-}
-@keyframes confirmCoverAnimate {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .confirm__message {
-  font-size: 14px;
   margin-bottom: 30px;
+  color: black;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
 }
 
 .confirm__btns {
-  width: 225px;
+  width: 200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .confirm__btns__btn {
-  font-size: 13px;
-  padding: 10px 25px;
+  height: 35px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 2px;
   border: none;
-  border-radius: 100px;
-  transition: opacity 0.3s;
+  border-radius: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.2s;
 }
 .confirm__btns__btn--yes {
+  width: 70px;
   background: #147647;
   color: #FDFDFD;
 }
 .confirm__btns__btn--cancel {
+  width: 100px;
   background: #F4F4F4;
   color: #636363;
 }
 .confirm__btns__btn:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .registerRecipeBtn {
@@ -427,7 +450,7 @@ a {
   color: #ACACAC;
   font-size: 13px;
   font-weight: 300;
-  font-family: "Kiwi Maru";
+  font-family: "Noto Snas JP";
   letter-spacing: 1px;
   transition: opacity 0.2s;
   will-change: opacity;
@@ -465,7 +488,7 @@ a {
 .recipe__name {
   font-size: 16px;
   font-weight: 400;
-  font-family: "Nova Square", "Kiwi Maru";
+  font-family: "Kiwi Maru";
   margin-top: 10px;
   margin-bottom: 10px;
   letter-spacing: 1px;
@@ -521,7 +544,7 @@ a {
   align-items: center;
   vertical-align: middle;
   color: #B67C47;
-  font-family: "Nova Square", "Kiwi Maru";
+  font-family: "Kiwi Maru";
   will-change: color;
   transition: color 0.2s;
 }
@@ -675,6 +698,7 @@ a {
   right: 30px;
   transition: top 0.4s;
   will-change: top, right;
+  animation: filterBtnAnimate 0.5s;
 }
 @media screen and (max-width: 1024px) {
   .insectFilterBtn {
@@ -704,6 +728,14 @@ a {
   .insectFilterBtn.js-headerScrollOn {
     top: 10px;
     right: 0px;
+  }
+}
+@keyframes filterBtnAnimate {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

@@ -1,9 +1,9 @@
 package com.example.bugbug.controller;
 
-import com.example.bugbug.entity.User;
-import com.example.bugbug.form.LoginForm;
-import com.example.bugbug.service.AuthService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import com.example.bugbug.entity.User;
+import com.example.bugbug.form.LoginForm;
+import com.example.bugbug.service.AuthService;
+import com.example.bugbug.service.MyAccountService;
+
+import lombok.RequiredArgsConstructor;
 
 // ログイン処理のコントローラー
 @RequiredArgsConstructor
@@ -23,6 +27,7 @@ import java.util.List;
 public class AuthController {
 
     private final AuthService service;
+    private final MyAccountService myAccountService;
     @Autowired
     private HttpSession session;
 
@@ -49,9 +54,11 @@ public class AuthController {
             session.setAttribute("user_id", list.get(0).getUserId());
             session.setAttribute("user_name", list.get(0).getName());
             model.addAttribute("msg", "ログイン成功");
+            model.addAttribute("user_icon", myAccountService.getMyIcon());
             return "redirect:/index";
         } else {
-            redirectAttributes.addFlashAttribute("msg", "メールアドレスかパスワードが違います");
+        	redirectAttributes.addFlashAttribute("mail", f.getMail());
+            redirectAttributes.addFlashAttribute("msg", "メールアドレスまたはパスワードが違います");
             System.out.println("ログイン失敗");
             return "redirect:/login/form";
         }
