@@ -26,7 +26,7 @@ public class IndexController {
 
     @RequestMapping(value = {"/", "/index", "/index.html"})
     public String viewIndex(Model model){
-    	///ログイン状態判定
+    	//ログイン状態判定
     	boolean loginState = false;
     	if(authService.isLogin()) {
     		loginState = true;
