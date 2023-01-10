@@ -21,6 +21,6 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
  	
  	//ビュー数の増加
  	@Modifying
- 	@Query("UPDATE recipes SET browes = browes+1 WHERE recipe_id = :recipeId")
+ 	@Query("UPDATE recipes SET views = views+1 WHERE recipe_id = :recipeId")
  	void BroweCounta(@Param("recipeId") int recipeId);
 }

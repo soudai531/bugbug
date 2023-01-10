@@ -7,10 +7,41 @@
   justify-content: space-around;
   align-items: flex-start;
 }
+.recipeList::before, .popRecipe__list::before {
+  content: "";
+  width: 22%;
+  display: block;
+  order: 1;
+}
+@media screen and (max-width: 1024px) {
+  .recipeList::before, .popRecipe__list::before {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .recipeList::before, .popRecipe__list::before {
+    width: 70%;
+  }
+}
+.recipeList::after, .popRecipe__list::after {
+  content: "";
+  width: 22%;
+  display: block;
+}
+@media screen and (max-width: 1024px) {
+  .recipeList::after, .popRecipe__list::after {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .recipeList::after, .popRecipe__list::after {
+    width: 70%;
+  }
+}
 
 .recipe, .popRecipe__list__item {
   width: 22%;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
@@ -44,7 +75,6 @@
   width: 100%;
   height: 150px;
   overflow: hidden;
-  background: #e6e6e6;
   display: flex;
   border-radius: 10px;
   justify-content: center;
@@ -54,7 +84,7 @@
   transition: border-radius 0.3s linear;
 }
 .recipe__img img, .popRecipe__list__item__img img {
-  max-width: 100%;
+  width: 100%;
   border-radius: 10px;
   transition: scale 0.6s, opacity 0.4s, filter 0.2s;
   will-change: scale;
@@ -109,7 +139,7 @@
   color: #ACACAC;
   font-size: 13px;
   font-weight: 300;
-  font-family: "Kiwi Maru";
+  font-family: "Noto Snas JP";
   letter-spacing: 1px;
   transition: opacity 0.2s;
   will-change: opacity;
@@ -147,7 +177,7 @@
 .recipe__name, .popRecipe__list__item__recipeName {
   font-size: 16px;
   font-weight: 400;
-  font-family: "Nova Square", "Kiwi Maru";
+  font-family: "Kiwi Maru";
   margin-top: 10px;
   margin-bottom: 10px;
   letter-spacing: 1px;
@@ -203,7 +233,7 @@
   align-items: center;
   vertical-align: middle;
   color: #B67C47;
-  font-family: "Nova Square", "Kiwi Maru";
+  font-family: "Kiwi Maru";
   will-change: color;
   transition: color 0.2s;
 }
