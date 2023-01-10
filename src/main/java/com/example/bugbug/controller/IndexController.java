@@ -2,6 +2,7 @@ package com.example.bugbug.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.bugbug.service.AuthService;
 import com.example.bugbug.service.RecipeService;
 import com.example.bugbug.service.dto.RecipeDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +19,19 @@ import java.util.List;
 public class IndexController {
 
     private final RecipeService recipeService;
+    private final AuthService authService;
 
     @Autowired
     private HttpSession session;
 
     @RequestMapping(value = {"/", "/index", "/index.html"})
     public String viewIndex(Model model){
-    	boolean loginState = true;
-    	if(session.getAttribute("user_id") == null) {
-    		loginState = false;
-    		model.addAttribute("loginState", loginState);
-    	}else {
+    	///ログイン状態判定
+    	boolean loginState = false;
+    	if(authService.isLogin()) {
     		loginState = true;
-    		model.addAttribute("loginState", loginState);
     	}
+    	model.addAttribute("loginState", loginState);
         model.addAttribute("session_name",session.getAttribute("user_name"));
         model.addAttribute("user_id",session.getAttribute("user_id"));
         List<RecipeDto> recipes = recipeService.getAllRecipe();

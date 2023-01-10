@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -59,17 +61,24 @@ public class RecipeController {
     
 	//レシピ登録画面表示
 	@RequestMapping("/recipes/register/form")
-	public String viewRegisterRecipeForm() {
+	public String viewRegisterRecipeForm(Model model) {
 	    //  ログイン状態判定
-        if (!authService.isLogin()) {
-            return "redirect:/login/form";
+		boolean loginState = false;
+        if (authService.isLogin()) {
+        	loginState = true;
+        	model.addAttribute("loginState", loginState);
+        	return "register-recipe";
         }
-		return "register-recipe";
+        model.addAttribute("loginState", loginState);
+		return "redirect:/login/form";
 	}
 
     @Transactional
 	@PostMapping("/recipes/register")
-	public String saveRecipe(RecipeRegisterForm form,Model model) {
+	public String saveRecipe(@Validated RecipeRegisterForm form,BindingResult bindingResult,Model model) {
+    	if(bindingResult.hasErrors()) {
+    		return "register-recipe";
+    	}
 	    //  ログイン状態判定
         if (!authService.isLogin()) {
             return "redirect:/login/form";
@@ -78,7 +87,9 @@ public class RecipeController {
         //画像の登録
         recipeService.saveRecipeImage(form.getRecipeImage(), savedRecipe.getRecipeId());
         //タグの登録
-        recipeService.saveRecipeTag(savedRecipe.getRecipeId(),form.getTags());
+        if(form.getTags() != null) {
+        	recipeService.saveRecipeTag(savedRecipe.getRecipeId(),form.getTags());
+        }
         //材料の登録
         recipeService.saveMaterial(savedRecipe.getRecipeId(),form.getMaterials(),form.getAmounts());
         //手順の登録
