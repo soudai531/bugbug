@@ -19,7 +19,6 @@ public class SearchController {
     /**
      * キーワードからレシピを検索する
      * @param keyword 検索に使うキーワード
-     * @param page ページ数
      * @param model
      */
     @GetMapping("search/keyword")
