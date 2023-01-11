@@ -64,7 +64,7 @@ public class MyAccountServiceImpl implements MyAccountService{
         return user.get().getIcon();
     }
     
-    /** 下記2つ仮で置いています。後で消してください　*/
+    /** 下記2つ仮で置いています(伊藤)*/
     
     /**
      * 自分のメールアドレスを取得する
@@ -74,7 +74,7 @@ public class MyAccountServiceImpl implements MyAccountService{
         int userId = Integer.parseInt(session.getAttribute("user_id").toString());
         // ユーザー情報を取得
         Optional<User> user = userRepository.findById(userId);
-        // ユーザーアイコンのファイル名を返す
+        // ユーザーのメールアドレスを返す
         return user.get().getMail();
     }
     
@@ -86,7 +86,7 @@ public class MyAccountServiceImpl implements MyAccountService{
         int userId = Integer.parseInt(session.getAttribute("user_id").toString());
         // ユーザー情報を取得
         Optional<User> user = userRepository.findById(userId);
-        // ユーザーアイコンのファイル名を返す
+        // ユーザーネームを返す
         return user.get().getName();
     }
 }

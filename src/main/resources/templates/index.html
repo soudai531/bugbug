@@ -46,7 +46,7 @@
                   </span>
                   <span class="popRecipe__list__item__user__name">[[${recipe.postUserName}]]</span>
                 </a>
-                <div class="heartBtn">
+                <div class="heartBtn" th:data-recipe-id="${recipe.recipeId}">
                   <ion-icon name="heart-outline"></ion-icon>
                   <span class="heartNum">[[${recipe.favoriteNumber}]]</span>
                 </div>

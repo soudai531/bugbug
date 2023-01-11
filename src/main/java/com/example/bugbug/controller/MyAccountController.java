@@ -41,7 +41,7 @@ public class MyAccountController {
         // URL用のユーザーID
         model.addAttribute("userId", session.getAttribute("user_id"));
         
-        /** 下記2つ仮で置いています。後で消してください  */
+        /** 下記2つ仮で置いています(伊藤) */
         model.addAttribute("userMail", myAccountService.getMyMail());
         model.addAttribute("userName", myAccountService.getMyUsername());
         return "mypage";

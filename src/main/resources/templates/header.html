@@ -25,31 +25,31 @@
       <span class="navBtns__btn__text js-headerScrollOn">レシピを探す</span>
       <ion-icon name="search-outline"></ion-icon>
     </a>
-    <th:block th:switch="${loginState}">
-      <th:block th:case="true">
-        <a class="navBtns__btn navBtns__btn--favRecipe js-headerScrollOn" href="mypage.html">
-          <span class="navBtns__btn__text js-headerScrollOn">お気に入り</span>
-          <ion-icon name="heart-outline"></ion-icon>
-        </a>
-        <a class="navBtns__btn navBtns__btn--mypage js-headerScrollOn" th:href="@{/mypage}">
-          <span class="navBtns__btn__text js-headerScrollOn">マイページ</span>
-          <span class="navBtns__btn--mypage__icon">
-            <!-- /* ログインユーザーのアイコンを表示(未実装) */ -->
-            <!-- /* いまは仮の画像 */ -->
-            <img th:src="@{/img/userIconSample.jpeg}" />
-          </span>
-        </a>
-      </th:block>
-      <th:block th:case="false">
-        <a class="navBtns__btn navBtns__btn--registerAcount js-headerScrollOn" th:href="@{/signup/form}">
-          <span class="navBtns__btn__text js-headerScrollOn">会員登録</span>
-          <ion-icon name="person-add-outline"></ion-icon>
-        </a>
-        <a class="navBtns__btn navBtns__btn--login js-headerScrollOn" th:href="@{/login/form}">
-          <span class="navBtns__btn__text js-headerScrollOn">ログイン</span>
-          <ion-icon name="log-in-outline"></ion-icon>
-        </a>
-      </th:block>
+    <!-- /* ログイン時はお気に入りとマイページボタン表示 */ -->
+    <th:block th:if="${session.user_id}">
+      <a class="navBtns__btn navBtns__btn--favRecipe js-headerScrollOn" th:href="@{/mypage}">
+        <span class="navBtns__btn__text js-headerScrollOn">お気に入り</span>
+        <ion-icon name="heart-outline"></ion-icon>
+      </a>
+      <a class="navBtns__btn navBtns__btn--mypage js-headerScrollOn" th:href="@{/mypage}">
+        <span class="navBtns__btn__text js-headerScrollOn">マイページ</span>
+        <span class="navBtns__btn--mypage__icon">
+          <!-- /* ログインユーザーのアイコンを表示(未実装) */ -->
+          <!-- /* いまは仮の画像 */ -->
+          <img th:src="@{/img/userIconSample.jpeg}" />
+        </span>
+      </a>
+    </th:block>
+    <!-- /* 未ログイン時は会員登録とログインボタン表示 */ -->
+    <th:block th:unless="${session.user_id}">
+      <a class="navBtns__btn navBtns__btn--registerAcount js-headerScrollOn" th:href="@{/signup/form}">
+        <span class="navBtns__btn__text js-headerScrollOn">会員登録</span>
+        <ion-icon name="person-add-outline"></ion-icon>
+      </a>
+      <a class="navBtns__btn navBtns__btn--login js-headerScrollOn" th:href="@{/login/form}">
+        <span class="navBtns__btn__text js-headerScrollOn">ログイン</span>
+        <ion-icon name="log-in-outline"></ion-icon>
+      </a>
     </th:block>
   </nav>
   <div class="search__form__cover hidden"></div>
