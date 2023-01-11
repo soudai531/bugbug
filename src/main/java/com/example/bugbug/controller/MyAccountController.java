@@ -71,7 +71,7 @@ public class MyAccountController {
         // ファイルがないとき
         if(file.isEmpty()) {
             model.addAttribute("error", "ファイルを指定してください");
-            return "mypage";
+            return "redirect:/mypage";
         }
         //画像を保存
         String imageFileName = myAccountService.saveUserIcon(file,userId);
