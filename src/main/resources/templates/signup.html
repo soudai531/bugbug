@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>bugbug</title>
+    <link rel="icon" th:href="@{/img/logoicon.png}" />
+    <!-- 共通CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- 各ページCSS -->
+    <link rel="stylesheet" th:href="@{/css/signup.css}" />
+  </head>
+  <body>
+    <main class="main">
+      <header th:replace="header"></header>
+      <div class="signup">
+        <h3 class="signup__title">SIGNUP</h3>
+        <!-- アカウント作成フォーム -->
+        <form class="signup__form registerForm" th:action="@{/signup}" method="post" th:object="${inputForm}">
+          <!--メールアドレス-->
+          <div class="signup__form__item">
+            <span class="signup__form__item__text">メールアドレス</span>
+            <input type="email" name="mail" class="signup__form__input" placeholder="メールアドレス" autocomplete="on" required />
+          </div>
+          <!--ユーザーネーム-->
+          <div class="signup__form__item">
+            <span class="signup__form__item__text">ユーザーネーム</span>
+            <input type="text" name="name" class="signup__form__input" placeholder="ユーザーネーム" required />
+          </div>
+          <!--パスワード-->
+          <div class="signup__form__item">
+            <span class="signup__form__item__text">パスワード</span>
+            <input type="password" name="password" class="signup__form__input" placeholder="パスワード" required />
+          </div>
+          <!--パスワード確認用-->
+          <div class="signup__form__item">
+            <span class="signup__form__item__text">パスワード(確認用)</span>
+            <input type="password" name="confirmPassword" class="signup__form__input" placeholder="パスワード(確認用)" required />
+          </div>
+          <th:block th:if="${msg}">
+            <span class="signup__form__errorMessage">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              エラー
+            </span>
+          </th:block>
+          <button class="signup__form__btn" type="button"><span>アカウント作成</span></button>
+          <h:outputText styleClass="required" />
+        </form>
+      </div>
+    </main>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>

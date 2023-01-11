@@ -2,7 +2,7 @@
 <header class="header js-headerScrollOn">
   <!-- ロゴ -->
   <a class="logo js-headerScrollOn" th:href="@{/index}">
-    <img class="logo__img" th:src="@{/img/logo_white.png}" alt="" srcset="" />
+    <img class="logo__img" th:src="@{/img/logo_white.png}" />
   </a>
   <!-- サイト説明 -->
   <section class="siteExpl js-headerScrollOn">
@@ -17,7 +17,7 @@
   </section>
   <!-- ナビボタン -->
   <nav class="navBtns js-headerScrollOn">
-    <a class="navBtns__btn navBtns__btn--insectBook js-headerScrollOn">
+    <a class="navBtns__btn navBtns__btn--insectBook js-headerScrollOn" th:href="@{/insectBook}">
       <span class="navBtns__btn__text js-headerScrollOn">昆虫食図鑑</span>
       <ion-icon name="bug-outline"></ion-icon>
     </a>
@@ -25,14 +25,32 @@
       <span class="navBtns__btn__text js-headerScrollOn">レシピを探す</span>
       <ion-icon name="search-outline"></ion-icon>
     </a>
-    <a class="navBtns__btn navBtns__btn--registerAcount js-headerScrollOn" th:href="@{/sinup/form}">
-      <span class="navBtns__btn__text js-headerScrollOn">会員登録</span>
-      <ion-icon name="person-add-outline"></ion-icon>
-    </a>
-    <a class="navBtns__btn navBtns__btn--login js-headerScrollOn" th:href="@{/login/form}">
-      <span class="navBtns__btn__text js-headerScrollOn">ログイン</span>
-      <ion-icon name="log-in-outline"></ion-icon>
-    </a>
+    <th:block th:switch="${loginState}">
+      <th:block th:case="true">
+        <a class="navBtns__btn navBtns__btn--favRecipe js-headerScrollOn" href="mypage.html">
+          <span class="navBtns__btn__text js-headerScrollOn">お気に入り</span>
+          <ion-icon name="heart-outline"></ion-icon>
+        </a>
+        <a class="navBtns__btn navBtns__btn--mypage js-headerScrollOn" href="mypage.html">
+          <span class="navBtns__btn__text js-headerScrollOn">マイページ</span>
+          <span class="navBtns__btn--mypage__icon">
+            <!-- /* ログインユーザーのアイコンを表示(未実装) */ -->
+            <!-- /* いまは仮の画像 */ -->
+            <img th:src="@{/img/userIconSample.jpeg}" />
+          </span>
+        </a>
+      </th:block>
+      <th:block th:case="false">
+        <a class="navBtns__btn navBtns__btn--registerAcount js-headerScrollOn" th:href="@{/signup/form}">
+          <span class="navBtns__btn__text js-headerScrollOn">会員登録</span>
+          <ion-icon name="person-add-outline"></ion-icon>
+        </a>
+        <a class="navBtns__btn navBtns__btn--login js-headerScrollOn" th:href="@{/login/form}">
+          <span class="navBtns__btn__text js-headerScrollOn">ログイン</span>
+          <ion-icon name="log-in-outline"></ion-icon>
+        </a>
+      </th:block>
+    </th:block>
   </nav>
   <div class="search__form__cover hidden"></div>
   <form class="search__form hidden" action="search.html">
@@ -44,7 +62,7 @@
         <button class="search__form__keyword__btn" type="submit">検索</button>
       </div>
     </section>
-    <hr>
+    <hr />
     <section class="search__form__tag">
       <span class="search__form__title">タグから探す</span>
       <!-- ここで表示するタグ一覧の取得は未実装() -->
