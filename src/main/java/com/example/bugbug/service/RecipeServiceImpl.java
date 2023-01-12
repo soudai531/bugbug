@@ -75,7 +75,7 @@ public class RecipeServiceImpl implements RecipeService {
 	public List<RecipeDto> getRecommendRecipe(int page){
 		return new ArrayList<RecipeDto>();
 	}
-	
+
     /**
      * レシピ情報からレシピDTOを作成する
      */

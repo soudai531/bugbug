@@ -53,12 +53,12 @@
     </th:block>
   </nav>
   <div class="search__form__cover hidden"></div>
-  <form class="search__form hidden" action="search.html">
+  <form class="search__form hidden" th:action="@{/search/keyword}" method="get">
     <button class="search__form__close" type="button">×</button>
     <section class="search__form__keyword">
       <span class="search__form__title">キーワードから探す</span>
       <div class="search__form__keyword__input">
-        <input type="text" name="keyword" placeholder="キーワードを入力" />
+        <input type="text" name="q" placeholder="キーワードを入力" />
         <button class="search__form__keyword__btn" type="submit">検索</button>
       </div>
     </section>
