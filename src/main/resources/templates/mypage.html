@@ -131,15 +131,6 @@
         </section>
       </section>
     </main>
-
-    <!-- ユーザーアイコンの変更用フォーム -->
-    <form th:action="|/users/${userId}/user-icon/update|" method="post" enctype="multipart/form-data">
-      <input type="file" name="file" accept="image/jpeg,image/png" />
-      <input type="submit" value="完了" />
-    </form>
-    <!-- テスト表示 -->
-    <img th:src="|/images/user-icons/${userIcon}|" alt="ユーザーアイコン" width="400px" />
-    <p th:if="${error}" th:text="${error}">エラーメッセージ</p>
     
     <footer th:replace="footer"></footer>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
