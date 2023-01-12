@@ -1,6 +1,6 @@
 "use strict";
-
 window.addEventListener("load", () => {
+  console.log("jsが読み込まれました");
   const header = document.querySelector(".header");
   const siteExpl = document.querySelector(".siteExpl");
   const logo = document.querySelector(".logo");
@@ -11,120 +11,161 @@ window.addEventListener("load", () => {
   const main = document.querySelector(".main");
   const headerElemnts = [header, siteExpl, logo, insectFilterBtn, navBtns, ...navBtns__btn, ...navBtns__btn__text, main];
 
-  // トップページでのみスクロール処理用クラスを操作
-  const indexPaths = ["", "/", "/index", "/index.html"];
-  if (indexPaths.includes(location.pathname)) {
-    for (let el of headerElemnts) {
-      el.classList.remove("js-headerScrollOn");
-    }
-  }
 
-  // ログイン・アカウント作成ページはナビボタンを非表示
-  const headerHiddenPaths = ["/sinup/form", "/sinup", "/login/form", "/login"];
-  if (headerHiddenPaths.includes(location.pathname)) {
-    navBtns.style.display = "none";
-    insectFilterBtn.style.display = "none";
-  }
+  /* 昆虫食図鑑ポップアップ */
 
-  /* スクロール時ヘッダー処理 */
-  const scrollHeaderHandle = () => {
-    // トップページでのみスクロール処理
-    if (!indexPaths.includes(location.pathname)) return;
-    if (set_position > document.documentElement.scrollTop) {
-      for (let el of headerElemnts) {
-        el.classList.remove("js-headerScrollOn");
-      }
-    } else {
-      if (!header.classList.contains("js-headerScrollOn")) {
-        for (let el of headerElemnts) {
-          el.classList.add("js-headerScrollOn");
-        }
-      }
-    }
-  };
+  /*蟻 */
+  const antDetailCover = document.querySelector(".ant_detail_form_cover"); 
+  const antDetailClose =document.querySelector(".ant_detail_form_close");
+  const antDetailForm = document.querySelector(".ant_detail_form");
+  const antOpen = document.querySelector(".insect_ant");
 
-  let set_position = 10;
-  window.addEventListener("scroll", scrollHeaderHandle);
-
-  /* 虫フィルターボタンクリック処理 */
-  const insectFilter = document.querySelector(".insectFilterBtn__input");
-  const recipeImgArray = document.querySelectorAll(".recomRecipe__list__item__img");
-  let recipeImgArrayLength = recipeImgArray.length;
-  if (recipeImgArrayLength > 0) {
-    for (let i = 0; i < recipeImgArrayLength; i++) {
-      recipeImgArray[i].originImg = recipeImgArray[i].firstElementChild.src;
-    }
-  }
-  let filterStarte = false;
-  insectFilter.addEventListener("click", () => {
-    filterStarte = !filterStarte;
-    for (let i = 0, size = recipeImgArray.length; i < size; i++) {
-      if (filterStarte) {
-        recipeImgArray[i].firstElementChild.src = "../img/filter.png";
-      } else {
-        recipeImgArray[i].firstElementChild.src = recipeImgArray[i].originImg;
-      }
-    }
+  antOpen.addEventListener("click", () => {
+    antDetailCover.classList.remove("hidden");
+    antDetailForm.classList.remove("hidden");
   });
 
-  /* ダイアログメソッド */
-  const addClassHidden = (el) => {
-    el.classList.add("hidden");
-  };
-  const removeClassHidden = (el) => {
-    el.classList.remove("hidden");
-  };
-
-  /* 検索フォームJS処理 */
-  const searchFormCover = document.querySelector(".search__form__cover");
-  const searchFormClose = document.querySelector(".search__form__close");
-  const searchForm = document.querySelector(".search__form");
-  const nav_searchRecipe = document.querySelector(".navBtns__btn--searchRecipe");
-
-  nav_searchRecipe.addEventListener("click", () => {
-    removeClassHidden(searchFormCover);
-    removeClassHidden(searchForm);
+  antDetailCover.addEventListener("click", () => {
+    antDetailCover.classList.add("hidden");
+    antDetailForm.classList.add("hidden");
   });
-  searchFormCover.addEventListener("click", () => {
-    addClassHidden(searchFormCover);
-    addClassHidden(searchForm);
-  });
-  searchFormClose.addEventListener("click", () => {
-    addClassHidden(searchFormCover);
-    addClassHidden(searchForm);
+  antDetailClose.addEventListener("click", () => {
+    antDetailCover.classList.add("hidden");
+    antDetailForm.classList.add("hidden");
   });
 
-  /* 登録時確認ダイアログ */
-  const confirmPaths = ["/sinup/form", "/sinup"];
-  if (confirmPaths.includes(location.pathname)) {
-    const confirmCover = document.querySelector(".confirm__cover");
-    const confirmClose = document.querySelector(".confirm__btns__btn--no");
-    const confirmDiv = document.querySelector(".confirm");
-    const confirmOpen = document.querySelector(".confirm__open");
+  /*蝉 */
+  const semiDetailCover = document.querySelector(".semi_detail_form_cover"); 
+  const semiDetailClose =document.querySelector(".semi_detail_form_close");
+  const semiDetailForm = document.querySelector(".semi_detail_form");
+  const semiOpen = document.querySelector(".insect_semi");
 
-    confirmOpen.addEventListener("click", () => {
-      removeClassHidden(confirmCover);
-      removeClassHidden(confirmDiv);
-    });
-    confirmClose.addEventListener("click", () => {
-      addClassHidden(confirmCover);
-      addClassHidden(confirmDiv);
-    });
-  }
+  semiOpen.addEventListener("click", () => {
+    semiDetailCover.classList.remove("hidden");
+    semiDetailForm.classList.remove("hidden");
+  });
 
-  /* お気に入りボタンクリック処理(仮) */
-  const hearts = document.querySelectorAll(".heartBtn");
-  for (let el of hearts) {
-    el.addEventListener("click", () => {
-      const ionicon = el.firstElementChild;
-      const heartNum = el.lastElementChild;
-      if (ionicon.name === "heart") {
-        ionicon.name = "heart-outline";
-        heartNum.textContent--;
-      } else {
-        ionicon.name = "heart";
-        heartNum.textContent++;
-      }
-    });
-  }
+  semiDetailCover.addEventListener("click", () => {
+    semiDetailCover.classList.add("hidden");
+    semiDetailForm.classList.add("hidden");
+  });
+  semiDetailClose.addEventListener("click", () => {
+    semiDetailCover.classList.add("hidden");
+    semiDetailForm.classList.add("hidden");
+  });
+
+  /*蜘蛛 */
+  const kumoDetailCover = document.querySelector(".kumo_detail_form_cover"); 
+  const kumoDetailClose =document.querySelector(".kumo_detail_form_close");
+  const kumoDetailForm = document.querySelector(".kumo_detail_form");
+  const kumoOpen = document.querySelector(".insect_kumo");
+
+  kumoOpen.addEventListener("click", () => {
+    kumoDetailCover.classList.remove("hidden");
+    kumoDetailForm.classList.remove("hidden");
+  });
+
+  kumoDetailCover.addEventListener("click", () => {
+    kumoDetailCover.classList.add("hidden");
+    kumoDetailForm.classList.add("hidden");
+  });
+  kumoDetailClose.addEventListener("click", () => {
+    kumoDetailCover.classList.add("hidden");
+    kumoDetailForm.classList.add("hidden");
+  });
+  /*百足*/
+  const mukadeDetailCover = document.querySelector(".mukade_detail_form_cover"); 
+  const mukadeDetailClose =document.querySelector(".mukade_detail_form_close");
+  const mukadeDetailForm = document.querySelector(".mukade_detail_form");
+  const mukadeOpen = document.querySelector(".insect_mukade");
+
+  mukadeOpen.addEventListener("click", () => {
+    mukadeDetailCover.classList.remove("hidden");
+    mukadeDetailForm.classList.remove("hidden");
+  });
+
+  mukadeDetailCover.addEventListener("click", () => {
+    mukadeDetailCover.classList.add("hidden");
+    mukadeDetailForm.classList.add("hidden");
+  });
+  mukadeDetailClose.addEventListener("click", () => {
+    mukadeDetailCover.classList.add("hidden");
+    mukadeDetailForm.classList.add("hidden");
+  });
+  /*コオロギ*/
+  const koorogiDetailCover = document.querySelector(".koorogi_detail_form_cover"); 
+  const koorogiDetailClose =document.querySelector(".koorogi_detail_form_close");
+  const koorogiDetailForm = document.querySelector(".koorogi_detail_form");
+  const koorogiOpen = document.querySelector(".insect_koorogi");
+
+  koorogiOpen.addEventListener("click", () => {
+    koorogiDetailCover.classList.remove("hidden");
+    koorogiDetailForm.classList.remove("hidden");
+  });
+
+  koorogiDetailCover.addEventListener("click", () => {
+    koorogiDetailCover.classList.add("hidden");
+    koorogiDetailForm.classList.add("hidden");
+  });
+  koorogiDetailClose.addEventListener("click", () => {
+    koorogiDetailCover.classList.add("hidden");
+    koorogiDetailForm.classList.add("hidden");
+  });
+  /*甲虫*/
+  const koutyuuDetailCover = document.querySelector(".koutyuu_detail_form_cover"); 
+  const koutyuuDetailClose =document.querySelector(".koutyuu_detail_form_close");
+  const koutyuuDetailForm = document.querySelector(".koutyuu_detail_form");
+  const koutyuuOpen = document.querySelector(".insect_koutyuu");
+
+  koutyuuOpen.addEventListener("click", () => {
+    koutyuuDetailCover.classList.remove("hidden");
+    koutyuuDetailForm.classList.remove("hidden");
+  });
+
+  koutyuuDetailCover.addEventListener("click", () => {
+    koutyuuDetailCover.classList.add("hidden");
+    koutyuuDetailForm.classList.add("hidden");
+  });
+  koutyuuDetailClose.addEventListener("click", () => {
+    koutyuuDetailCover.classList.add("hidden");
+    koutyuuDetailForm.classList.add("hidden");
+  });
+  /*ワーム*/
+  const warmDetailCover = document.querySelector(".warm_detail_form_cover"); 
+  const warmDetailClose =document.querySelector(".warm_detail_form_close");
+  const warmDetailForm = document.querySelector(".warm_detail_form");
+  const warmOpen = document.querySelector(".insect_warm");
+
+  warmOpen.addEventListener("click", () => {
+    warmDetailCover.classList.remove("hidden");
+    warmDetailForm.classList.remove("hidden");
+  });
+
+  warmDetailCover.addEventListener("click", () => {
+    warmDetailCover.classList.add("hidden");
+    warmDetailForm.classList.add("hidden");
+  });
+  warmDetailClose.addEventListener("click", () => {
+    warmDetailCover.classList.add("hidden");
+    warmDetailForm.classList.add("hidden");
+  });
+  /*バッタ*/
+  const battaDetailCover = document.querySelector(".batta_detail_form_cover"); 
+  const battaDetailClose =document.querySelector(".batta_detail_form_close");
+  const battaDetailForm = document.querySelector(".batta_detail_form");
+  const battaOpen = document.querySelector(".insect_batta");
+
+  battaOpen.addEventListener("click", () => {
+    battaDetailCover.classList.remove("hidden");
+    battaDetailForm.classList.remove("hidden");
+  });
+
+  battaDetailCover.addEventListener("click", () => {
+    battaDetailCover.classList.add("hidden");
+    battaDetailForm.classList.add("hidden");
+  });
+  battaDetailClose.addEventListener("click", () => {
+    battaDetailCover.classList.add("hidden");
+    battaDetailForm.classList.add("hidden");
+  });
 });
