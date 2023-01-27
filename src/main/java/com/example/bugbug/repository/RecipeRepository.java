@@ -13,23 +13,33 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
     List<Recipe> findAll();
 
     /**
-     * レシピ検索
-     */
-    @Query("SELECT * FROM `recipes` WHERE name LIKE :keyword")
-    List<Recipe> searchRecipe(@Param("keyword") String keyword);
-
-    /**
-     * レシピ名と説明とタグ名からレシピを検索し閲覧数の降順
+     * レシピ名と説明とタグ名からキーワードによるレシピ検索（閲覧数による降順）
      */
     @Query("SELECT DISTINCT recipes.recipe_id, recipes.user_id, recipes.name, recipes.image, recipes.image_blurred, recipes.views " +
             "FROM recipes INNER JOIN tags INNER JOIN recipe_tags " +
             "ON recipes.recipe_id = recipe_tags.recipe_id " +
             "AND tags.tag_id = recipe_tags.tag_id " +
             "AND tags.name LIKE :keyword " +
+            "AND recipes.deleted = 0 "+
             "OR recipes.name LIKE :keyword " +
             "OR recipes.explanation LIKE :keyword " +
             "ORDER BY recipes.views DESC;")
     List<Recipe> searchRecipeNameTag(@Param("keyword") String keyword);
+
+	/**
+	 * タグIDからレシピを検索（閲覧数による降順）
+	 * @param tagId 検索するタグのID
+	 * @return タグIDによる検索結果
+	 */
+	@Query("SELECT DISTINCT recipes.recipe_id, recipes.user_id, recipes.name, recipes.image, recipes.image_blurred, recipes.views " +
+			"FROM recipes INNER JOIN recipe_tags " +
+			"ON recipes.recipe_id = recipe_tags.recipe_id " +
+			"AND recipes.deleted = 0 " +
+			"AND recipe_tags.tag_id = :tagId " +
+			"ORDER BY recipes.views DESC;")
+	List<Recipe> searchRecipeTagId(@Param("tagId") String tagId);
+
+
 
     // レシピ画像の更新
  	@Modifying
@@ -39,5 +49,7 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
  	//ビュー数の増加
  	@Modifying
  	@Query("UPDATE recipes SET views = views+1 WHERE recipe_id = :recipeId")
- 	void BroweCounta(@Param("recipeId") int recipeId);
+ 	void ViewCount(@Param("recipeId") int recipeId);
+
+
 }

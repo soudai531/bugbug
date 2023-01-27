@@ -7,4 +7,6 @@ import java.util.Set;
 
 public interface SearchService {
     List<RecipeDto> searchKeyword(String keyword);
+
+    List<RecipeDto> searchTagId(final String tagId);
 }

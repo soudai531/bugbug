@@ -10,4 +10,6 @@ public interface TagRepository extends CrudRepository<Tag, Integer> {
     Tag findByName(String name);
     //タグの存在チェック
     boolean existsByName(String name);
+
+    Tag findById(int id);
 }

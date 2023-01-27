@@ -117,7 +117,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	//ビュー数の増加
 	public void addBrow(int recipeId) {
-		recipeRepository.BroweCounta(recipeId);
+		recipeRepository.ViewCount(recipeId);
 	}
 
 	//レシピ登録
@@ -140,8 +140,6 @@ public class RecipeServiceImpl implements RecipeService {
 				,null,form.getExplanation(),form.getPoint(),image_blurred,0,date,0);
 		return saveRecipe(recipe);
 	}
-
-
 
 	/**
 	 * レシピ画像の登録
@@ -177,7 +175,7 @@ public class RecipeServiceImpl implements RecipeService {
 			//タグの登録
 			tagService.saveTag(tag);
 			//IDの取得
-			int tagId = tagService.getTag(tag).getTagId();
+			int tagId = tagService.getTagByName(tag).getTagId();
 			//登録
 			recipeTagRepository.save(new RecipeTag(null,recipe_id,tagId,0));
 		});

@@ -1,6 +1,8 @@
 package com.example.bugbug.controller;
 
+import com.example.bugbug.entity.Tag;
 import com.example.bugbug.service.SearchService;
+import com.example.bugbug.service.TagService;
 import com.example.bugbug.service.dto.RecipeDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import java.util.List;
 public class SearchController {
 
     private final SearchService searchService;
+    private final TagService tagService;
 
     /**
      * キーワードからレシピを検索する
@@ -36,11 +39,24 @@ public class SearchController {
     /**
      *
      * @param tagId 検索に使うタグId
-     * @param page ページ数
      * @param model
      */
-    @GetMapping("serch/tag")
-    public String searchTag(@RequestParam("tag") String tagId, @RequestParam("page") int page, Model model){
+    @GetMapping("search/tag")
+    public String searchTag(@RequestParam("tag") String tagId, Model model){
+        try{
+            List<RecipeDto> resultList = searchService.searchTagId(tagId);
+            model.addAttribute("recipes" ,resultList);
+            Tag tagEntity = tagService.getTagById(Integer.parseInt(tagId));
+            if(resultList.isEmpty()){
+                System.out.println(tagEntity.getName() + "の検索に一致する商品はありませんでした。");
+                model.addAttribute("error", "タグ：「" + tagEntity.getName() + "」の検索に一致する商品はありませんでした。");
+            }
+            model.addAttribute("keyword", tagEntity.getName());
+        } catch (NullPointerException e) {
+            model.addAttribute("error","タグが見つかりませんでした。");
+
+        }
+
 
         return "search";
     }

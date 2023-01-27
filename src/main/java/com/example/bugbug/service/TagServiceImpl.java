@@ -18,6 +18,8 @@ public class TagServiceImpl implements TagService {
     private TagRepository tagRepository;
 
 
+
+
     /**
      * レシピタグのリストを受け取りタグ情報をリストで返す
      * @param recipeTags
@@ -43,7 +45,17 @@ public class TagServiceImpl implements TagService {
     
     //名前からタグを取得
     @Override
-    public Tag getTag(String name) {
+    public Tag getTagByName(String name) {
     	 return tagRepository.findByName(name);
+    }
+
+    /**
+     * タグIDからタグエンティティを取得
+     * @param tagId
+     * @return
+     */
+    @Override
+    public Tag getTagById(int tagId) {
+        return tagRepository.findById(tagId);
     }
 }

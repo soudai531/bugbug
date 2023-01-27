@@ -17,8 +17,9 @@ public interface TagService {
     //タグの操作
     public void saveTag(String name);
     
-    //IDの取得
-    Tag getTag(String name);
-    
-   
+    //タグ名からIDの取得
+    Tag getTagByName(String name);
+
+    // IDからタグ情報を取得
+    Tag getTagById(int tagId);
 }
