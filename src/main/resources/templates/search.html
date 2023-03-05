@@ -19,11 +19,8 @@
   <main class="main">
     <section class="popRecipe">
       <th:block th:if="${!#lists.isEmpty(recipes)}">
-      <span class="rearchKeyword">「[[${keyword}]]」の検索結果</span>
-    </th:block>
-          <th:block th:if="${error.isEmpty()}">
-            <span th:text="${error}"></span>
-          </th:block>
+        <span class="rearchKeyword">「[[${keyword}]]」の検索結果</span>
+      </th:block>
       <!-- レシピ一覧 -->
       <section class="popRecipe__list">
         <!-- レシピ -->
@@ -37,7 +34,7 @@
             </div>
             <div class="popRecipe__list__item__tags">
               <th:block th:each="tag : ${recipe.tags}">
-                <a class="popRecipe__list__item__tag" th:href="|/serch?tag=${tag.tagId}|">
+                <a class="popRecipe__list__item__tag" th:href="|/search/tag?tag=${tag.tagId}|">
                   <span class="popRecipe__list__item__tag__name"><span>#</span>[[${tag.name}]]</span>
                 </a>
               </th:block>

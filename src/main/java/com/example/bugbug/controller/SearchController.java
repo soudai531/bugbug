@@ -1,6 +1,7 @@
 package com.example.bugbug.controller;
 
 import com.example.bugbug.entity.Tag;
+import com.example.bugbug.service.AuthService;
 import com.example.bugbug.service.SearchService;
 import com.example.bugbug.service.TagService;
 import com.example.bugbug.service.dto.RecipeDto;
@@ -18,6 +19,7 @@ public class SearchController {
 
     private final SearchService searchService;
     private final TagService tagService;
+    private final AuthService authService;
 
     /**
      * キーワードからレシピを検索する
@@ -43,21 +45,19 @@ public class SearchController {
      */
     @GetMapping("search/tag")
     public String searchTag(@RequestParam("tag") String tagId, Model model){
-        try{
-            List<RecipeDto> resultList = searchService.searchTagId(tagId);
-            model.addAttribute("recipes" ,resultList);
-            Tag tagEntity = tagService.getTagById(Integer.parseInt(tagId));
-            if(resultList.isEmpty()){
-                System.out.println(tagEntity.getName() + "の検索に一致する商品はありませんでした。");
-                model.addAttribute("error", "タグ：「" + tagEntity.getName() + "」の検索に一致する商品はありませんでした。");
-            }
-            model.addAttribute("keyword", tagEntity.getName());
-        } catch (NullPointerException e) {
-            model.addAttribute("error","タグが見つかりませんでした。");
-
+        //ログイン状態判定
+        boolean loginState = false;
+        if(authService.isLogin()) {
+            loginState = true;
         }
-
-
+        model.addAttribute("loginState", loginState);
+        List<RecipeDto> resultList = searchService.searchTagId(tagId);
+        model.addAttribute("recipes" ,resultList);
+        Tag tagEntity = tagService.getTagById(Integer.parseInt(tagId));
+        if(resultList.isEmpty()){
+            model.addAttribute("error", "タグ：「" + tagEntity.getName() + "」の検索に一致する商品はありませんでした。");
+        }
+        model.addAttribute("keyword", tagEntity.getName());
         return "search";
     }
 }

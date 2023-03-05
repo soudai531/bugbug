@@ -34,7 +34,7 @@
               </div>
               <div class="popRecipe__list__item__tags">
                 <th:block th:each="tag : ${recipe.tags}">
-                  <a class="popRecipe__list__item__tag" th:href="|/serch?tag=${tag.tagId}|">
+                  <a class="popRecipe__list__item__tag" th:href="|/search?tag=${tag.tagId}|">
                     <span class="popRecipe__list__item__tag__name"><span>#</span>[[${tag.name}]]</span>
                   </a>
                 </th:block>

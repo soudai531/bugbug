@@ -50,7 +50,7 @@
         </div>
         <div class="recipeDetail__tags">
           <th:block th:if="${!#lists.isEmpty(tags)}" th:each="tag : ${tags}">
-            <a class="recipeDetail__tag" th:href="|/serch?tag=${tag.tagId}|">
+            <a class="recipeDetail__tag" th:href="|/search?tag=${tag.tagId}|">
               <span class="recipeDetail__tag__name"><span>#</span>[[${tag.name}]]</span>
             </a>
           </th:block>
